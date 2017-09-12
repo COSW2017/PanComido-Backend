@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ public class UserServiceImpl
     implements UserService
 {
 
-    private List<User> users = new ArrayList<>();
+    private HashMap<Long, User> users = new HashMap<>();
 
 
     @Autowired
@@ -28,18 +29,18 @@ public class UserServiceImpl
     @PostConstruct
     private void populateSampleData()
     {
-        users.add( new User( "test@mail.com", "password", "Andres", "Perez", "https://cdn-images-1.medium.com/max/796/1*juPyda3wq9uz_SNFRLuANg@2x.png", "test", "123456" ) );
+        users.put(0l, new User( "test@mail.com", "password", "Andres", "Perez", "https://cdn-images-1.medium.com/max/796/1*juPyda3wq9uz_SNFRLuANg@2x.png", "test", "123456" ) );
     }
 
 
     @Override
-    public List<User> getUsers()
+    public HashMap<Long, User> getUsers()
     {
         return users;
     }
 
     @Override
-    public User getUser( Integer id )
+    public User getUser( Long id )
     {
         return users.get(id);
     }
@@ -47,7 +48,7 @@ public class UserServiceImpl
     @Override
     public User createUser( User user )
     {
-        users.add(user);
+        users.put(user.getId(), user);
         return user;
     }
 
@@ -75,6 +76,31 @@ public class UserServiceImpl
             }
         }
         return found;
+    }
+
+    @Override
+    public User updateUser(User user) {
+        User oldUser = this.findUserByEmail(user.getEmail());
+        oldUser.setCellphone(user.getCellphone());
+        oldUser.setCity(user.getCity());
+        oldUser.setPassword(user.getPassword());
+        oldUser.setImage(user.getImage());
+        return oldUser;
+    }
+
+    @Override
+    public Boolean addFriend(Long user, Long friend) {
+        User user1 = this.getUser(user);
+        User user2 = this.getUser(friend);
+        List<User> pending1 = user1.getPendingFriends();
+        boolean retval = false;
+        if(!pending1.contains(user2)) {
+            pending1.add(user2);
+            retval = true;
+        }
+
+        return retval;
+
     }
 
 }
