@@ -32,6 +32,8 @@ public class User
 
     public List<User> friends;
 
+    public List<User> pendingFriends;
+
     private Restaurant restaurant;
 
     public User()
@@ -49,6 +51,7 @@ public class User
         this.cellphone = cellphone;
         orders = new ArrayList<>();
         friends = new ArrayList<>();
+        pendingFriends = new ArrayList<>();
     }
 
 
@@ -126,6 +129,38 @@ public class User
 
     public void setCellphone(String cellphone) {
         this.cellphone = cellphone;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public List<User> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(List<User> friends) {
+        this.friends = friends;
+    }
+
+    public List<User> getPendingFriends() {
+        return pendingFriends;
+    }
+
+    public void setPendingFriends(List<User> pendingFriends) {
+        this.pendingFriends = pendingFriends;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 
     @Override

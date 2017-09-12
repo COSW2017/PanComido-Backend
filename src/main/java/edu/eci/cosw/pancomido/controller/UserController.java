@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.ServletException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -63,7 +64,7 @@ public class UserController
 
     @RequestMapping( value = "/items", method = RequestMethod.GET )
     public List<User> getUsers(){
-        return userService.getUsers();
+        return new ArrayList<>(userService.getUsers().values());
     }
 
     @RequestMapping( value = "/search", method = RequestMethod.GET )
@@ -107,5 +108,13 @@ public class UserController
             this.access_token = access_token;
         }
     }
+
+    @RequestMapping( value = "/update", method = RequestMethod.POST )
+    public User update( @RequestBody User user )
+            throws ServletException
+    {
+        return userService.updateUser(user);
+    }
+
 
 }

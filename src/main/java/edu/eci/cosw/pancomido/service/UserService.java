@@ -2,6 +2,7 @@ package edu.eci.cosw.pancomido.service;
 
 import edu.eci.cosw.pancomido.model.User;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -10,13 +11,17 @@ import java.util.List;
  */
 public interface UserService
 {
-    List<User> getUsers();
+    HashMap<Long, User> getUsers();
 
-    User getUser( Integer id );
+    User getUser( Long id );
 
     User createUser( User user );
 
     User findUserByEmail( String email );
 
     User findUserByEmailAndPassword( String email, String password );
+
+    User updateUser(User user);
+
+    Boolean addFriend(Long user, Long friend);
 }
