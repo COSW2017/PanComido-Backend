@@ -1,5 +1,10 @@
 package edu.eci.cosw.pancomido.model;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /**
  * @author Santiago Carrillo
  * 8/21/17.
@@ -17,30 +22,33 @@ public class User
 
     private String lastname;
 
-    private String username;
+    private String city;
 
     private String image;
 
-    public String getImage() {
-        return image;
-    }
+    public String cellphone;
 
-    public void setImage(String image) {
-        this.image = image;
-    }
+    public List<Order> orders;
+
+    public List<User> friends;
+
+    private Restaurant restaurant;
 
     public User()
     {
     }
 
-    public User( String email, String password, String firstname, String lastname, String image, String username )
+    public User( String email, String password, String firstname, String lastname, String image, String city, String cellphone)
     {
         this.email = email;
         this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
         this.image = image;
-        this.username = username;
+        this.city = city;
+        this.cellphone = cellphone;
+        orders = new ArrayList<>();
+        friends = new ArrayList<>();
     }
 
 
@@ -94,14 +102,30 @@ public class User
         this.lastname = lastname;
     }
 
-    public String getUsername()
+    public String getCity()
     {
-        return username;
+        return city;
     }
 
-    public void setUsername( String username )
+    public void setCity(String city)
     {
-        this.username = username;
+        this.city = city;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getCellphone() {
+        return cellphone;
+    }
+
+    public void setCellphone(String cellphone) {
+        this.cellphone = cellphone;
     }
 
     @Override
