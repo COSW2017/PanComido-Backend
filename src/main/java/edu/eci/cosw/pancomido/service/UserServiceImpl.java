@@ -1,5 +1,6 @@
 package edu.eci.cosw.pancomido.service;
 
+import edu.eci.cosw.pancomido.model.Order;
 import edu.eci.cosw.pancomido.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -101,6 +102,21 @@ public class UserServiceImpl
 
         return retval;
 
+    }
+
+    //Pensar si es mejor pasar las ordenes del usuario a un HashMap
+    @Override
+    public Order getOrder(Long id_user, Integer id_order) {
+        List<Order> orders = getUser(id_user).getOrders();
+        Boolean found = false;
+        Order order = null;
+        for(int i = 0; i < orders.size() & !found;i++){
+            if(orders.get(i).getId() == id_order){
+                order=orders.get(i);
+                found = true;
+            }
+        }
+        return order;
     }
 
 }
