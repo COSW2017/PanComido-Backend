@@ -18,6 +18,7 @@ public class Restaurant {
     private Integer angry;
     private List<Order> orders;
     private List<Comment> comments;
+    private List<Dish> dishes;
 
     public Restaurant(Integer id, String name, Double latitude, Double longitude, Integer like, Integer dislike, Integer love, Integer angry, List<Order> orders, List<Comment> comments) {
         this.name = name;
@@ -119,5 +120,13 @@ public class Restaurant {
                 ", orders=" + orders +
                 ", comments=" + comments +
                 '}';
+    }
+
+    public List<Dish> getDishes() {
+        return dishes;
+    }
+
+    public void setDishes(List<Dish> dishes) {
+        this.dishes = dishes;
     }
 }

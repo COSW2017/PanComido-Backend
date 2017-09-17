@@ -22,26 +22,23 @@ public class RestaurantController {
     @Autowired
     RestaurantService restaurantService;
 
-    @RequestMapping( value = "/", method = RequestMethod.POST )
-    public Dish addDish(@RequestBody Restaurant r, Dish d )
-            throws ServletException
-    {
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public Dish addDish(@RequestBody Restaurant r, Dish d)
+            throws ServletException {
         return restaurantService.addDish(r, d);
 
     }
 
-    @RequestMapping( value = "/", method = RequestMethod.PUT )
-    public Dish modifyDish(@RequestBody Restaurant r, Dish d )
-            throws ServletException
-    {
+    @RequestMapping(value = "/", method = RequestMethod.PUT)
+    public Dish modifyDish(@RequestBody Restaurant r, Dish d)
+            throws ServletException {
         return restaurantService.modifyDish(r, d);
 
     }
 
-    @RequestMapping( value = "/", method = RequestMethod.PUT )
-    public Dish deleteDish(@RequestBody Restaurant r, Dish d )
-            throws ServletException
-    {
+    @RequestMapping(value = "/", method = RequestMethod.DELETE)
+    public Dish deleteDish(@RequestBody Restaurant r, Dish d)
+            throws ServletException {
         return restaurantService.deleteDish(r, d);
 
     }
@@ -59,6 +56,20 @@ public class RestaurantController {
             throws ServletException
     {
         return restaurantService.changeStateOrder(id_restaurant, id__order, state);
+
+    }
+
+    @RequestMapping( value = "/near/{latitude}/{longitude}", method = RequestMethod.GET )
+    public List<Restaurant> getNearRestaurants(@PathVariable Double latitude, @PathVariable Double longitude)
+            throws ServletException{
+        return restaurantService.getLocationRestaurants(latitude, longitude);
+
+    }
+
+    @RequestMapping( value = "/dishes/{idRestaurant}", method = RequestMethod.GET )
+    public List<Dish> getDishesByRestaurant(@PathVariable Integer idRestaurant)
+            throws ServletException{
+        return restaurantService.getDishes(idRestaurant);
 
     }
 
