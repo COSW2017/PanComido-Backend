@@ -8,6 +8,7 @@ import java.util.List;
  */
 public class Restaurant {
 
+    private Integer id_restaurant;
     private String name;
     private Double latitude;
     private Double longitude;
@@ -19,7 +20,7 @@ public class Restaurant {
     private List<Comment> comments;
     private List<Dish> dishes;
 
-    public Restaurant(String name, Double latitude, Double longitude, Integer like, Integer dislike, Integer love, Integer angry, List<Order> orders, List<Comment> comments) {
+    public Restaurant(Integer id, String name, Double latitude, Double longitude, Integer like, Integer dislike, Integer love, Integer angry, List<Order> orders, List<Comment> comments) {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;

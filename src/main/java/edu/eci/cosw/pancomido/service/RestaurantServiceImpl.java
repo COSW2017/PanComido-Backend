@@ -1,10 +1,10 @@
 package edu.eci.cosw.pancomido.service;
 
 import edu.eci.cosw.pancomido.model.Dish;
+import edu.eci.cosw.pancomido.model.Order;
 import edu.eci.cosw.pancomido.model.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +14,7 @@ import java.util.List;
  */
 @Service
 public class RestaurantServiceImpl implements RestaurantService{
+
 
     private HashMap<Integer, Restaurant> restaurants = new HashMap<>();
     private final Double RADIUS = 6371.0;
@@ -38,6 +39,26 @@ public class RestaurantServiceImpl implements RestaurantService{
     }
 
 
+    @Override
+    public List<Order> getOrders(Integer id_restaurant) {
+        return restaurants.get(id_restaurant).getOrders();
+    }
+
+    //Tal vez se debería crear un orderController
+    @Override
+    public Boolean changeStateOrder(Integer id_restaurant, Integer id_order, Integer state) {
+        List<Order> orders = restaurants.get(id_restaurant).getOrders();
+        Boolean found = false;
+        for (int i = 0; i < orders.size() & !found; i++){
+            if(orders.get(i).getId() == id_order){
+                orders.get(i).setState(state);
+                found = true;
+            }
+        }
+        return found;
+    }
+
+
     public HashMap<Integer, Restaurant> getRestaurants() {
         return restaurants;
     }
@@ -45,8 +66,6 @@ public class RestaurantServiceImpl implements RestaurantService{
     public void setRestaurants(HashMap<Integer, Restaurant> restaurants) {
         this.restaurants = restaurants;
     }
-
-
 
     public List<Restaurant> getLocationRestaurants(Double latitude, Double longitude){
         ArrayList<Restaurant> locationRestaurants = new ArrayList<>();

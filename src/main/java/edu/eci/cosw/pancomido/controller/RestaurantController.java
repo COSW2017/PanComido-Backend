@@ -1,6 +1,7 @@
 package edu.eci.cosw.pancomido.controller;
 
 import edu.eci.cosw.pancomido.model.Dish;
+import edu.eci.cosw.pancomido.model.Order;
 import edu.eci.cosw.pancomido.model.Restaurant;
 import edu.eci.cosw.pancomido.model.Todo;
 import edu.eci.cosw.pancomido.service.RestaurantService;
@@ -42,6 +43,21 @@ public class RestaurantController {
 
     }
 
+    @RequestMapping( value = "/{id}/order", method = RequestMethod.GET )
+    public List<Order> getOrders(@PathVariable Integer id)
+            throws ServletException
+    {
+        return restaurantService.getOrders(id);
+
+    }
+
+    @RequestMapping( value = "/order", method = RequestMethod.POST )
+    public Boolean addDish(@RequestBody Integer id_restaurant, Integer id__order, Integer state )
+            throws ServletException
+    {
+        return restaurantService.changeStateOrder(id_restaurant, id__order, state);
+
+    }
 
     @RequestMapping( value = "/near/{latitude}/{longitude}", method = RequestMethod.GET )
     public List<Restaurant> getNearRestaurants(@PathVariable Double latitude, @PathVariable Double longitude)
@@ -56,7 +72,5 @@ public class RestaurantController {
         return restaurantService.getDishes(idRestaurant);
 
     }
-
-
 
 }

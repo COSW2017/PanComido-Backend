@@ -7,27 +7,29 @@ import java.util.List;
  */
 public class Order {
 
-    private Integer id;
+    private Integer id_order;
     private List<Restaurant> restaurants;
     private List<User> users;
     private List<Dish> dishes;
+    private Integer state;
 
     public Order() {
     }
 
-    public Order(Integer id, List<Restaurant> restaurants, List<User> users, List<Dish> dishes) {
-        this.id = id;
+    public Order(Integer id_order, List<Restaurant> restaurants, List<User> users, List<Dish> dishes, Integer state) {
+        this.id_order = id_order;
         this.restaurants = restaurants;
         this.users = users;
         this.dishes = dishes;
+        this.state = state;
     }
 
     public Integer getId() {
-        return id;
+        return id_order;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer id_order) {
+        this.id_order = id_order;
     }
 
     public List<Restaurant> getRestaurants() {
@@ -54,10 +56,18 @@ public class Order {
         this.dishes = dishes;
     }
 
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
-                "id=" + id +
+                "id=" + id_order +
                 ", restaurants=" + restaurants +
                 ", users=" + users +
                 ", dishes=" + dishes +

@@ -12,7 +12,7 @@ import java.util.Set;
 public class User
 {
 
-    private long id;
+    private long id_user;
 
     private String email;
 
@@ -57,12 +57,12 @@ public class User
 
     public long getId()
     {
-        return id;
+        return id_user;
     }
 
-    public void setId( long id )
+    public void setId( long id_user )
     {
-        this.id = id;
+        this.id_user = id_user;
     }
 
     public String getEmail()
@@ -166,7 +166,7 @@ public class User
     @Override
     public String toString()
     {
-        return "User{" + "id=" + id + ", email='" + email + '\'' + ", password='" + password + '\'' + ", firstname='"
+        return "User{" + "id=" + id_user + ", email='" + email + '\'' + ", password='" + password + '\'' + ", firstname='"
             + firstname + '\'' + '}';
     }
 }
