@@ -32,4 +32,5 @@ public interface RestaurantService {
 
     Restaurant addRestaurant(Restaurant restaurant);
 
+    Order getOrdersById(Integer id_restaurant, Integer id_order);
 }
