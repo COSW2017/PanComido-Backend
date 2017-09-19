@@ -42,6 +42,7 @@ public class UserServiceImpl
         userss.add(user);
         Restaurant restaurant = new Restaurant(0, "Perter pan", 1.12, 2.36, 5, 2, 3, 1, orders, new ArrayList<>());
         user.setRestaurant(restaurant);
+        restaurant.setDishes(dishes);
         users.put(0l, user);
 
         restaurantService.addRestaurant(restaurant);
