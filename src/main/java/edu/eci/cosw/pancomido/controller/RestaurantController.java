@@ -1,6 +1,7 @@
 package edu.eci.cosw.pancomido.controller;
 
 import edu.eci.cosw.pancomido.model.Dish;
+import edu.eci.cosw.pancomido.model.Order;
 import edu.eci.cosw.pancomido.model.Restaurant;
 import edu.eci.cosw.pancomido.model.Todo;
 import edu.eci.cosw.pancomido.service.RestaurantService;
@@ -57,6 +58,11 @@ public class RestaurantController {
 
     }
 
+    @RequestMapping( value = "/{idRestaurant}/order", method = RequestMethod.GET )
+    public List<Order> getOrdersByRestaurant(@PathVariable Integer idRestaurant)
+            throws ServletException{
+        return restaurantService.getOrders(idRestaurant);
 
+    }
 
 }

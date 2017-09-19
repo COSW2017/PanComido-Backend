@@ -1,6 +1,7 @@
 package edu.eci.cosw.pancomido.service;
 
 import edu.eci.cosw.pancomido.model.Dish;
+import edu.eci.cosw.pancomido.model.Order;
 import edu.eci.cosw.pancomido.model.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,6 +64,11 @@ public class RestaurantServiceImpl implements RestaurantService{
     @Override
     public List<Dish> getDishes(Integer idRestaurant) {
         return restaurants.get(idRestaurant).getDishes();
+    }
+
+    @Override
+    public List<Order> getOrders(Integer id) {
+        return restaurants.get(id).getOrders();
     }
 
     private Double calculateDistance(Double latitude1, Double latitude2, Double longitude1, Double longitude2) {

@@ -1,6 +1,7 @@
 package edu.eci.cosw.pancomido.service;
 
 import edu.eci.cosw.pancomido.model.Dish;
+import edu.eci.cosw.pancomido.model.Order;
 import edu.eci.cosw.pancomido.model.Restaurant;
 
 import java.util.HashMap;
@@ -22,5 +23,7 @@ public interface RestaurantService {
     List<Restaurant> getLocationRestaurants(Double latitude, Double longitude);
 
     List <Dish> getDishes(Integer idRestaurant);
+
+    List <Order> getOrders(Integer id);
 
 }
