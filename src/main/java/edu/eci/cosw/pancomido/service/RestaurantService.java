@@ -13,11 +13,11 @@ import java.util.List;
  */
 public interface RestaurantService {
 
-    Dish addDish(Restaurant r, Dish d);
+    Dish addDish(Integer id_restaurant, Dish d);
 
-    Dish deleteDish(Restaurant r, Dish d);
+    Boolean deleteDish(Integer id_restaurant, Dish d);
 
-    Dish modifyDish(Restaurant r, Dish d);
+    Dish modifyDish(Integer id_restaurant, Dish d);
 
 
     List<Order> getOrders(Integer id_restaurant);

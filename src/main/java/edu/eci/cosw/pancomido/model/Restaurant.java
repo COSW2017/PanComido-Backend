@@ -32,6 +32,14 @@ public class Restaurant {
         this.comments = comments;
     }
 
+    public Integer getId_restaurant() {
+        return id_restaurant;
+    }
+
+    public void setId_restaurant(Integer id_restaurant) {
+        this.id_restaurant = id_restaurant;
+    }
+
     public Restaurant() {
     }
 

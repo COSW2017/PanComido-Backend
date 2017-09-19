@@ -60,4 +60,26 @@ public class Dish {
                 ", description='" + description + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Dish dish = (Dish) o;
+
+        if (!id_dish.equals(dish.id_dish)) return false;
+        if (!getName().equals(dish.getName())) return false;
+        if (!getPrice().equals(dish.getPrice())) return false;
+        return getDescription().equals(dish.getDescription());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id_dish.hashCode();
+        result = 31 * result + getName().hashCode();
+        result = 31 * result + getPrice().hashCode();
+        result = 31 * result + getDescription().hashCode();
+        return result;
+    }
 }
