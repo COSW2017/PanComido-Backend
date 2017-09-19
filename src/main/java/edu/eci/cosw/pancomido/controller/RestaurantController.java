@@ -72,4 +72,11 @@ public class RestaurantController {
         return restaurantService.getDishes(idRestaurant);
     }
 
+    @RequestMapping( value = "/{idRestaurant}/order", method = RequestMethod.GET )
+    public List<Order> getOrdersByRestaurant(@PathVariable Integer idRestaurant)
+            throws ServletException{
+        return restaurantService.getOrders(idRestaurant);
+
+    }
+
 }

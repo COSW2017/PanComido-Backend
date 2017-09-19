@@ -30,4 +30,6 @@ public interface RestaurantService {
 
     List <Dish> getDishes(Integer idRestaurant);
 
+    List <Order> getOrders(Integer id);
+
 }
