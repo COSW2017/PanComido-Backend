@@ -20,7 +20,8 @@ public class Restaurant {
     private List<Comment> comments;
     private List<Dish> dishes;
 
-    public Restaurant(Integer id, String name, Double latitude, Double longitude, Integer like, Integer dislike, Integer love, Integer angry, List<Order> orders, List<Comment> comments) {
+    public Restaurant(Integer id_restaurant, String name, Double latitude, Double longitude, Integer like, Integer dislike, Integer love, Integer angry, List<Order> orders, List<Comment> comments) {
+        this.id_restaurant = id_restaurant;
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
