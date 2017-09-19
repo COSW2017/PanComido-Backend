@@ -66,13 +66,13 @@ public class RestaurantController {
 
     }
 
-    @RequestMapping( value = "{idRestaurant}/dish", method = RequestMethod.GET )
+    @RequestMapping( value = "{id_restaurant}/dish", method = RequestMethod.GET )
     public List<Dish> getDishesByRestaurant(@PathVariable Integer idRestaurant)
             throws ServletException{
         return restaurantService.getDishes(idRestaurant);
     }
 
-    @RequestMapping( value = "/{idRestaurant}/order", method = RequestMethod.GET )
+    @RequestMapping( value = "/{id_restaurant}/order", method = RequestMethod.GET )
     public List<Order> getOrdersByRestaurant(@PathVariable Integer idRestaurant)
             throws ServletException{
         return restaurantService.getOrders(idRestaurant);

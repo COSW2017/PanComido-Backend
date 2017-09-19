@@ -1,7 +1,6 @@
 package edu.eci.cosw.pancomido.service;
 
-import edu.eci.cosw.pancomido.model.Order;
-import edu.eci.cosw.pancomido.model.User;
+import edu.eci.cosw.pancomido.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +8,7 @@ import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Santiago Carrillo
@@ -30,7 +30,13 @@ public class UserServiceImpl
     @PostConstruct
     private void populateSampleData()
     {
-        users.put(0l, new User( "test@mail.com", "password", "Andres", "Perez", "https://cdn-images-1.medium.com/max/796/1*juPyda3wq9uz_SNFRLuANg@2x.png", "test", "123456" ) );
+        User user = new User( "test@mail.com", "password", "Andres", "Perez", "https://cdn-images-1.medium.com/max/796/1*juPyda3wq9uz_SNFRLuANg@2x.png", "test", "123456" );
+        ArrayList<Dish> dishes = new ArrayList<>();
+        Dish dish = new Dish(0, "Pollo", 25000, "un pollo muy rico");
+        dishes.add(dish);
+        Order order = new Order(0, new ArrayList<>(), new ArrayList<>(), dishes, 0);
+        Restaurant restaurant = new Restaurant(0, "Perter pan", 1.12, 2.36, 5, 2, 3, 1, new ArrayList<>(), new ArrayList<>());
+        users.put(0l, user);
     }
 
 
@@ -57,10 +63,13 @@ public class UserServiceImpl
     public User findUserByEmail( String email )
     {
         User found = null;
-        for(int i = 0 ; i < users.size() && found == null; i++){
-            User u = users.get(i);
-            if(u.getEmail().equals(email)){
-                found = u;
+        for (Map.Entry<Long, User> entry : users.entrySet())
+        {
+            Long key = entry.getKey();
+            User value = entry.getValue();
+            if(value.getEmail().equals(email)) {
+                found = value;
+                break;
             }
         }
         return found;
@@ -70,12 +79,16 @@ public class UserServiceImpl
     public User findUserByEmailAndPassword( String email, String password )
     {
         User found = null;
-        for(int i = 0 ; i < users.size() && found == null; i++){
-            User u = users.get(i);
-            if(u.getEmail().equals(email) && u.getPassword().equals(password)){
-                found = u;
+        for (Map.Entry<Long, User> entry : users.entrySet())
+        {
+            Long key = entry.getKey();
+            User value = entry.getValue();
+            if(value.getEmail().equals(email) && value.getPassword().equals(password)){
+                found = value;
+                break;
             }
         }
+
         return found;
     }
 
