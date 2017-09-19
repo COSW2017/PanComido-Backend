@@ -118,11 +118,6 @@ public class RestaurantServiceImpl implements RestaurantService{
         return restaurants.get(idRestaurant).getDishes();
     }
 
-    @Override
-    public List<Order> getOrders(Integer id) {
-        return restaurants.get(id).getOrders();
-    }
-
     private Double calculateDistance(Double latitude1, Double latitude2, Double longitude1, Double longitude2) {
         Double rad =Math.PI/180;
         Double dlat=latitude2-latitude1;
