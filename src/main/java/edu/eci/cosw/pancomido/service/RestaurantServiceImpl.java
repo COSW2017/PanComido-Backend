@@ -1,11 +1,11 @@
 package edu.eci.cosw.pancomido.service;
 
+import com.sun.org.apache.xpath.internal.operations.Or;
 import edu.eci.cosw.pancomido.model.Dish;
 import edu.eci.cosw.pancomido.model.Order;
 import edu.eci.cosw.pancomido.model.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +16,7 @@ import java.util.List;
 @Service
 public class RestaurantServiceImpl implements RestaurantService{
 
+
     private HashMap<Integer, Restaurant> restaurants = new HashMap<>();
     private final Double RADIUS = 6371.0;
 
@@ -24,18 +25,71 @@ public class RestaurantServiceImpl implements RestaurantService{
     }
 
     @Override
-    public Dish addDish(Restaurant r, Dish d) {
-        return null;
+    public Dish addDish(Integer id_restaurant, Dish d) {
+        Restaurant r = restaurants.get(id_restaurant);
+        List<Dish> dishes = r.getDishes();
+        dishes.add(d);
+        return d;
     }
 
     @Override
-    public Dish deleteDish(Restaurant r, Dish d) {
-        return null;
+    public Boolean deleteDish(Integer id_restaurant, Dish d) {
+        boolean found = false;
+        Restaurant r = restaurants.get(id_restaurant);
+
+        List<Dish> dishes = r.getDishes();
+        List<Order> orders = r.getOrders();
+        boolean found2 = false;
+        for (int i = 0 ; i < dishes.size() && !found; i++){
+
+            if(dishes.get(i).equals(d)){
+                found2 = false;
+                for (int j = 0 ; j < orders.size() && !found2; j++){
+                    if(orders.get(j).getId() == dishes.get(i).getId()){
+                        found2 = true;
+                    }
+                }
+                if(!found2){
+                    dishes.remove(i);
+                }
+                found = true;
+            }
+        }
+        return found && !found2;
     }
 
     @Override
-    public Dish modifyDish(Restaurant r, Dish d) {
-        return null;
+    public Dish modifyDish(Integer id_restaurant, Dish d) {
+        boolean found = false;
+        Restaurant r = restaurants.get(id_restaurant);
+        List<Dish> dishes = r.getDishes();
+        for (int i = 0 ; i < dishes.size() && !found; i++){
+            if(dishes.get(i).equals(d)){
+                dishes.set(i, d);
+                found = true;
+            }
+        }
+        return d;
+    }
+
+
+    @Override
+    public List<Order> getOrders(Integer id_restaurant) {
+        return restaurants.get(id_restaurant).getOrders();
+    }
+
+    //Tal vez se debería crear un orderController
+    @Override
+    public Boolean changeStateOrder(Integer id_restaurant, Integer id_order, Integer state) {
+        List<Order> orders = restaurants.get(id_restaurant).getOrders();
+        Boolean found = false;
+        for (int i = 0; i < orders.size() & !found; i++){
+            if(orders.get(i).getId() == id_order){
+                orders.get(i).setState(state);
+                found = true;
+            }
+        }
+        return found;
     }
 
 
@@ -46,8 +100,6 @@ public class RestaurantServiceImpl implements RestaurantService{
     public void setRestaurants(HashMap<Integer, Restaurant> restaurants) {
         this.restaurants = restaurants;
     }
-
-
 
     public List<Restaurant> getLocationRestaurants(Double latitude, Double longitude){
         ArrayList<Restaurant> locationRestaurants = new ArrayList<>();

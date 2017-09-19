@@ -5,12 +5,12 @@ package edu.eci.cosw.pancomido.model;
  */
 public class Dish {
 
-    private Integer id;
+    private Integer id_dish;
     private String name;
     private Integer price;
     private String description;
 
-    public Dish(Integer id, String name, Integer price, String description) {
+    public Dish(Integer id_dish, String name, Integer price, String description) {
         this.name = name;
         this.price = price;
         this.description = description;
@@ -20,11 +20,11 @@ public class Dish {
     }
 
     public Integer getId() {
-        return id;
+        return id_dish;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer id_dish) {
+        this.id_dish = id_dish;
     }
 
     public String getName() {
@@ -54,10 +54,32 @@ public class Dish {
     @Override
     public String toString() {
         return "Dish{" +
-                "id=" + id +
+                "id=" + id_dish +
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Dish dish = (Dish) o;
+
+        if (!id_dish.equals(dish.id_dish)) return false;
+        if (!getName().equals(dish.getName())) return false;
+        if (!getPrice().equals(dish.getPrice())) return false;
+        return getDescription().equals(dish.getDescription());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id_dish.hashCode();
+        result = 31 * result + getName().hashCode();
+        result = 31 * result + getPrice().hashCode();
+        result = 31 * result + getDescription().hashCode();
+        return result;
     }
 }

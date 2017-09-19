@@ -3,8 +3,9 @@ package edu.eci.cosw.pancomido.service;
 import edu.eci.cosw.pancomido.model.Dish;
 import edu.eci.cosw.pancomido.model.Order;
 import edu.eci.cosw.pancomido.model.Restaurant;
-
+import java.util.ArrayList;
 import java.util.HashMap;
+
 import java.util.List;
 
 /**
@@ -12,11 +13,16 @@ import java.util.List;
  */
 public interface RestaurantService {
 
-    Dish addDish(Restaurant r, Dish d);
+    Dish addDish(Integer id_restaurant, Dish d);
 
-    Dish deleteDish(Restaurant r, Dish d);
+    Boolean deleteDish(Integer id_restaurant, Dish d);
 
-    Dish modifyDish(Restaurant r, Dish d);
+    Dish modifyDish(Integer id_restaurant, Dish d);
+
+
+    List<Order> getOrders(Integer id_restaurant);
+
+    Boolean changeStateOrder(Integer id_restaurant, Integer id_order, Integer state);
 
     HashMap<Integer, Restaurant> getRestaurants();
 

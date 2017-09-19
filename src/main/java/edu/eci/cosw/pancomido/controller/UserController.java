@@ -1,14 +1,12 @@
 package edu.eci.cosw.pancomido.controller;
 
+import edu.eci.cosw.pancomido.model.Order;
 import edu.eci.cosw.pancomido.model.User;
 import edu.eci.cosw.pancomido.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletException;
 import java.util.ArrayList;
@@ -116,5 +114,12 @@ public class UserController
         return userService.updateUser(user);
     }
 
+    @RequestMapping( value = "/{id_user}/order/{id_order}", method = RequestMethod.GET )
+    public Order getOrder(@PathVariable Long id_user, Integer id_order)
+            throws ServletException
+    {
+        return userService.getOrder(id_user, id_order);
+
+    }
 
 }

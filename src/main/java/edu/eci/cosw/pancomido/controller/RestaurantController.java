@@ -22,27 +22,42 @@ public class RestaurantController {
     @Autowired
     RestaurantService restaurantService;
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    public Dish addDish(@RequestBody Restaurant r, Dish d)
-            throws ServletException {
-        return restaurantService.addDish(r, d);
+    @RequestMapping( value = "/{id}/order", method = RequestMethod.GET )
+    public List<Order> getOrders(@PathVariable Integer id)
+            throws ServletException
+    {
+        return restaurantService.getOrders(id);
 
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.PUT)
-    public Dish modifyDish(@RequestBody Restaurant r, Dish d)
-            throws ServletException {
-        return restaurantService.modifyDish(r, d);
-
+    @RequestMapping( value = "/{id_restaurant}/dish", method = RequestMethod.POST )
+    public Dish addDish(@PathVariable Integer id_restaurant, @RequestBody Dish d)
+            throws ServletException
+    {
+        return restaurantService.addDish(id_restaurant, d);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.DELETE)
-    public Dish deleteDish(@RequestBody Restaurant r, Dish d)
-            throws ServletException {
-        return restaurantService.deleteDish(r, d);
-
+    @RequestMapping( value = "/{id_restaurant}/dish", method = RequestMethod.PUT )
+    public Dish modifyDish(@PathVariable Integer id_restaurant, @RequestBody Dish d)
+            throws ServletException
+    {
+        return restaurantService.modifyDish(id_restaurant, d);
     }
 
+    @RequestMapping( value = "/{id_restaurant}/dish", method = RequestMethod.DELETE )
+    public boolean deleteDish(@PathVariable Integer id_restaurant, @RequestBody Dish d)
+            throws ServletException
+    {
+        return restaurantService.deleteDish(id_restaurant, d);
+    }
+
+    @RequestMapping( value = "/order", method = RequestMethod.POST )
+    public Boolean addDish(@RequestBody Integer id_restaurant, Integer id__order, Integer state )
+            throws ServletException
+    {
+        return restaurantService.changeStateOrder(id_restaurant, id__order, state);
+
+    }
 
     @RequestMapping( value = "/near/{latitude}/{longitude}", method = RequestMethod.GET )
     public List<Restaurant> getNearRestaurants(@PathVariable Double latitude, @PathVariable Double longitude)
@@ -51,11 +66,10 @@ public class RestaurantController {
 
     }
 
-    @RequestMapping( value = "/dishes/{idRestaurant}", method = RequestMethod.GET )
+    @RequestMapping( value = "{idRestaurant}/dish", method = RequestMethod.GET )
     public List<Dish> getDishesByRestaurant(@PathVariable Integer idRestaurant)
             throws ServletException{
         return restaurantService.getDishes(idRestaurant);
-
     }
 
     @RequestMapping( value = "/{idRestaurant}/order", method = RequestMethod.GET )
