@@ -13,32 +13,18 @@ public class User
 {
 
     private long id_user;
-
     private String email;
-
     private String password;
-
     private String firstname;
-
     private String lastname;
-
     private String city;
-
     private String image;
-
     public String cellphone;
-
     public List<Order> orders;
-
     public List<User> friends;
-
     public List<User> pendingFriends;
-
     private Restaurant restaurant;
-
-    public User()
-    {
-    }
+    public User(){}
 
     public User( String email, String password, String firstname, String lastname, String image, String city, String cellphone)
     {
