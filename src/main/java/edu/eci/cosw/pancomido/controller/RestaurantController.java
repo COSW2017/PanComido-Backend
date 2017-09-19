@@ -22,11 +22,11 @@ public class RestaurantController {
     @Autowired
     RestaurantService restaurantService;
 
-    @RequestMapping( value = "/{id}/order", method = RequestMethod.GET )
-    public List<Order> getOrders(@PathVariable Integer id)
+    @RequestMapping( value = "/{id_restaurant}/order", method = RequestMethod.GET )
+    public List<Order> getOrders(@PathVariable Integer id_restaurant)
             throws ServletException
     {
-        return restaurantService.getOrders(id);
+        return restaurantService.getOrders(id_restaurant);
 
     }
 
@@ -72,13 +72,6 @@ public class RestaurantController {
         return restaurantService.getDishes(idRestaurant);
     }
 
-    @RequestMapping( value = "/{id_restaurant}/order", method = RequestMethod.GET )
-    public List<Order> getOrdersByRestaurant(@PathVariable Integer idRestaurant)
-            throws ServletException{
-        return restaurantService.getOrders(idRestaurant);
-
-    }
-
 
     @RequestMapping( value = "/register", method = RequestMethod.GET )
     public Restaurant restaurantRegister(@RequestBody Restaurant toRegister)
@@ -87,5 +80,12 @@ public class RestaurantController {
 
     }
 
+    @RequestMapping( value = "/{id_restaurant}/order/{id_order}", method = RequestMethod.GET )
+    public Order getOrdersById(@PathVariable Integer id_restaurant,@PathVariable Integer id_order)
+            throws ServletException
+    {
+        return restaurantService.getOrdersById(id_restaurant, id_order);
+
+    }
 
 }

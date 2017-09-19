@@ -17,7 +17,7 @@ import java.util.List;
 public class RestaurantServiceImpl implements RestaurantService{
 
 
-    private HashMap<Integer, Restaurant> restaurants = new HashMap<>();
+    public HashMap<Integer, Restaurant> restaurants = new HashMap<>();
     private final Double RADIUS = 6371.0;
 
     @Autowired
@@ -122,6 +122,19 @@ public class RestaurantServiceImpl implements RestaurantService{
     public Restaurant addRestaurant(Restaurant restaurant) {
         restaurants.put(restaurant.getId_restaurant(), restaurant);
         return restaurant;
+    }
+
+    @Override
+    public Order getOrdersById(Integer id_restaurant, Integer id_order) {
+        List<Order> orders = restaurants.get(id_restaurant).getOrders();
+        Order ord = null;
+        for (Order o: orders) {
+            if (o.getId()== id_order){
+                ord = o;
+                break;
+            }
+        }
+        return ord;
     }
 
     private Double calculateDistance(Double latitude1, Double latitude2, Double longitude1, Double longitude2) {
