@@ -6,6 +6,7 @@ package edu.eci.cosw.pancomido.model;
 public class Dish {
 
     private Integer id_dish;
+    private Integer id_restaurante;
     private String name;
     private Integer price;
     private String description;
@@ -59,5 +60,13 @@ public class Dish {
                 ", price=" + price +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    public Integer getId_restaurante() {
+        return id_restaurante;
+    }
+
+    public void setId_restaurante(Integer id_restaurante) {
+        this.id_restaurante = id_restaurante;
     }
 }
