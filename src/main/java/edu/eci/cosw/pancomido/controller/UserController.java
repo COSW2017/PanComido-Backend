@@ -79,28 +79,20 @@ public class UserController
 
     @RequestMapping( value = "/register", method = RequestMethod.POST )
     public User registerUser( @RequestBody User toRegister )
-            throws ServletException
-    {
+            throws ServletException {
         return userService.createUser(toRegister);
     }
 
-    public class Token
-    {
-
+    public class Token {
         String access_token;
-
-
         public Token( String access_token )
         {
             this.access_token = access_token;
         }
-
-
         public String getAccessToken()
         {
             return access_token;
         }
-
         public void setAccessToken( String access_token )
         {
             this.access_token = access_token;

@@ -79,4 +79,13 @@ public class RestaurantController {
 
     }
 
+
+    @RequestMapping( value = "/register", method = RequestMethod.GET )
+    public Restaurant restaurantRegister(@RequestBody Restaurant toRegister)
+            throws ServletException{
+        return restaurantService.addRestaurant(toRegister);
+
+    }
+
+
 }
