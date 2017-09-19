@@ -44,7 +44,7 @@ public class RestaurantController {
         return restaurantService.modifyDish(id_restaurant, d);
     }
 
-    @RequestMapping( value = "/{id_restaurant}/dish", method = RequestMethod.PUT )
+    @RequestMapping( value = "/{id_restaurant}/dish", method = RequestMethod.DELETE )
     public boolean deleteDish(@PathVariable Integer id_restaurant, @RequestBody Dish d)
             throws ServletException
     {
