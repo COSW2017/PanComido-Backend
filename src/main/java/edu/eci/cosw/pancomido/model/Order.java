@@ -73,4 +73,12 @@ public class Order {
                 ", dishes=" + dishes +
                 '}';
     }
+
+    public Double getMonto(){
+        double sum = 0;
+        for(Dish d : getDishes()){
+            sum+=d.getPrice();
+        }
+        return sum;
+    }
 }
