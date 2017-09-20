@@ -35,11 +35,11 @@ public class UserServiceImpl
         ArrayList<Dish> dishes = new ArrayList<>();
         Dish dish = new Dish(0, "Pollo", 25000, "un pollo muy rico");
         dishes.add(dish);
+        ArrayList<User> userss = new ArrayList<>();
+        userss.add(user);
         Order order = new Order(0, new ArrayList<>(), new ArrayList<>(), dishes, 0);
         ArrayList<Order> orders = new ArrayList<>();
         orders.add(order);
-        ArrayList<User> userss = new ArrayList<>();
-        userss.add(user);
         Restaurant restaurant = new Restaurant(0, "Perter pan", 1.12, 2.36, 5, 2, 3, 1, orders, new ArrayList<>());
         user.setRestaurant(restaurant);
         users.put(0l, user);
