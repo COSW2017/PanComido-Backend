@@ -18,7 +18,7 @@ import java.util.Map;
 public class UserServiceImpl
     implements UserService
 {
-
+    public static Long consucutive = 1l; //hay que quitar esto cuando se implemente la base de datoss!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     private HashMap<Long, User> users = new HashMap<>();
     @Autowired
     private RestaurantService restaurantService;
@@ -41,7 +41,7 @@ public class UserServiceImpl
         Restaurant restaurant = new Restaurant(0, "Perter pan", 1.12, 2.36, 5, 2, 3, 1, orders, new ArrayList<>());
         user.setRestaurant(restaurant);
         restaurant.setDishes(dishes);
-        users.put(0l, user);
+        users.put(1l, user);
 
         restaurantService.addRestaurant(restaurant);
     }
@@ -61,7 +61,9 @@ public class UserServiceImpl
     @Override
     public User createUser( User user )
     {
-        users.put(user.getId(), user);
+        consucutive++;
+        user.setId(consucutive); // Arreglar esto cuando se implemente la base de datos!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        users.put(consucutive, user);
         return user;
     }
 
