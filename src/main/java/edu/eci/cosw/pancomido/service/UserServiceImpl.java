@@ -24,16 +24,14 @@ public class UserServiceImpl
     private RestaurantService restaurantService;
 
     @Autowired
-    public UserServiceImpl()
-    {
-    }
+    public UserServiceImpl() { }
 
     @PostConstruct
     private void populateSampleData()
     {
         User user = new User( "test@mail.com", "password", "Andres", "Perez", "https://cdn-images-1.medium.com/max/796/1*juPyda3wq9uz_SNFRLuANg@2x.png", "test", "123456" );
         ArrayList<Dish> dishes = new ArrayList<>();
-        Dish dish = new Dish(0, "Pollo", 25000, "un pollo muy rico");
+        Dish dish = new Dish(0, "Arroz con pollo", 25000, "Arroz con pollo y papas a la francesa");
         dishes.add(dish);
         ArrayList<User> userss = new ArrayList<>();
         userss.add(user);
@@ -42,12 +40,12 @@ public class UserServiceImpl
         orders.add(order);
         Restaurant restaurant = new Restaurant(0, "Perter pan", 1.12, 2.36, 5, 2, 3, 1, orders, new ArrayList<>());
         user.setRestaurant(restaurant);
+        restaurant.setDishes(dishes);
         users.put(0l, user);
 
         restaurantService.addRestaurant(restaurant);
     }
-
-
+    
     @Override
     public HashMap<Long, User> getUsers()
     {
