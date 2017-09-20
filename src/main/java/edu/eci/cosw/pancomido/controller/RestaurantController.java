@@ -44,15 +44,19 @@ public class RestaurantController {
         return restaurantService.modifyDish(id_restaurant, d);
     }
 
-    @RequestMapping( value = "/{id_restaurant}/dish", method = RequestMethod.DELETE )
-    public boolean deleteDish(@PathVariable Integer id_restaurant, @RequestBody Dish d)
+    @RequestMapping( value = "/{id_restaurant}/dish/{id_dish}", method = RequestMethod.DELETE )
+    public boolean deleteDish(@PathVariable Integer id_restaurant, @PathVariable Integer id_dish)
             throws ServletException
     {
-        return restaurantService.deleteDish(id_restaurant, d);
+        boolean deleted = restaurantService.deleteDish(id_restaurant, id_dish);
+        if(!deleted){
+            throw new ServletException("This dish is associated with an active order.");
+        }
+        return deleted;
     }
 
     @RequestMapping( value = "/order", method = RequestMethod.POST )
-    public Boolean addDish(@RequestBody Integer id_restaurant, Integer id__order, Integer state )
+    public Boolean addOrder(@RequestBody Integer id_restaurant, Integer id__order, Integer state )
             throws ServletException
     {
         return restaurantService.changeStateOrder(id_restaurant, id__order, state);
