@@ -42,10 +42,10 @@ public class RestaurantServiceImpl implements RestaurantService{
         boolean found2 = false;
         for (int i = 0 ; i < dishes.size() && !found; i++){
 
-            if(dishes.get(i).getId_dish() == id_dish){
+            if(dishes.get(i).getId() == id_dish){
                 found2 = false;
                 for (int j = 0 ; j < orders.size() && !found2; j++){
-                    if(orders.get(j).getId() == dishes.get(i).getId_dish()){
+                    if(orders.get(j).getId() == dishes.get(i).getId()){
                         found2 = true;
                     }
                 }
