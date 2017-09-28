@@ -33,7 +33,7 @@ public class RestaurantServiceImpl implements RestaurantService{
     }
 
     @Override
-    public Boolean deleteDish(Integer id_restaurant, Dish d) {
+    public Boolean deleteDish(Integer id_restaurant, Integer id_dish) {
         boolean found = false;
         Restaurant r = restaurants.get(id_restaurant);
 
@@ -42,10 +42,10 @@ public class RestaurantServiceImpl implements RestaurantService{
         boolean found2 = false;
         for (int i = 0 ; i < dishes.size() && !found; i++){
 
-            if(dishes.get(i).equals(d)){
+            if(dishes.get(i).getId_dish() == id_dish){
                 found2 = false;
                 for (int j = 0 ; j < orders.size() && !found2; j++){
-                    if(orders.get(j).getId() == dishes.get(i).getId()){
+                    if(orders.get(j).getId() == dishes.get(i).getId_dish()){
                         found2 = true;
                     }
                 }

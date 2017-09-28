@@ -10,7 +10,7 @@ public class Dish {
     private Integer price;
     private String description;
 
-    public Dish(Integer id_dish, String name, Integer price, String description) {
+    public Dish(String name, Integer price, String description) {
         this.name = name;
         this.price = price;
         this.description = description;

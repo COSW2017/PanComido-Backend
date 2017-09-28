@@ -15,36 +15,35 @@ import java.util.Map;
  * 8/21/17.
  */
 @Service
-public class UserServiceImpl
-    implements UserService {
-
+public class UserServiceImpl implements UserService {
+    public static Long consucutive = 1l; //hay que quitar esto cuando se implemente la base de datoss!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     private HashMap<Long, User> users = new HashMap<>();
     @Autowired
     private RestaurantService restaurantService;
 
     @Autowired
-    public UserServiceImpl() {
-    }
+    public UserServiceImpl() { }
 
     @PostConstruct
     private void populateSampleData() {
         User user = new User("test@mail.com", "password", "Andres", "Perez", "https://cdn-images-1.medium.com/max/796/1*juPyda3wq9uz_SNFRLuANg@2x.png", "test", "123456");
         ArrayList<Dish> dishes = new ArrayList<>();
-        Dish dish = new Dish(0, "Pollo", 25000, "un pollo muy rico");
+        Dish dish = new Dish("Arroz con pollo", 25000, "Arroz con pollo y papas a la francesa");
+        dish.setId(0);
         dishes.add(dish);
+        ArrayList<User> userss = new ArrayList<>();
+        userss.add(user);
         Order order = new Order(0, new ArrayList<>(), new ArrayList<>(), dishes, 0);
         ArrayList<Order> orders = new ArrayList<>();
         orders.add(order);
-        ArrayList<User> userss = new ArrayList<>();
-        userss.add(user);
         Restaurant restaurant = new Restaurant(0, "Perter pan", 1.12, 2.36, 5, 2, 3, 1, orders, new ArrayList<>());
         user.setRestaurant(restaurant);
-        users.put(0l, user);
+        restaurant.setDishes(dishes);
+        users.put(1l, user);
 
         restaurantService.addRestaurant(restaurant);
     }
-
-
+    
     @Override
     public HashMap<Long, User> getUsers() {
         return users;
@@ -56,8 +55,11 @@ public class UserServiceImpl
     }
 
     @Override
-    public User createUser(User user) {
-        users.put(user.getId(), user);
+    public User createUser( User user )
+    {
+        consucutive++;
+        user.setId(consucutive); // Arreglar esto cuando se implemente la base de datos!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        users.put(consucutive, user);
         return user;
     }
 

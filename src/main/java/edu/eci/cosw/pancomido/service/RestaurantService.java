@@ -15,7 +15,7 @@ public interface RestaurantService {
 
     Dish addDish(Integer id_restaurant, Dish d);
 
-    Boolean deleteDish(Integer id_restaurant, Dish d);
+    Boolean deleteDish(Integer id_restaurant, Integer id_dish);
 
     Dish modifyDish(Integer id_restaurant, Dish d);
 
