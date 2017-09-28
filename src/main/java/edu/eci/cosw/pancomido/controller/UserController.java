@@ -80,7 +80,10 @@ public class UserController
     @RequestMapping( value = "/register", method = RequestMethod.POST )
     public User registerUser( @RequestBody User toRegister )
             throws ServletException {
-        return userService.createUser(toRegister);
+        User u =userService.createUser(toRegister);
+        System.out.print("HOLA");
+        System.out.print(u.getFirstname());
+        return u;
     }
 
     public class Token {

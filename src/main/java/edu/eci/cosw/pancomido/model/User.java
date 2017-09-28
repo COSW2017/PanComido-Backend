@@ -9,9 +9,7 @@ import java.util.Set;
  * @author Santiago Carrillo
  * 8/21/17.
  */
-public class User
-{
-
+public class User {
     private long id_user;
     private String email;
     private String password;
@@ -24,6 +22,7 @@ public class User
     public List<User> friends;
     public List<User> pendingFriends;
     private Restaurant restaurant;
+
     public User(){}
 
     public User( String email, String password, String firstname, String lastname, String image, String city, String cellphone)
