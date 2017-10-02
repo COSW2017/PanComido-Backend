@@ -7,7 +7,7 @@ public class PasareladePagos {
     private static final int maxValue = 100000;
     private static int monto;
 
-    public static boolean pagar(Pago pago, int identificador){
+    public static boolean pagar(Payment pago, int identificador){
         setMonto();
         boolean pagado = true;
         switch (identificador){

@@ -78,21 +78,6 @@ public class RestaurantServiceImpl implements RestaurantService{
         return restaurants.get(id_restaurant).getOrders();
     }
 
-    //Tal vez se debería crear un orderController
-    @Override
-    public Boolean changeStateOrder(Integer id_restaurant, Integer id_order, Integer state) {
-        List<Order> orders = restaurants.get(id_restaurant).getOrders();
-        Boolean found = false;
-        for (int i = 0; i < orders.size() & !found; i++){
-            if(orders.get(i).getId() == id_order){
-                orders.get(i).setState(state);
-                found = true;
-            }
-        }
-        return found;
-    }
-
-
     public HashMap<Integer, Restaurant> getRestaurants() {
         return restaurants;
     }

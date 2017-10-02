@@ -2,7 +2,7 @@ package edu.eci.cosw.pancomido.model;
 
 import java.util.Date;
 
-public class Pago {
+public class Payment {
     private Integer id_pago;
     private Order orden;
     private Date fecha_pago;
@@ -11,7 +11,7 @@ public class Pago {
     private User usuario;
     private Double monto;
 
-    public Pago(User usuario, Double monto, Order orden){
+    public Payment(User usuario, Double monto, Order orden){
         this.usuario = usuario;
         this.orden = orden;
         this.monto = monto;

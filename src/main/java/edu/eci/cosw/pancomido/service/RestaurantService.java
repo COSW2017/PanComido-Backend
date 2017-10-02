@@ -22,8 +22,6 @@ public interface RestaurantService {
 
     List<Order> getOrders(Integer id_restaurant);
 
-    Boolean changeStateOrder(Integer id_restaurant, Integer id_order, Integer state);
-
     HashMap<Integer, Restaurant> getRestaurants();
 
     List<Restaurant> getLocationRestaurants(Double latitude, Double longitude);
