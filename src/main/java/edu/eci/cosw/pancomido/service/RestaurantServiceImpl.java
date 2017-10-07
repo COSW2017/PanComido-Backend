@@ -26,13 +26,25 @@ public class RestaurantServiceImpl implements RestaurantService{
 
     @Override
     public Dish addDish(Integer id_restaurant, Dish d) {
-        Restaurant r = restaurants.get(id_restaurant);
+        /*Restaurant r = restaurants.get(id_restaurant);
         List<Dish> dishes = r.getDishes();
-        dishes.add(d);
+        dishes.add(d);*/
+        restaurants.get(id_restaurant).addDish(d);
         return d;
     }
 
     @Override
+    public Boolean deleteDish(Integer id_restaurant, Integer id_dish) {
+        Restaurant restaurant = restaurants.get(id_restaurant);
+        Boolean found = false;
+        if(restaurant.getDishById(id_dish)!=null){
+            restaurant.delDishById(id_dish);
+            found = true;
+        }
+        return found;
+    }
+
+    /*@Override
     public Boolean deleteDish(Integer id_restaurant, Integer id_dish) {
         boolean found = false;
         Restaurant r = restaurants.get(id_restaurant);
@@ -42,10 +54,10 @@ public class RestaurantServiceImpl implements RestaurantService{
         boolean found2 = false;
         for (int i = 0 ; i < dishes.size() && !found; i++){
 
-            if(dishes.get(i).getId() == id_dish){
+            if(dishes.get(i).getId_dish() == id_dish){
                 found2 = false;
                 for (int j = 0 ; j < orders.size() && !found2; j++){
-                    if(orders.get(j).getId() == dishes.get(i).getId()){
+                    if(orders.get(j).getId() == dishes.get(i).getId_dish()){
                         found2 = true;
                     }
                 }
@@ -56,7 +68,9 @@ public class RestaurantServiceImpl implements RestaurantService{
             }
         }
         return found && !found2;
-    }
+    }*/
+
+
 
     @Override
     public Dish modifyDish(Integer id_restaurant, Dish d) {
@@ -72,14 +86,8 @@ public class RestaurantServiceImpl implements RestaurantService{
         return d;
     }
 
-
-    @Override
-    public List<Order> getOrders(Integer id_restaurant) {
-        return restaurants.get(id_restaurant).getOrders();
-    }
-
     //Tal vez se debería crear un orderController
-    @Override
+    /*@Override
     public Boolean changeStateOrder(Integer id_restaurant, Integer id_order, Integer state) {
         List<Order> orders = restaurants.get(id_restaurant).getOrders();
         Boolean found = false;
@@ -90,7 +98,7 @@ public class RestaurantServiceImpl implements RestaurantService{
             }
         }
         return found;
-    }
+    }*/
 
 
     public HashMap<Integer, Restaurant> getRestaurants() {
@@ -122,19 +130,6 @@ public class RestaurantServiceImpl implements RestaurantService{
     public Restaurant addRestaurant(Restaurant restaurant) {
         restaurants.put(restaurant.getId_restaurant(), restaurant);
         return restaurant;
-    }
-
-    @Override
-    public Order getOrdersById(Integer id_restaurant, Integer id_order) {
-        List<Order> orders = restaurants.get(id_restaurant).getOrders();
-        Order ord = null;
-        for (Order o: orders) {
-            if (o.getId()== id_order){
-                ord = o;
-                break;
-            }
-        }
-        return ord;
     }
 
     private Double calculateDistance(Double latitude1, Double latitude2, Double longitude1, Double longitude2) {

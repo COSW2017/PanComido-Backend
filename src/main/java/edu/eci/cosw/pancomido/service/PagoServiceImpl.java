@@ -1,5 +1,6 @@
 package edu.eci.cosw.pancomido.service;
 
+import edu.eci.cosw.pancomido.Exceptions.PanComidoServicesException;
 import edu.eci.cosw.pancomido.model.*;
 import org.springframework.stereotype.Service;
 
@@ -10,39 +11,25 @@ import java.util.HashMap;
 @Service
 public class PagoServiceImpl implements PagoService{
 
-    private HashMap<Integer, Pago> pagos = new HashMap<>();
+    private HashMap<Integer, Payment> pagos = new HashMap<>();
 
-    public boolean pagarOrden(Order orden, MetodoPago metodoPago, int identificador){
-        ArrayList<Pago> pagosRealizados= new ArrayList<>();
-        Double monto = orden.getMonto()/orden.getUsers().size();
-        boolean orderPaid = true; Pago p; User u;
-        for(int i = 0; i<orden.getUsers().size() && orderPaid; i++){
-            u = orden.getUsers().get(i);
-            orderPaid= orderPaid && metodoPago.isValid();
+    public boolean payCommand(Command command, User user, int identificador) throws PanComidoServicesException {
+        Double monto = command.getMonto();
+        boolean orderPaid = true; Payment p = null; Command c;
+        PaymentMethod paymentMethod = user.getPaymentMethod();
+        if(paymentMethod!=null) {
+            orderPaid= paymentMethod.isValid();
             if(orderPaid){
-                p =new Pago(u, monto, orden); pagosRealizados.add(p);
-                orderPaid = orderPaid && PasareladePagos.pagar(p,identificador);
-            }else{
-                rollback(pagosRealizados);
+                p =new Payment(user, command);
             }
+        }else {
+            throw new PanComidoServicesException(PanComidoServicesException.NO_METODO_DE_PAGO + user.getFirstname());
         }
-        cambiarEstado(orden, pagosRealizados);
+        orderPaid = orderPaid && PaymentGateway.pagar(p, identificador);
+        if (orderPaid){
+            command.setState(2);
+        }
         return orderPaid;
     }
 
-    private void cambiarEstado(Order orden, ArrayList<Pago> pagosRealizados) {
-        orden.setState(2);
-        for(Pago p: pagosRealizados){
-            p.setId_pago(pagos.size()+1);
-            p.setEstadoTransaccion(2);
-            pagos.put(p.getId_pago(), p);
-        }
-    }
-
-
-    private void rollback(ArrayList<Pago> pagosRealizados){
-        for(Pago p : pagosRealizados){
-            p.setEstadoTransaccion(0);
-        }
-    }
 }

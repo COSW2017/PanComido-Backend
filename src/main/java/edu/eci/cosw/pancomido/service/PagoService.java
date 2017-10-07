@@ -1,9 +1,11 @@
 package edu.eci.cosw.pancomido.service;
 
-import edu.eci.cosw.pancomido.model.MetodoPago;
+import edu.eci.cosw.pancomido.Exceptions.PanComidoServicesException;
+import edu.eci.cosw.pancomido.model.Command;
 import edu.eci.cosw.pancomido.model.Order;
+import edu.eci.cosw.pancomido.model.User;
 
 public interface PagoService {
 
-    public boolean pagarOrden(Order orden, MetodoPago metodoPago, int identificador);
+    public boolean payCommand(Command command, User user, int identificador) throws PanComidoServicesException;
 }

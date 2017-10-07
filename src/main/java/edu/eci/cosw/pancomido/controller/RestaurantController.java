@@ -1,10 +1,9 @@
 package edu.eci.cosw.pancomido.controller;
 
-import edu.eci.cosw.pancomido.model.Dish;
-import edu.eci.cosw.pancomido.model.Order;
-import edu.eci.cosw.pancomido.model.Restaurant;
-import edu.eci.cosw.pancomido.model.Todo;
+import edu.eci.cosw.pancomido.model.*;
+import edu.eci.cosw.pancomido.service.OrderService;
 import edu.eci.cosw.pancomido.service.RestaurantService;
+import edu.eci.cosw.pancomido.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,11 +21,13 @@ public class RestaurantController {
     @Autowired
     RestaurantService restaurantService;
 
-    @RequestMapping( value = "/{id_restaurant}/order", method = RequestMethod.GET )
-    public List<Order> getOrders(@PathVariable Integer id_restaurant)
-            throws ServletException
-    {
-        return restaurantService.getOrders(id_restaurant);
+    @Autowired
+    UserService userService;
+
+    @RequestMapping( value = "/{id_restaurant}/commands", method = RequestMethod.GET )
+    public List<Command> get(@PathVariable Integer id_restaurant)
+            throws ServletException {
+        return userService.getPedidosByRestaurant(id_restaurant);
 
     }
 
@@ -57,9 +58,8 @@ public class RestaurantController {
 
     @RequestMapping( value = "/order", method = RequestMethod.POST )
     public Boolean addOrder(@RequestBody Integer id_restaurant, Integer id__order, Integer state )
-            throws ServletException
-    {
-        return restaurantService.changeStateOrder(id_restaurant, id__order, state);
+            throws ServletException {
+        return null; 
 
     }
 
@@ -83,13 +83,12 @@ public class RestaurantController {
         return restaurantService.addRestaurant(toRegister);
     }
 
-    @RequestMapping( value = "/{id_restaurant}/order/{id_order}", method = RequestMethod.GET )
+    /*@RequestMapping( value = "/{id_restaurant}/order/{id_order}", method = RequestMethod.GET )
     public Order getOrdersById(@PathVariable Integer id_restaurant,@PathVariable Integer id_order)
             throws ServletException
     {
         return restaurantService.getOrdersById(id_restaurant, id_order);
 
-    }
+    }*/
 
 }
-

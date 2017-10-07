@@ -9,21 +9,34 @@ public class Dish {
     private String name;
     private Integer price;
     private String description;
+    private Restaurant restaurant;
+    private Integer tiempoPreparacion;
+    private String image;
 
-    public Dish(String name, Integer price, String description) {
+    public Dish(Integer id_dish, String name, Integer price, String description, Restaurant restaurant) {
+        this.id_dish = id_dish;
         this.name = name;
         this.price = price;
         this.description = description;
+        this.restaurant = restaurant;
     }
 
     public Dish() {
     }
 
-    public Integer getId() {
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Integer getId_dish() {
         return id_dish;
     }
 
-    public void setId(Integer id_dish) {
+    public void setId_dish(Integer id_dish) {
         this.id_dish = id_dish;
     }
 
@@ -81,5 +94,21 @@ public class Dish {
         result = 31 * result + getPrice().hashCode();
         result = 31 * result + getDescription().hashCode();
         return result;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    public Integer getTiempoPreparacion() {
+        return tiempoPreparacion;
+    }
+
+    public void setTiempoPreparacion(Integer tiempoPreparacion) {
+        this.tiempoPreparacion = tiempoPreparacion;
     }
 }

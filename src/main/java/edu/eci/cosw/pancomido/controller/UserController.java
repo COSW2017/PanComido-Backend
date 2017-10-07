@@ -1,5 +1,6 @@
 package edu.eci.cosw.pancomido.controller;
 
+import edu.eci.cosw.pancomido.model.PaymentMethod;
 import edu.eci.cosw.pancomido.model.Order;
 import edu.eci.cosw.pancomido.model.User;
 import edu.eci.cosw.pancomido.service.UserService;
@@ -80,10 +81,7 @@ public class UserController
     @RequestMapping( value = "/register", method = RequestMethod.POST )
     public User registerUser( @RequestBody User toRegister )
             throws ServletException {
-        User u =userService.createUser(toRegister);
-        System.out.print("HOLA");
-        System.out.print(u.getFirstname());
-        return u;
+        return userService.createUser(toRegister);
     }
 
     public class Token {
@@ -111,10 +109,16 @@ public class UserController
 
     @RequestMapping( value = "/{id_user}/order/{id_order}", method = RequestMethod.GET )
     public Order getOrder(@PathVariable Long id_user, Integer id_order)
-            throws ServletException
-    {
+            throws ServletException {
         return userService.getOrder(id_user, id_order);
 
     }
+
+    @RequestMapping( value = "/payment", method = RequestMethod.POST )
+    public PaymentMethod addPaymentMethod(@RequestBody Integer idUser, PaymentMethod metodo)
+            throws ServletException {
+        return userService.addPaymentMethod(idUser, metodo);
+    }
+
 
 }

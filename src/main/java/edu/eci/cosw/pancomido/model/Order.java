@@ -1,5 +1,6 @@
 package edu.eci.cosw.pancomido.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,20 +9,17 @@ import java.util.List;
 public class Order {
 
     private Integer id_order;
-    private List<Restaurant> restaurants;
-    private List<User> users;
-    private List<Dish> dishes;
-    private Integer state;
+    private User user;
+    private List<Command> commands;
+
 
     public Order() {
     }
 
-    public Order(Integer id_order, List<Restaurant> restaurants, List<User> users, List<Dish> dishes, Integer state) {
+    public Order(Integer id_order, User user, List<Command> commands) {
         this.id_order = id_order;
-        this.restaurants = restaurants;
-        this.users = users;
-        this.dishes = dishes;
-        this.state = state;
+        this.user = user;
+        this.commands = commands;
     }
 
     public Integer getId() {
@@ -32,53 +30,67 @@ public class Order {
         this.id_order = id_order;
     }
 
-    public List<Restaurant> getRestaurants() {
-        return restaurants;
+    public User getUser() {
+        return user;
     }
 
-    public void setRestaurants(List<Restaurant> restaurants) {
-        this.restaurants = restaurants;
+    public void setUsers(User user) {
+        this.user = user;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public void addPedido(Command p){
+        this.getCommands().add(p);
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public Command getPedidoById(int id){
+        return commands.get(id);
     }
 
-    public List<Dish> getDishes() {
-        return dishes;
-    }
-
-    public void setDishes(List<Dish> dishes) {
-        this.dishes = dishes;
-    }
-
-    public Integer getState() {
-        return state;
-    }
-
-    public void setState(Integer state) {
-        this.state = state;
+    public void delPedido(int idPedido){
+        List<Command> pedidosBack = getCommands();
+        boolean found = false;
+        for(int i=0; i<pedidosBack.size() && !found; i++){
+            if(idPedido== getCommands().get(i).getIdPedido()){
+                getCommands().remove(getCommands().get(i));
+                found=true;
+            }
+        }
     }
 
     @Override
     public String toString() {
         return "Order{" +
                 "id=" + id_order +
-                ", restaurants=" + restaurants +
-                ", users=" + users +
-                ", dishes=" + dishes +
+                ", users=" + user +
                 '}';
     }
 
     public Double getMonto(){
         double sum = 0;
-        for(Dish d : getDishes()){
-            sum+=d.getPrice();
+        for(Command d : getCommands()){
+            sum+=d.getMonto();
         }
         return sum;
     }
+
+    public List<Command> getCommands() {
+        return commands;
+    }
+
+    public void setCommands(List<Command> commands) {
+        this.commands = commands;
+    }
+    /*
+    En cola: 0, En progreso: 1, Listo=2
+     */
+    public boolean isReady(){
+        Boolean ready = true;
+        for(Command p : commands){
+            ready = ready && p.getState()== 2 ? true : false;
+        }
+        return ready;
+    }
+
+    //ToDo: falta calcular los pagos
+
 }

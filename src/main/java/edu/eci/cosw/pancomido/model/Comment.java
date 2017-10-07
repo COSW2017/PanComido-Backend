@@ -8,12 +8,10 @@ import java.util.Date;
 public class Comment {
 
     private String comment;
-    private User user;
     private Date date;
 
-    public Comment(String comment, User user, Date date) {
+    public Comment(String comment, Date date) {
         this.comment = comment;
-        this.user = user;
         this.date = date;
     }
 
@@ -26,14 +24,6 @@ public class Comment {
 
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public Date getDate() {

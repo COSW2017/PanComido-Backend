@@ -16,11 +16,10 @@ public class Restaurant {
     private Integer dislike;
     private Integer love;
     private Integer angry;
-    private List<Order> orders;
     private List<Comment> comments;
     private List<Dish> dishes;
 
-    public Restaurant(Integer id_restaurant, String name, Double latitude, Double longitude, Integer like, Integer dislike, Integer love, Integer angry, List<Order> orders, List<Comment> comments) {
+    public Restaurant(Integer id_restaurant, String name, Double latitude, Double longitude, Integer like, Integer dislike, Integer love, Integer angry) {
         this.id_restaurant = id_restaurant;
         this.name = name;
         this.latitude = latitude;
@@ -29,8 +28,8 @@ public class Restaurant {
         this.dislike = dislike;
         this.love = love;
         this.angry = angry;
-        this.orders = orders;
-        this.comments = comments;
+        this.dishes = new ArrayList<>();
+        this.comments = new ArrayList<>();
     }
 
     public Integer getId_restaurant() {
@@ -100,13 +99,13 @@ public class Restaurant {
         this.angry = angry;
     }
 
-    public List<Order> getOrders() {
+    /*public List<Order> getOrders() {
         return orders;
-    }
+    }*/
 
-    public void setOrders(List<Order> orders) {
+    /*public void setOrders(List<Order> orders) {
         this.orders = orders;
-    }
+    }*/
 
     public List<Comment> getComments() {
         return comments;
@@ -114,6 +113,32 @@ public class Restaurant {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public Dish getDishById(int id_dish){
+        Dish d = null; boolean found = false;
+        for(int i =0; i< dishes.size() && !found; i++){
+            if(id_dish == dishes.get(i).getId_dish()){
+                d = dishes.get(i);
+                found = true;
+            }
+        }
+        return d;
+    }
+
+    public void delDishById(int id_dish){
+        boolean found = false;
+        for(int i =0; i< dishes.size() && !found; i++){
+            if(id_dish == dishes.get(i).getId_dish()){
+                dishes.remove(dishes.get(i));
+                found = true;
+            }
+        }
+    }
+
+    public Dish addDish(Dish dish){
+        dishes.add(dish);
+        return dish;
     }
 
     @Override
@@ -126,7 +151,6 @@ public class Restaurant {
                 ", dislike=" + dislike +
                 ", love=" + love +
                 ", angry=" + angry +
-                ", orders=" + orders +
                 ", comments=" + comments +
                 '}';
     }
