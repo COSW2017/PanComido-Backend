@@ -1,15 +1,15 @@
 package edu.eci.cosw.pancomido.model;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author Santiago Carrillo
  * 8/21/17.
  */
-public class User {
+public class User
+{
+
     private long id_user;
     private String email;
     private String password;
@@ -22,14 +22,15 @@ public class User {
     public List<User> friends;
     public List<User> pendingFriends;
     private Restaurant restaurant;
-
+    private List<PaymentMethod> metodosPaymentMethods;
+    private List<Payment> pagos;
+    private int selectedPaymentMethod;
     public User(){}
 
-    public User( String email, String password, String firstname, String lastname, String image, String city, String cellphone)
-    {
-        this.email = email;
+    public User( String email, String password, String firstname, String lastname, String image, String city, String cellphone) {
         this.password = password;
         this.firstname = firstname;
+        this.email = email;
         this.lastname = lastname;
         this.image = image;
         this.city = city;
@@ -37,8 +38,17 @@ public class User {
         orders = new ArrayList<>();
         friends = new ArrayList<>();
         pendingFriends = new ArrayList<>();
+        metodosPaymentMethods = new ArrayList<>();
+        selectedPaymentMethod = -1;
     }
 
+    public List<Payment> getPagos() {
+        return pagos;
+    }
+
+    public void setPagos(List<Payment> pagos) {
+        this.pagos = pagos;
+    }
 
     public long getId()
     {
@@ -146,6 +156,14 @@ public class User {
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
+    }
+
+    public void addMetodoPago(PaymentMethod paymentMethod){
+        metodosPaymentMethods.add(paymentMethod);
+    }
+
+    public PaymentMethod getPaymentMethod(){
+        return selectedPaymentMethod <0 ? null : metodosPaymentMethods.get(selectedPaymentMethod);
     }
 
     @Override

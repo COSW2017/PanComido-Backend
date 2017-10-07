@@ -1,5 +1,7 @@
 package edu.eci.cosw.pancomido.service;
 
+import edu.eci.cosw.pancomido.model.Command;
+import edu.eci.cosw.pancomido.model.PaymentMethod;
 import edu.eci.cosw.pancomido.model.Order;
 import edu.eci.cosw.pancomido.model.User;
 
@@ -27,4 +29,15 @@ public interface UserService
     Boolean addFriend(Long user, Long friend);
 
     Order getOrder(Long id_user, Integer id_order);
+
+    PaymentMethod addPaymentMethod(Integer idUser, PaymentMethod paymentMethod);
+
+    /*
+    Estado: 0 -> En cola, 1-> Progreso, 2->Lista, -1->Cancelada
+     */
+    Boolean changeCommandState(Integer id_order, Integer id_pedido, Integer state);
+
+    Order getOrderById(Integer id_order);
+
+    List<Command> getPedidosByRestaurant(Integer id_restaurant);
 }
