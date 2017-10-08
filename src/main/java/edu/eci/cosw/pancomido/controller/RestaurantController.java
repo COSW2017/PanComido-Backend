@@ -67,7 +67,6 @@ public class RestaurantController {
     public List<Restaurant> getNearRestaurants(@PathVariable Double latitude, @PathVariable Double longitude)
             throws ServletException{
         return restaurantService.getLocationRestaurants(latitude, longitude);
-
     }
 
     @RequestMapping( value = "{idRestaurant}/dish", method = RequestMethod.GET )
@@ -86,4 +85,11 @@ public class RestaurantController {
     public List<Command> getCommandsByRestaurant(@RequestBody Integer idRestaurant){
         return restaurantService.getCommands(idRestaurant);
     }
+
+    @RequestMapping( value = "{idRestaurant}/command", method = RequestMethod.PUT )
+    public Command updateCommmandState(@PathVariable Integer id_restaurant, @RequestBody Command command)
+            throws ServletException{
+        return restaurantService.changeCommandState(command);
+    }
+
 }
