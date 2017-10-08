@@ -1,0 +1,10 @@
+DROP TABLE Command_Dish; 
+DROP TABLE Dish; 
+DROP TABLE Payment; 
+DROP TABLE Restaurant; 
+DROP TABLE PaymentMethod; 
+DROP TABLE CreditCard;
+DROP TABLE Command; 
+DROP TABLE Rest_Order; 
+DROP TABLE Friend; 
+DROP TABLE Users; 

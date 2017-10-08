@@ -62,15 +62,15 @@ public class OrderServiceImpl implements OrderService{
         List<Command> commandPorOrden; Dish d;
         for(Integer i : ordenes.keySet()){
             commandPorOrden = ordenes.get(i).getCommands();
-            if(commandPorOrden.get(i).getPlatos().get(0).getRestaurant().getId_restaurant()==id_restaurant){
+            /*if(commandPorOrden.get(i).getPlatos().get(0).getRestaurant().getId_restaurant()==id_restaurant){
                 commands.add(commandPorOrden.get(i));
-            }
+            }*/
         }
         return commands;
     }
 
     public Order addOrder(Order order){
-        ordenes.put(order.getId(), order);
+        ordenes.put(order.getId_order(), order);
         return order;
     }
 

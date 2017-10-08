@@ -31,4 +31,9 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('io.jsonwebtoken:jjwt:0.6.0')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	compile("org.hibernate:hibernate-core:5.2.11.Final")
+	compile("org.springframework.boot:spring-boot-starter-data-jpa")
+	compile('mysql:mysql-connector-java')
+
+
 }

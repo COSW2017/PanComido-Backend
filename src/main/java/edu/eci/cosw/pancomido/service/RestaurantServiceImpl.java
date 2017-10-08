@@ -1,6 +1,7 @@
 package edu.eci.cosw.pancomido.service;
 
 import com.sun.org.apache.xpath.internal.operations.Or;
+import edu.eci.cosw.pancomido.model.Command;
 import edu.eci.cosw.pancomido.model.Dish;
 import edu.eci.cosw.pancomido.model.Order;
 import edu.eci.cosw.pancomido.model.Restaurant;
@@ -21,15 +22,14 @@ public class RestaurantServiceImpl implements RestaurantService{
     private final Double RADIUS = 6371.0;
 
     @Autowired
-    public RestaurantServiceImpl() {
-    }
+    public RestaurantServiceImpl() { }
 
     @Override
     public Dish addDish(Integer id_restaurant, Dish d) {
         /*Restaurant r = restaurants.get(id_restaurant);
         List<Dish> dishes = r.getDishes();
         dishes.add(d);*/
-        restaurants.get(id_restaurant).addDish(d);
+        //restaurants.get(id_restaurant).addDish(d);
         return d;
     }
 
@@ -37,10 +37,10 @@ public class RestaurantServiceImpl implements RestaurantService{
     public Boolean deleteDish(Integer id_restaurant, Integer id_dish) {
         Restaurant restaurant = restaurants.get(id_restaurant);
         Boolean found = false;
-        if(restaurant.getDishById(id_dish)!=null){
+        /*if(restaurant.getDishById(id_dish)!=null){
             restaurant.delDishById(id_dish);
             found = true;
-        }
+        }*/
         return found;
     }
 
@@ -76,7 +76,7 @@ public class RestaurantServiceImpl implements RestaurantService{
     public Dish modifyDish(Integer id_restaurant, Dish d) {
         boolean found = false;
         Restaurant r = restaurants.get(id_restaurant);
-        List<Dish> dishes = r.getDishes();
+        List<Dish> dishes = null;
         for (int i = 0 ; i < dishes.size() && !found; i++){
             if(dishes.get(i).equals(d)){
                 dishes.set(i, d);
@@ -123,13 +123,24 @@ public class RestaurantServiceImpl implements RestaurantService{
 
     @Override
     public List<Dish> getDishes(Integer idRestaurant) {
-        return restaurants.get(idRestaurant).getDishes();
+        //return restaurants.get(idRestaurant).getDishes();
+        return null;
     }
 
     @Override
     public Restaurant addRestaurant(Restaurant restaurant) {
         restaurants.put(restaurant.getId_restaurant(), restaurant);
         return restaurant;
+    }
+
+    @Override
+    public Order changeCommandState(Integer commandId) {
+        return null;
+    }
+
+    @Override
+    public List<Command> getCommands(Integer idRestaurant) {
+        return null;
     }
 
     private Double calculateDistance(Double latitude1, Double latitude2, Double longitude1, Double longitude2) {
@@ -141,6 +152,8 @@ public class RestaurantServiceImpl implements RestaurantService{
         Double distance = 2*RADIUS*Math.asin(Math.sqrt(a));
         return distance;
     }
+
+
 
 
 }

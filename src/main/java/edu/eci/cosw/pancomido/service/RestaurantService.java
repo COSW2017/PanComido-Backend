@@ -1,5 +1,6 @@
 package edu.eci.cosw.pancomido.service;
 
+import edu.eci.cosw.pancomido.model.Command;
 import edu.eci.cosw.pancomido.model.Dish;
 import edu.eci.cosw.pancomido.model.Order;
 import edu.eci.cosw.pancomido.model.Restaurant;
@@ -27,4 +28,7 @@ public interface RestaurantService {
 
     Restaurant addRestaurant(Restaurant restaurant);
 
+    Order changeCommandState(Integer commandId);
+
+    List<Command> getCommands(Integer idRestaurant);
 }

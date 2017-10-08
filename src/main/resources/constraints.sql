@@ -1,0 +1,22 @@
+ALTER TABLE CreditCard ADD CONSTRAINT PK_CreditCard PRIMARY KEY (card_number);
+ALTER TABLE Payment ADD CONSTRAINT PK_Payment PRIMARY KEY (id_payment);
+ALTER TABLE Dish ADD CONSTRAINT PK_Dish PRIMARY KEY (id_dish);
+ALTER TABLE Command ADD CONSTRAINT PK_Command PRIMARY KEY (id_command);
+ALTER TABLE Restaurant ADD CONSTRAINT PK_Restaurant PRIMARY KEY (id_restaurant);
+ALTER TABLE Rest_Order ADD CONSTRAINT PK_Rest_Order PRIMARY KEY (id_order);
+ALTER TABLE PaymentMethod ADD CONSTRAINT PK_PaymentMethod PRIMARY KEY (id_payment_method);
+ALTER TABLE Friend ADD CONSTRAINT PK_Friend PRIMARY KEY (id_friend);
+ALTER TABLE Users ADD CONSTRAINT PK_Users PRIMARY KEY (user_id );
+
+ALTER TABLE PaymentMethod ADD CONSTRAINT FK_PaymentMethod_user FOREIGN KEY (user_id ) REFERENCES Users (user_id ) ON DELETE CASCADE;
+ALTER TABLE PaymentMethod ADD CONSTRAINT FK_PaymentMethod_card FOREIGN KEY (card_number) REFERENCES CreditCard (card_number) ON DELETE CASCADE;; 
+ALTER TABLE Rest_Order ADD CONSTRAINT FK_Rest_Order_user FOREIGN KEY (user_id) REFERENCES Users (user_id ) ON DELETE SET NULL;
+ALTER TABLE Restaurant ADD CONSTRAINT FK_Restaurant_user FOREIGN KEY (user_id) REFERENCES Users (user_id ) ON DELETE CASCADE;
+ALTER TABLE Command ADD CONSTRAINT FK_Command_order FOREIGN KEY (id_order) REFERENCES Rest_Order (id_order);
+ALTER TABLE Dish ADD CONSTRAINT FK_Dish_restaurant FOREIGN KEY (id_restaurant) REFERENCES Restaurant (id_restaurant) ON DELETE CASCADE;
+ALTER TABLE Payment ADD CONSTRAINT FK_Payment_command FOREIGN KEY (id_command) REFERENCES Command (id_command);
+ALTER TABLE Payment ADD CONSTRAINT FK_Payment_user FOREIGN KEY (user_id ) REFERENCES Users (user_id ) ON DELETE SET NULL;
+ALTER TABLE Command_Dish ADD CONSTRAINT FK_Command_Dish_command FOREIGN KEY (id_command) REFERENCES Command (id_command);
+ALTER TABLE Command_Dish ADD CONSTRAINT FK_Command_Dish_dish FOREIGN KEY (id_dish) REFERENCES Dish (id_dish);
+ALTER TABLE Friend ADD CONSTRAINT FK_Friend_user FOREIGN KEY (user_id ) REFERENCES Users (user_id );
+ALTER TABLE Friend ADD CONSTRAINT FK_Friend_friend FOREIGN KEY (friend_id) REFERENCES Users (user_id );
