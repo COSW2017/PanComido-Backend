@@ -17,7 +17,7 @@ import javax.servlet.ServletException;
 
 @RestController
 @RequestMapping( "payment" )
-public class PagoController {
+public class PaymentController {
 
     @Autowired
     PagoService pagoService;

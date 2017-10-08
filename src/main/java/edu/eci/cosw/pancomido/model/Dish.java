@@ -1,16 +1,31 @@
 package edu.eci.cosw.pancomido.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import javax.persistence.*;
+
 /**
  * Created by 2100038 on 9/12/17.
  */
+@Entity
+@Table(name = "dish")
 public class Dish {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id_dish;
+
     private String name;
     private Integer price;
     private String description;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_restaurant", nullable = false)
+    @Fetch(FetchMode.JOIN)
     private Restaurant restaurant;
-    private Integer tiempoPreparacion;
+
+    private Integer prep_time;
     private String image;
 
     public Dish(Integer id_dish, String name, Integer price, String description, Restaurant restaurant) {
@@ -24,6 +39,7 @@ public class Dish {
     public Dish() {
     }
 
+    @Column(name="image")
     public String getImage() {
         return image;
     }
@@ -32,6 +48,7 @@ public class Dish {
         this.image = image;
     }
 
+    @Column(name="id_dish", unique = true, nullable = false)
     public Integer getId_dish() {
         return id_dish;
     }
@@ -40,6 +57,7 @@ public class Dish {
         this.id_dish = id_dish;
     }
 
+    @Column(name="name", nullable = false)
     public String getName() {
         return name;
     }
@@ -48,6 +66,7 @@ public class Dish {
         this.name = name;
     }
 
+    @Column(name="price", nullable = false)
     public Integer getPrice() {
         return price;
     }
@@ -56,6 +75,7 @@ public class Dish {
         this.price = price;
     }
 
+    @Column(name="description", nullable = false)
     public String getDescription() {
         return description;
     }
@@ -96,6 +116,7 @@ public class Dish {
         return result;
     }
 
+
     public Restaurant getRestaurant() {
         return restaurant;
     }
@@ -104,11 +125,12 @@ public class Dish {
         this.restaurant = restaurant;
     }
 
-    public Integer getTiempoPreparacion() {
-        return tiempoPreparacion;
+    @Column(name="prep_time", nullable = false)
+    public Integer getPrep_time() {
+        return prep_time;
     }
 
-    public void setTiempoPreparacion(Integer tiempoPreparacion) {
-        this.tiempoPreparacion = tiempoPreparacion;
+    public void setPrep_time(Integer tiempoPreparacion) {
+        this.prep_time = tiempoPreparacion;
     }
 }

@@ -34,14 +34,14 @@ public class UserServiceImpl implements UserService
         Restaurant restaurant = new Restaurant(0, "Perter pan", 1.12, 2.36, 5, 2, 3, 1);
         ArrayList<Dish> dishes = new ArrayList<>();
         Dish dish = new Dish(0, "Arroz con pollo", 25000, "Arroz con pollo y papas a la francesa", restaurant);
-        restaurant.addDish(dish);
+        //restaurant.addDish(dish);
         Command command = new Command(0, dishes);
         ArrayList<Command> commands = new ArrayList<>(); commands.add(command);
         Order order = new Order(0, user, commands);
         ArrayList<Order> orders = new ArrayList<>();
-        user.setOrders(orders);
-        user.setRestaurant(restaurant);
-        restaurant.setDishes(dishes);
+        //user.setOrders(orders);
+        //user.setRestaurant(restaurant);
+        //restaurant.setDishes(dishes);
         users.put(1l, user);
 
         restaurantService.addRestaurant(restaurant);
@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService
     @Override
     public User createUser( User user ){
         consucutive++;
-        user.setId(consucutive); // Arreglar esto cuando se implemente la base de datos!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //user.setId(consucutive); // Arreglar esto cuando se implemente la base de datos!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         users.put(consucutive, user);
         return user;
     }
@@ -114,24 +114,24 @@ public class UserServiceImpl implements UserService
     public Boolean addFriend(Long user, Long friend) {
         User user1 = this.getUser(user);
         User user2 = this.getUser(friend);
-        List<User> pending1 = user1.getPendingFriends();
-        boolean retval = false;
+        //List<User> pending1 = user1.getPendingFriends();
+        /*boolean retval = false;
         if(!pending1.contains(user2)) {
             pending1.add(user2);
             retval = true;
-        }
-        return retval;
+        }*/
+        return null;
 
     }
 
     //Pensar si es mejor pasar las ordenes del usuario a un HashMap
     @Override
     public Order getOrder(Long id_user, Integer id_order) {
-        List<Order> orders = getUser(id_user).getOrders();
+        List<Order> orders = new ArrayList<>();
         Boolean found = false;
         Order order = null;
         for(int i = 0; i < orders.size() & !found;i++){
-            if(orders.get(i).getId() == id_order){
+            if(orders.get(i).getId_order() == id_order){
                 order=orders.get(i);
                 found = true;
             }
@@ -141,7 +141,7 @@ public class UserServiceImpl implements UserService
 
     @Override
     public PaymentMethod addPaymentMethod(Integer idUser, PaymentMethod paymentMethod) {
-        users.get(idUser).addMetodoPago(paymentMethod);
+        //users.get(idUser).addMetodoPago(paymentMethod);
         return paymentMethod;
     }
 
@@ -152,7 +152,7 @@ public class UserServiceImpl implements UserService
         List<Command> commands = order.getCommands();
         Boolean found = false;
         for(int i = 0; i< commands.size() && !found; i++){
-            if(commands.get(i).getIdPedido()==id_pedido){
+            if(commands.get(i).getId_command()==id_pedido){
                 commands.get(i).setState(state);
                 found=true;
             }
@@ -172,9 +172,9 @@ public class UserServiceImpl implements UserService
         List<Command> commandPorOrden; Dish d;
         for(Integer i : ordenes.keySet()){
             commandPorOrden = ordenes.get(i).getCommands();
-            if(commandPorOrden.get(i).getPlatos().get(0).getRestaurant().getId_restaurant()==id_restaurant){
+            /*if(commandPorOrden.get(i).getPlatos().get(0).getRestaurant().getId_restaurant()==id_restaurant){
                 commands.add(commandPorOrden.get(i));
-            }
+            }*/
         }
         return commands;
     }
@@ -184,10 +184,10 @@ public class UserServiceImpl implements UserService
         List<Order> orders = new ArrayList<>();
         HashMap<Integer, Order> allOrders = new HashMap<>();
         for(Long u : users.keySet()){
-            orders =  users.get(u).getOrders();
+            orders =  new ArrayList<>();
             for(Order o : orders){
-                if(!allOrders.containsKey(o.getId())){
-                    allOrders.put(o.getId(), o);
+                if(!allOrders.containsKey(o.getId_order())){
+                    allOrders.put(o.getId_order(), o);
                 }
             }
         }
