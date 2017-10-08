@@ -28,7 +28,7 @@ public interface RestaurantService {
 
     Restaurant addRestaurant(Restaurant restaurant);
 
-    Order changeCommandState(Integer commandId);
+    Command changeCommandState(Command command);
 
     List<Command> getCommands(Integer idRestaurant);
 }

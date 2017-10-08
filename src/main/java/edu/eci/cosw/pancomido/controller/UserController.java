@@ -1,11 +1,13 @@
 package edu.eci.cosw.pancomido.controller;
 
+import edu.eci.cosw.pancomido.Exceptions.PanComidoServicesException;
 import edu.eci.cosw.pancomido.model.PaymentMethod;
 import edu.eci.cosw.pancomido.model.Order;
 import edu.eci.cosw.pancomido.model.User;
 import edu.eci.cosw.pancomido.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -120,5 +122,13 @@ public class UserController
         return userService.addPaymentMethod(idUser, metodo);
     }
 
-
+    @RequestMapping( value = "/{id_user}/order/", method = RequestMethod.PUT )
+    public Order cancelOrder(@PathVariable Long idUser, @RequestBody Order order)
+            throws ServletException {
+        try {
+            return userService.cancelOrder(order);
+        } catch (PanComidoServicesException e) {
+            throw new ServletException(e.getMessage());
+        }
+    }
 }

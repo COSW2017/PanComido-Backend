@@ -5,6 +5,8 @@ import edu.eci.cosw.pancomido.model.Command;
 import edu.eci.cosw.pancomido.model.Dish;
 import edu.eci.cosw.pancomido.model.Order;
 import edu.eci.cosw.pancomido.model.Restaurant;
+import edu.eci.cosw.pancomido.repositories.CommandRepository;
+import edu.eci.cosw.pancomido.repositories.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -22,7 +24,14 @@ public class RestaurantServiceImpl implements RestaurantService{
     private final Double RADIUS = 6371.0;
 
     @Autowired
+    public CommandRepository commandRepository;
+
+    @Autowired
+    public RestaurantRepository restaurantRepository;
+
+    @Autowired
     public RestaurantServiceImpl() { }
+
 
     @Override
     public Dish addDish(Integer id_restaurant, Dish d) {
@@ -110,12 +119,11 @@ public class RestaurantServiceImpl implements RestaurantService{
     }
 
     public List<Restaurant> getLocationRestaurants(Double latitude, Double longitude){
+        List<Restaurant> restaurants = restaurantRepository.findAll();
         ArrayList<Restaurant> locationRestaurants = new ArrayList<>();
-        Restaurant r = null; 
-        for(Integer i : restaurants.keySet()){
-            r = restaurants.get(i);
-            if(calculateDistance(latitude, r.getLatitude(), longitude, r.getLongitude()) < 0.2){
-                locationRestaurants.add(r);
+        for(Restaurant restaurant : restaurants){
+            if(calculateDistance(latitude, restaurant.getLatitude(), longitude, restaurant.getLongitude()) < 0.2){
+                locationRestaurants.add(restaurant);
             }
         }
         return locationRestaurants;
@@ -134,8 +142,11 @@ public class RestaurantServiceImpl implements RestaurantService{
     }
 
     @Override
-    public Order changeCommandState(Integer commandId) {
-        return null;
+    public Command changeCommandState(Command command) {
+        Command updateCommand = commandRepository.getOne(command.getId_command());
+        updateCommand.setState(command.getState());
+        commandRepository.saveAndFlush(updateCommand);
+        return command;
     }
 
     @Override

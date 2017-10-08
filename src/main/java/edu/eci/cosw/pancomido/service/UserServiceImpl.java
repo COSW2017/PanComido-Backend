@@ -1,6 +1,9 @@
 package edu.eci.cosw.pancomido.service;
 
+import edu.eci.cosw.pancomido.Exceptions.PanComidoServicesException;
 import edu.eci.cosw.pancomido.model.*;
+import edu.eci.cosw.pancomido.repositories.CommandRepository;
+import edu.eci.cosw.pancomido.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +20,15 @@ import java.util.Map;
 @Service
 public class UserServiceImpl implements UserService
 {
-    public static Long consucutive = 1l; //hay que quitar esto cuando se implemente la base de datoss!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //public static Long consucutive = 1l; //hay que quitar esto cuando se implemente la base de datoss!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     private HashMap<Long, User> users = new HashMap<>();
+
+    @Autowired
+    public OrderRepository orderRepository;
+
+    @Autowired
+    public CommandRepository commandRepository;
 
     @Autowired
     private RestaurantService restaurantService;
@@ -61,9 +70,9 @@ public class UserServiceImpl implements UserService
 
     @Override
     public User createUser( User user ){
-        consucutive++;
+        //consucutive++;
         //user.setId(consucutive); // Arreglar esto cuando se implemente la base de datos!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        users.put(consucutive, user);
+        //users.put(consucutive, user);
         return user;
     }
 
@@ -146,19 +155,22 @@ public class UserServiceImpl implements UserService
     }
 
     @Override
-    public Boolean changeCommandState(Integer id_order, Integer id_pedido, Integer state) {
-        HashMap<Integer, Order> ordenes = getAllOrders();
-        Order order = ordenes.get(id_order);
-        List<Command> commands = order.getCommands();
-        Boolean found = false;
-        for(int i = 0; i< commands.size() && !found; i++){
-            if(commands.get(i).getId_command()==id_pedido){
-                commands.get(i).setState(state);
-                found=true;
-            }
+    public Order cancelOrder(Order order) throws PanComidoServicesException {
+        List<Command> commands = commandRepository.getCommandsByOrder(order.getId_order());
+        int state = 0;
+        for(int i=0; i <commands.size() && (state<1); i++){
+            state+=commands.get(i).getState();
         }
-        return found;
+        if(state<1){
+            for(Command command : commands){
+                command.setState(-1);
+            }
+        }else{
+            throw new PanComidoServicesException(PanComidoServicesException.NO_SE_PUEDE_CANCELAR_ORDEN);
+        }
+        return order;
     }
+
 
     @Override
     public Order getOrderById(Integer id_order) {

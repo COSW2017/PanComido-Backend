@@ -1,5 +1,6 @@
 package edu.eci.cosw.pancomido.service;
 
+import edu.eci.cosw.pancomido.Exceptions.PanComidoServicesException;
 import edu.eci.cosw.pancomido.model.Command;
 import edu.eci.cosw.pancomido.model.PaymentMethod;
 import edu.eci.cosw.pancomido.model.Order;
@@ -35,7 +36,7 @@ public interface UserService
     /*
     Estado: 0 -> En cola, 1-> Progreso, 2->Lista, -1->Cancelada
      */
-    Boolean changeCommandState(Integer id_order, Integer id_pedido, Integer state);
+    Order cancelOrder(Order order) throws PanComidoServicesException;
 
     Order getOrderById(Integer id_order);
 
