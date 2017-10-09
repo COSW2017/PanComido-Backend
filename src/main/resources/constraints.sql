@@ -1,5 +1,4 @@
 ALTER TABLE Command_Dish ADD CONSTRAINT PK_Command_Dish PRIMARY KEY (id_command_dish);
-ALTER TABLE Comments ADD CONSTRAINT PK_Comment PRIMARY KEY (id_comment);
 ALTER TABLE CreditCard ADD CONSTRAINT PK_CreditCard PRIMARY KEY (card_number);
 ALTER TABLE Payment ADD CONSTRAINT PK_Payment PRIMARY KEY (id_payment);
 ALTER TABLE Dish ADD CONSTRAINT PK_Dish PRIMARY KEY (id_dish);
@@ -11,7 +10,7 @@ ALTER TABLE Friend ADD CONSTRAINT PK_Friend PRIMARY KEY (id_friend);
 ALTER TABLE Users ADD CONSTRAINT PK_Users PRIMARY KEY (user_id );
 
 ALTER TABLE PaymentMethod ADD CONSTRAINT FK_PaymentMethod_user FOREIGN KEY (user_id ) REFERENCES Users (user_id ) ON DELETE CASCADE;
-ALTER TABLE PaymentMethod ADD CONSTRAINT FK_PaymentMethod_card FOREIGN KEY (card_number) REFERENCES CreditCard (card_number) ON DELETE CASCADE;; 
+ALTER TABLE PaymentMethod ADD CONSTRAINT FK_PaymentMethod_card FOREIGN KEY (card_number) REFERENCES CreditCard (card_number) ON DELETE CASCADE; 
 ALTER TABLE Rest_Order ADD CONSTRAINT FK_Rest_Order_user FOREIGN KEY (user_id) REFERENCES Users (user_id ) ON DELETE SET NULL;
 ALTER TABLE Restaurant ADD CONSTRAINT FK_Restaurant_user FOREIGN KEY (user_id) REFERENCES Users (user_id ) ON DELETE CASCADE;
 ALTER TABLE Command ADD CONSTRAINT FK_Command_order FOREIGN KEY (id_order) REFERENCES Rest_Order (id_order);
