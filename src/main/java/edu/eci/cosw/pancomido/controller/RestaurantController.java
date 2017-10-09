@@ -1,7 +1,6 @@
 package edu.eci.cosw.pancomido.controller;
 
 import edu.eci.cosw.pancomido.model.*;
-import edu.eci.cosw.pancomido.service.OrderService;
 import edu.eci.cosw.pancomido.service.RestaurantService;
 import edu.eci.cosw.pancomido.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

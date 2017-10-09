@@ -1,3 +1,5 @@
+ALTER TABLE Command_Dish ADD CONSTRAINT PK_Command_Dish PRIMARY KEY (id_command_dish);
+ALTER TABLE Comments ADD CONSTRAINT PK_Comment PRIMARY KEY (id_comment);
 ALTER TABLE CreditCard ADD CONSTRAINT PK_CreditCard PRIMARY KEY (card_number);
 ALTER TABLE Payment ADD CONSTRAINT PK_Payment PRIMARY KEY (id_payment);
 ALTER TABLE Dish ADD CONSTRAINT PK_Dish PRIMARY KEY (id_dish);
@@ -20,3 +22,4 @@ ALTER TABLE Command_Dish ADD CONSTRAINT FK_Command_Dish_command FOREIGN KEY (id_
 ALTER TABLE Command_Dish ADD CONSTRAINT FK_Command_Dish_dish FOREIGN KEY (id_dish) REFERENCES Dish (id_dish);
 ALTER TABLE Friend ADD CONSTRAINT FK_Friend_user FOREIGN KEY (user_id ) REFERENCES Users (user_id );
 ALTER TABLE Friend ADD CONSTRAINT FK_Friend_friend FOREIGN KEY (friend_id) REFERENCES Users (user_id );
+ALTER TABLE Comments ADD CONSTRAINT FK_Comment_restaurant FOREIGN KEY (id_restaurant) REFERENCES Restaurant (id_restaurant) ON DELETE CASCADE;

@@ -1,6 +1,7 @@
 DROP TABLE Command_Dish; 
 DROP TABLE Dish; 
-DROP TABLE Payment; 
+DROP TABLE Payment;
+DROP TABLE Comments;  
 DROP TABLE Restaurant; 
 DROP TABLE PaymentMethod; 
 DROP TABLE CreditCard;
