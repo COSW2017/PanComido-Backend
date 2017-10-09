@@ -1,7 +1,6 @@
 package edu.eci.cosw.pancomido.controller;
 
 import edu.eci.cosw.pancomido.model.*;
-import edu.eci.cosw.pancomido.service.OrderService;
 import edu.eci.cosw.pancomido.service.RestaurantService;
 import edu.eci.cosw.pancomido.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,14 @@ public class RestaurantController {
     @RequestMapping( value = "/{id_restaurant}/commands", method = RequestMethod.GET )
     public List<Command> get(@PathVariable Integer id_restaurant)
             throws ServletException {
-        return userService.getPedidosByRestaurant(id_restaurant);
+        return restaurantService.getCommands(id_restaurant);
+
+    }
+
+    @RequestMapping( value = "/commands/{id_command}", method = RequestMethod.GET )
+    public Command getCommandById(@PathVariable Integer id_command)
+            throws ServletException {
+        return restaurantService.getCommand(id_command);
 
     }
 
@@ -73,6 +79,12 @@ public class RestaurantController {
     public List<Dish> getDishesByRestaurant(@PathVariable Integer idRestaurant)
             throws ServletException{
         return restaurantService.getDishes(idRestaurant);
+    }
+
+    @RequestMapping( value = "/owner/{user_id}", method = RequestMethod.GET )
+    public Restaurant getRestaurantOwner(@PathVariable Integer user_id)
+            throws ServletException{
+        return restaurantService.getOwner(user_id);
     }
 
 

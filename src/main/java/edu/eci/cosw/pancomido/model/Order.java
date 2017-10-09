@@ -20,6 +20,8 @@ public class Order {
     private Integer id_order;
     private Date creation_date;
 
+    private List<Command> commands; //Falta guardar los pedidos
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @Fetch(FetchMode.JOIN)
@@ -29,7 +31,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(Integer id_order, User user, List<Command> commands) {
+    public Order(Integer id_order, User user) {
         this.id_order = id_order;
         this.user_id = user;
     }
@@ -87,12 +89,16 @@ public class Order {
         return sum;
     }
 
+    //Falta agregar lo de la base de datos
+    @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @JoinColumn(name="ORDER_id_order")
+    @Fetch(FetchMode.JOIN)
     public List<Command> getCommands() {
-        return null;
+        return this.commands;
     }
 
     public void setCommands(List<Command> commands) {
-
+        this.commands = commands;
     }
     /*
     En cola: 0, En progreso: 1, Listo=2

@@ -1,9 +1,7 @@
 package edu.eci.cosw.pancomido.service;
 
-import edu.eci.cosw.pancomido.model.Command;
-import edu.eci.cosw.pancomido.model.Dish;
-import edu.eci.cosw.pancomido.model.Order;
-import edu.eci.cosw.pancomido.model.Restaurant;
+import edu.eci.cosw.pancomido.model.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -30,5 +28,9 @@ public interface RestaurantService {
 
     Command changeCommandState(Command command);
 
+    Command getCommand(Integer id_Command);
+
     List<Command> getCommands(Integer idRestaurant);
+
+    Restaurant getOwner(Integer user_id);
 }

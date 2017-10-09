@@ -46,7 +46,8 @@ public class UserServiceImpl implements UserService
         //restaurant.addDish(dish);
         Command command = new Command(0, dishes);
         ArrayList<Command> commands = new ArrayList<>(); commands.add(command);
-        Order order = new Order(0, user, commands);
+        Order order = new Order(0, user);
+        order.setCommands(commands);
         ArrayList<Order> orders = new ArrayList<>();
         //user.setOrders(orders);
         //user.setRestaurant(restaurant);
@@ -135,7 +136,7 @@ public class UserServiceImpl implements UserService
 
     //Pensar si es mejor pasar las ordenes del usuario a un HashMap
     @Override
-    public Order getOrder(Long id_user, Integer id_order) {
+    public Order getOrder(Integer id_order) {
         List<Order> orders = new ArrayList<>();
         Boolean found = false;
         Order order = null;
@@ -178,18 +179,6 @@ public class UserServiceImpl implements UserService
         return ordenes.get(id_order);
     }
 
-    public List<Command> getPedidosByRestaurant(Integer id_restaurant){
-        HashMap<Integer, Order> ordenes = getAllOrders();
-        List<Command> commands = new ArrayList<>();
-        List<Command> commandPorOrden; Dish d;
-        for(Integer i : ordenes.keySet()){
-            commandPorOrden = ordenes.get(i).getCommands();
-            /*if(commandPorOrden.get(i).getPlatos().get(0).getRestaurant().getId_restaurant()==id_restaurant){
-                commands.add(commandPorOrden.get(i));
-            }*/
-        }
-        return commands;
-    }
 
 
     private HashMap<Integer, Order> getAllOrders(){

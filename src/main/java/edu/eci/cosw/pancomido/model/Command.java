@@ -4,6 +4,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,8 @@ public class Command {
     private Integer state;
     private Date creation_date;
 
+    private List<Dish> dishes;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_order", nullable = false)
     @Fetch(FetchMode.JOIN)
@@ -28,7 +31,7 @@ public class Command {
 
     public Command(int idPedido, List <Dish> platos){
         this.id_command = idPedido;
-    }
+    } //¿Se necesitan los platos o no?
 
     @Column(name="id_command", unique = true, nullable = false)
     public int getId_command() {
@@ -39,13 +42,13 @@ public class Command {
         this.id_command = idPedido;
     }
 
-    /*public List<Dish> getPlatos() {
-        return platos;
-    }*/
+    public List<Dish> getDishes() {
+        return dishes;
+    }
 
-    /*public void setPlatos(List<Dish> platos) {
-        this.platos = platos;
-    }*/
+    public void setDishes(List<Dish> platos) {
+        this.dishes = dishes;
+    }
 
     public Dish getPlato(int id){
         Dish d = null; boolean found = false;
