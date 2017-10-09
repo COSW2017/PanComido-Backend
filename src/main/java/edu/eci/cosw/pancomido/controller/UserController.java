@@ -68,8 +68,8 @@ public class UserController
         return new ArrayList<>(userService.getUsers().values());
     }
 
-    @RequestMapping( value = "/search", method = RequestMethod.GET )
-    public User searchUsersByEmail(String email)
+        @RequestMapping( value = "/search", method = RequestMethod.POST )
+    public User searchUsersByEmail(@RequestBody String email)
             throws ServletException{
 
         User u = userService.findUserByEmail(email);

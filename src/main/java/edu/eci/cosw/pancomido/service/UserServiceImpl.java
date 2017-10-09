@@ -4,6 +4,7 @@ import edu.eci.cosw.pancomido.Exceptions.PanComidoServicesException;
 import edu.eci.cosw.pancomido.model.*;
 import edu.eci.cosw.pancomido.repositories.CommandRepository;
 import edu.eci.cosw.pancomido.repositories.OrderRepository;
+import edu.eci.cosw.pancomido.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,9 @@ public class UserServiceImpl implements UserService
 
     @Autowired
     private RestaurantService restaurantService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     public UserServiceImpl() { }
@@ -79,7 +83,7 @@ public class UserServiceImpl implements UserService
     @Override
     public User findUserByEmail( String email )
     {
-        User found = null;
+        /*User found = null;
         for (Map.Entry<Long, User> entry : users.entrySet())
         {
             Long key = entry.getKey();
@@ -89,7 +93,8 @@ public class UserServiceImpl implements UserService
                 break;
             }
         }
-        return found;
+        return found;*/
+        return userRepository.findUsersByEmail(email);
     }
 
     @Override

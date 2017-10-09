@@ -16,7 +16,8 @@ CREATE TABLE Users (
  lastname  VARCHAR(40) NOT NULL,
  cellphone VARCHAR(10),
  city VARCHAR(30),
- image VARCHAR(300)
+ image VARCHAR(300),
+ selected_payment_method NUMERIC(11) NOT NULL
 );
 
 
@@ -115,7 +116,8 @@ CREATE TABLE Users (
  lastname  VARCHAR(40) NOT NULL,
  cellphone VARCHAR(10),
  city VARCHAR(30),
- image VARCHAR(300)
+ image VARCHAR(300),
+ selected_payment_method` NUMERIC(15) NOT NULL
 );
 
 
