@@ -19,9 +19,7 @@ public class Command {
 
     private Integer state;
     private Date creation_date;
-
-    //private List<Dish> dishes;
-
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_order", nullable = false)
     @Fetch(FetchMode.JOIN)
