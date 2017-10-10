@@ -23,7 +23,6 @@ public class User {
     private String city;
     private String image;
     private String cellphone;
-    private int selectedPaymentMethod;
 
 
 
@@ -42,7 +41,6 @@ public class User {
         this.setImage(image);
         this.setCity(city);
         this.setCellphone(cellphone);
-        this.setSelectedPaymentMethod(-1);
         /*orders = new ArrayList<>();
         friends = new ArrayList<>();
         pendingFriends = new ArrayList<>();
@@ -156,15 +154,6 @@ public class User {
 
     public void setCellphone(String cellphone) {
         this.cellphone = cellphone;
-    }
-
-    @Column(name="selected_payment_method")
-    public int getSelectedPaymentMethod() {
-        return selectedPaymentMethod;
-    }
-
-    public void setSelectedPaymentMethod(int selectedPaymentMethod) {
-        this.selectedPaymentMethod = selectedPaymentMethod;
     }
 
     @Override
