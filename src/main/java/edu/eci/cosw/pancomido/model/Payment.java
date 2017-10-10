@@ -11,7 +11,7 @@ import java.util.Date;
 public class Payment {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_payment;
     private Date payment_date;
     private Integer transaction_state;

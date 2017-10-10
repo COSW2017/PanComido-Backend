@@ -5,7 +5,6 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 @Entity
@@ -13,7 +12,7 @@ import java.util.List;
 public class Command {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_command;
 
     private Integer state;
@@ -28,7 +27,7 @@ public class Command {
 
     public Command(int idPedido, List <Dish> platos){
         this.id_command = idPedido;
-    }
+    } //¿Se necesitan los platos o no?
 
     @Column(name="id_command", unique = true, nullable = false)
     public int getId_command() {
@@ -38,15 +37,15 @@ public class Command {
     public void setId_command(int idPedido) {
         this.id_command = idPedido;
     }
+    /*
+    public List<Dish> getDishes() {
+        return dishes;
+    }
 
-    /*public List<Dish> getPlatos() {
-        return platos;
-    }*/
-
-    /*public void setPlatos(List<Dish> platos) {
-        this.platos = platos;
-    }*/
-
+    public void setDishes(List<Dish> platos) {
+        this.dishes = dishes;
+    }
+    */
     public Dish getPlato(int id){
         Dish d = null; boolean found = false;
         /*for(int i =0; i< platos.size() && !found; i++){

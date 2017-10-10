@@ -13,18 +13,19 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long user_id;
 
     private String email;
-    private String password;
+    private String user_password;
     private String firstname;
     private String lastname;
     private String city;
     private String image;
     private String cellphone;
-
     private int selectedPaymentMethod;
+
+
 
     /*public List<Order> orders;
     public List<User> friends;
@@ -34,18 +35,18 @@ public class User {
     public User(){}
 
     public User( String email, String password, String firstname, String lastname, String image, String city, String cellphone) {
-        this.setPassword(password);
+        this.setUser_password(password);
         this.setFirstname(firstname);
         this.setEmail(email);
         this.setLastname(lastname);
         this.setImage(image);
         this.setCity(city);
         this.setCellphone(cellphone);
+        this.setSelectedPaymentMethod(-1);
         /*orders = new ArrayList<>();
         friends = new ArrayList<>();
         pendingFriends = new ArrayList<>();
         metodosPaymentMethods = new ArrayList<>();*/
-        selectedPaymentMethod = -1;
     }
     /*public List<Payment> getPagos() {return pagos;}
     public void setPagos(List<Payment> pagos) {
@@ -103,13 +104,13 @@ public class User {
         this.email = email;
     }
 
-    @Column(name="password", nullable = false)
-    public String getPassword() {
-        return password;
+    @Column(name="user_password", nullable = false)
+    public String getUser_password() {
+        return user_password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUser_password(String password) {
+        this.user_password = password;
     }
 
     @Column(name="firstname", nullable = false)
@@ -157,10 +158,20 @@ public class User {
         this.cellphone = cellphone;
     }
 
+    @Column(name="selected_payment_method")
+    public int getSelectedPaymentMethod() {
+        return selectedPaymentMethod;
+    }
+
+    public void setSelectedPaymentMethod(int selectedPaymentMethod) {
+        this.selectedPaymentMethod = selectedPaymentMethod;
+    }
+
     @Override
     public String toString()
     {
-        return "User{" + "id=" + getUser_id() + ", email='" + getEmail() + '\'' + ", password='" + getPassword() + '\'' + ", firstname='"
+        return "User{" + "id=" + getUser_id() + ", email='" + getEmail() + '\'' + ", password='" + getUser_password() + '\'' + ", firstname='"
                 + getFirstname() + '\'' + '}';
     }
+
 }

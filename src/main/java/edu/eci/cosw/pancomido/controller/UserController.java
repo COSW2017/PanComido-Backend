@@ -3,6 +3,7 @@ package edu.eci.cosw.pancomido.controller;
 import edu.eci.cosw.pancomido.Exceptions.PanComidoServicesException;
 import edu.eci.cosw.pancomido.model.PaymentMethod;
 import edu.eci.cosw.pancomido.model.Order;
+import edu.eci.cosw.pancomido.model.Restaurant;
 import edu.eci.cosw.pancomido.model.User;
 import edu.eci.cosw.pancomido.service.UserService;
 import io.jsonwebtoken.Jwts;
@@ -35,13 +36,13 @@ public class UserController
 
         String jwtToken = "";
 
-        if ( login.getEmail() == null || login.getPassword() == null )
+        if ( login.getEmail() == null || login.getUser_password() == null )
         {
             throw new ServletException( "Please fill in username and password" );
         }
 
         String email = login.getEmail();
-        String password = login.getPassword();
+        String password = login.getUser_password();
 
         User user = userService.findUserByEmail(email);
 
@@ -50,7 +51,7 @@ public class UserController
             throw new ServletException( "User email not found." );
         }
 
-        String pwd = user.getPassword();
+        String pwd = user.getUser_password();
 
         if ( !password.equals( pwd ) )
         {
@@ -68,8 +69,8 @@ public class UserController
         return new ArrayList<>(userService.getUsers().values());
     }
 
-    @RequestMapping( value = "/search", method = RequestMethod.GET )
-    public User searchUsersByEmail(String email)
+        @RequestMapping( value = "/search", method = RequestMethod.POST )
+    public User searchUsersByEmail(@RequestBody String email)
             throws ServletException{
 
         User u = userService.findUserByEmail(email);
@@ -109,10 +110,10 @@ public class UserController
         return userService.updateUser(user);
     }
 
-    @RequestMapping( value = "/{id_user}/order/{id_order}", method = RequestMethod.GET )
-    public Order getOrder(@PathVariable Long id_user, Integer id_order)
+    @RequestMapping( value = "/order/{id_order}", method = RequestMethod.GET )
+    public Order getOrder(@PathVariable Integer id_order)
             throws ServletException {
-        return userService.getOrder(id_user, id_order);
+        return userService.getOrder(id_order);
 
     }
 

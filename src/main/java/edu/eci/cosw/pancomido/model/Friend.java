@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Friend {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_friend;
 
     @ManyToOne(fetch = FetchType.LAZY)
