@@ -21,7 +21,6 @@ import java.util.Map;
 @Service
 public class UserServiceImpl implements UserService
 {
-    //public static Long consucutive = 1l; //hay que quitar esto cuando se implemente la base de datoss!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     private HashMap<Long, User> users = new HashMap<>();
 
@@ -50,7 +49,8 @@ public class UserServiceImpl implements UserService
         //restaurant.addDish(dish);
         Command command = new Command(0, dishes);
         ArrayList<Command> commands = new ArrayList<>(); commands.add(command);
-        Order order = new Order(0, user, commands);
+        Order order = new Order(0, user);
+        order.setCommands(commands);
         ArrayList<Order> orders = new ArrayList<>();
         //user.setOrders(orders);
         //user.setRestaurant(restaurant);
@@ -74,9 +74,7 @@ public class UserServiceImpl implements UserService
 
     @Override
     public User createUser( User user ){
-        //consucutive++;
-        //user.setId(consucutive); // Arreglar esto cuando se implemente la base de datos!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //users.put(consucutive, user);
+        userRepository.saveAndFlush(user);
         return user;
     }
 
@@ -105,7 +103,7 @@ public class UserServiceImpl implements UserService
         {
             Long key = entry.getKey();
             User value = entry.getValue();
-            if(value.getEmail().equals(email) && value.getPassword().equals(password)){
+            if(value.getEmail().equals(email) && value.getUser_password().equals(password)){
                 found = value;
                 break;
             }
@@ -119,7 +117,7 @@ public class UserServiceImpl implements UserService
         User oldUser = this.findUserByEmail(user.getEmail());
         oldUser.setCellphone(user.getCellphone());
         oldUser.setCity(user.getCity());
-        oldUser.setPassword(user.getPassword());
+        oldUser.setUser_password(user.getUser_password());
         oldUser.setImage(user.getImage());
         return oldUser;
     }
@@ -140,7 +138,7 @@ public class UserServiceImpl implements UserService
 
     //Pensar si es mejor pasar las ordenes del usuario a un HashMap
     @Override
-    public Order getOrder(Long id_user, Integer id_order) {
+    public Order getOrder(Integer id_order) {
         List<Order> orders = new ArrayList<>();
         Boolean found = false;
         Order order = null;
@@ -183,18 +181,6 @@ public class UserServiceImpl implements UserService
         return ordenes.get(id_order);
     }
 
-    public List<Command> getPedidosByRestaurant(Integer id_restaurant){
-        HashMap<Integer, Order> ordenes = getAllOrders();
-        List<Command> commands = new ArrayList<>();
-        List<Command> commandPorOrden; Dish d;
-        for(Integer i : ordenes.keySet()){
-            commandPorOrden = ordenes.get(i).getCommands();
-            /*if(commandPorOrden.get(i).getPlatos().get(0).getRestaurant().getId_restaurant()==id_restaurant){
-                commands.add(commandPorOrden.get(i));
-            }*/
-        }
-        return commands;
-    }
 
 
     private HashMap<Integer, Order> getAllOrders(){
