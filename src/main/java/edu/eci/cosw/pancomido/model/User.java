@@ -23,8 +23,9 @@ public class User {
     private String city;
     private String image;
     private String cellphone;
-
     private int selectedPaymentMethod;
+
+
 
     /*public List<Order> orders;
     public List<User> friends;
@@ -41,11 +42,11 @@ public class User {
         this.setImage(image);
         this.setCity(city);
         this.setCellphone(cellphone);
+        this.setSelectedPaymentMethod(-1);
         /*orders = new ArrayList<>();
         friends = new ArrayList<>();
         pendingFriends = new ArrayList<>();
         metodosPaymentMethods = new ArrayList<>();*/
-        selectedPaymentMethod = -1;
     }
     /*public List<Payment> getPagos() {return pagos;}
     public void setPagos(List<Payment> pagos) {
@@ -157,10 +158,20 @@ public class User {
         this.cellphone = cellphone;
     }
 
+    @Column(name="selected_payment_method")
+    public int getSelectedPaymentMethod() {
+        return selectedPaymentMethod;
+    }
+
+    public void setSelectedPaymentMethod(int selectedPaymentMethod) {
+        this.selectedPaymentMethod = selectedPaymentMethod;
+    }
+
     @Override
     public String toString()
     {
         return "User{" + "id=" + getUser_id() + ", email='" + getEmail() + '\'' + ", password='" + getPassword() + '\'' + ", firstname='"
                 + getFirstname() + '\'' + '}';
     }
+
 }
