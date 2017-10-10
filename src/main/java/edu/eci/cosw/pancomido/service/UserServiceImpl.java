@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService
     @Autowired
     public UserServiceImpl() { }
 
-    @PostConstruct
+    /*@PostConstruct
     private void populateSampleData()
     {
         User user = new User( "test@mail.com", "password", "Andres", "Perez", "https://cdn-images-1.medium.com/max/796/1*juPyda3wq9uz_SNFRLuANg@2x.png", "test", "123456" );
@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService
         users.put(1l, user);
 
         restaurantService.addRestaurant(restaurant);
-    }
+    }*/
     
     @Override
     public HashMap<Long, User> getUsers()
