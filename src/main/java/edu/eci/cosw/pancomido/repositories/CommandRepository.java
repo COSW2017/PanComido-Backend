@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface CommandRepository extends JpaRepository<Command, Integer> {
 
-    @Query("SELECT c.id_command FROM Command as c WHERE c.id_order = ?1")
+    @Query("SELECT c command FROM Command as c WHERE c.id_order = ?1")
     public List<Command> getCommandsByOrder(Integer orderId);
 }

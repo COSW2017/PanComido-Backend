@@ -138,7 +138,7 @@ public class RestaurantServiceImpl implements RestaurantService{
     @Override
     public Restaurant addRestaurant(Restaurant restaurant) {
         restaurants.put(restaurant.getId_restaurant(), restaurant);
-        restaurantRepository.save(restaurant);
+        //restaurantRepository.save(restaurant);
         return restaurant;
     }
 
