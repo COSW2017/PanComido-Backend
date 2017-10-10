@@ -1,10 +1,7 @@
 package edu.eci.cosw.pancomido.service;
 
 import com.sun.org.apache.xpath.internal.operations.Or;
-import edu.eci.cosw.pancomido.model.Command;
-import edu.eci.cosw.pancomido.model.Dish;
-import edu.eci.cosw.pancomido.model.Order;
-import edu.eci.cosw.pancomido.model.Restaurant;
+import edu.eci.cosw.pancomido.model.*;
 import edu.eci.cosw.pancomido.repositories.CommandRepository;
 import edu.eci.cosw.pancomido.repositories.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -137,8 +134,7 @@ public class RestaurantServiceImpl implements RestaurantService{
 
     @Override
     public Restaurant addRestaurant(Restaurant restaurant) {
-        restaurants.put(restaurant.getId_restaurant(), restaurant);
-        //restaurantRepository.save(restaurant);
+        restaurantRepository.saveAndFlush(restaurant);
         return restaurant;
     }
 
@@ -151,8 +147,28 @@ public class RestaurantServiceImpl implements RestaurantService{
     }
 
     @Override
+    public Command getCommand(Integer id_Command) {
+        return commandRepository.getCommand(id_Command);
+    }
+
+    // Revisar porque muy posiblemente no funcione la QUERY
+    @Override
     public List<Command> getCommands(Integer idRestaurant) {
-        return null;
+        return commandRepository.getCommandByRestaurant(idRestaurant);
+    }
+
+    @Override
+    public Restaurant getOwner(Integer user_id) {
+        List<Restaurant> restaurants = restaurantRepository.findAll();
+        boolean find = false;
+        Restaurant restaurant = null;
+        for(int i = 0; i < restaurants.size() && !find; i++){
+            if(restaurants.get(i).getUser_id().getUser_id() == user_id){
+                restaurant = restaurants.get(i);
+                find = true;
+            }
+        }
+        return restaurant;
     }
 
     private Double calculateDistance(Double latitude1, Double latitude2, Double longitude1, Double longitude2) {

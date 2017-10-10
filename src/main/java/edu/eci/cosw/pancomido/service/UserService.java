@@ -1,10 +1,7 @@
 package edu.eci.cosw.pancomido.service;
 
 import edu.eci.cosw.pancomido.Exceptions.PanComidoServicesException;
-import edu.eci.cosw.pancomido.model.Command;
-import edu.eci.cosw.pancomido.model.PaymentMethod;
-import edu.eci.cosw.pancomido.model.Order;
-import edu.eci.cosw.pancomido.model.User;
+import edu.eci.cosw.pancomido.model.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +26,7 @@ public interface UserService
 
     Boolean addFriend(Long user, Long friend);
 
-    Order getOrder(Long id_user, Integer id_order);
+    Order getOrder(Integer id_order);
 
     PaymentMethod addPaymentMethod(Integer idUser, PaymentMethod paymentMethod);
 
@@ -40,5 +37,4 @@ public interface UserService
 
     Order getOrderById(Integer id_order);
 
-    List<Command> getPedidosByRestaurant(Integer id_restaurant);
 }
