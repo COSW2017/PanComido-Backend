@@ -12,7 +12,7 @@ import java.util.List;
 public class Command {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_command;
 
     private Integer state;

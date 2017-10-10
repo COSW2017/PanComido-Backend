@@ -19,3 +19,4 @@ public interface CommandRepository extends JpaRepository<Command, Integer> {
     @Query("select c from Command as c where c.id_command = ?1")
     public Command getCommand(Integer CommandId);
 }
+

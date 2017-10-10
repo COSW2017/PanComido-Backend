@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Command_Dish {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_command_dish;
     private int id_command;
     private int id_dish;
