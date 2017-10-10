@@ -20,7 +20,7 @@ public interface RestaurantService {
 
     HashMap<Integer, Restaurant> getRestaurants();
 
-    List<Restaurant> getLocationRestaurants(Double latitude, Double longitude);
+    List<Restaurant> getLocationRestaurants(Float latitude, Float longitude);
 
     List <Dish> getDishes(Integer idRestaurant);
 

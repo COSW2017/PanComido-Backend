@@ -81,14 +81,6 @@ public class Order {
                 '}';
     }
 
-    public Double getMonto(){
-        double sum = 0;
-        for(Command d : getCommands()){
-            sum+=d.getMonto();
-        }
-        return sum;
-    }
-
 
     public List<Command> getCommands() {
         return null;//this.commands;

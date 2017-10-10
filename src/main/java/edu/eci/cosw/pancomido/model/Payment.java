@@ -76,6 +76,6 @@ public class Payment {
     }
 
     public Double getMonto() {
-        return id_command.getMonto();
+        return 0.0;
     }
 }

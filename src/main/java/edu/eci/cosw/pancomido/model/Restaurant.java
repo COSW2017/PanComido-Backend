@@ -20,8 +20,8 @@ public class Restaurant {
     private Integer id_restaurant;
 
     private String name;
-    private Double latitude;
-    private Double longitude;
+    private Float latitude;
+    private Float longitude;
     private Integer likes;
     private Integer dislike;
     private Integer love;
@@ -32,7 +32,7 @@ public class Restaurant {
     @Fetch(FetchMode.JOIN)
     private User user_id;
 
-    public Restaurant(Integer id_restaurant, String name, Double latitude, Double longitude, Integer like, Integer dislike, Integer love, Integer angry) {
+    public Restaurant(Integer id_restaurant, String name, Float latitude, Float longitude, Integer like, Integer dislike, Integer love, Integer angry) {
         this.id_restaurant = id_restaurant;
         this.name = name;
         this.latitude = latitude;
@@ -65,20 +65,20 @@ public class Restaurant {
     }
 
     @Column(name="latitude", nullable = false)
-    public Double getLatitude() {
+    public Float getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Double latitude) {
+    public void setLatitude(Float latitude) {
         this.latitude = latitude;
     }
 
     @Column(name="longitude", nullable = false)
-    public Double getLongitude() {
+    public Float getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Double longitude) {
+    public void setLongitude(Float longitude) {
         this.longitude = longitude;
     }
 

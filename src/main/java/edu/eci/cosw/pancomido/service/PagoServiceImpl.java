@@ -14,7 +14,7 @@ public class PagoServiceImpl implements PagoService{
     private HashMap<Integer, Payment> pagos = new HashMap<>();
 
     public boolean payCommand(Command command, User user, int identificador) throws PanComidoServicesException {
-        Double monto = command.getMonto();
+        Double monto = 0.0;
         boolean orderPaid = true; Payment p = null; Command c;
         PaymentMethod paymentMethod = user.getPaymentMethod();
         if(paymentMethod!=null) {
