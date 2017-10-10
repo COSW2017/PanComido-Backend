@@ -21,7 +21,6 @@ import java.util.Map;
 @Service
 public class UserServiceImpl implements UserService
 {
-    //public static Long consucutive = 1l; //hay que quitar esto cuando se implemente la base de datoss!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     private HashMap<Long, User> users = new HashMap<>();
 
@@ -75,9 +74,7 @@ public class UserServiceImpl implements UserService
 
     @Override
     public User createUser( User user ){
-        //consucutive++;
-        //user.setId(consucutive); // Arreglar esto cuando se implemente la base de datos!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //users.put(consucutive, user);
+        userRepository.saveAndFlush(user);
         return user;
     }
 
@@ -106,7 +103,7 @@ public class UserServiceImpl implements UserService
         {
             Long key = entry.getKey();
             User value = entry.getValue();
-            if(value.getEmail().equals(email) && value.getPassword().equals(password)){
+            if(value.getEmail().equals(email) && value.getUser_password().equals(password)){
                 found = value;
                 break;
             }
@@ -120,7 +117,7 @@ public class UserServiceImpl implements UserService
         User oldUser = this.findUserByEmail(user.getEmail());
         oldUser.setCellphone(user.getCellphone());
         oldUser.setCity(user.getCity());
-        oldUser.setPassword(user.getPassword());
+        oldUser.setUser_password(user.getUser_password());
         oldUser.setImage(user.getImage());
         return oldUser;
     }

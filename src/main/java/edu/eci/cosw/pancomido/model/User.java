@@ -17,7 +17,7 @@ public class User {
     private long user_id;
 
     private String email;
-    private String password;
+    private String user_password;
     private String firstname;
     private String lastname;
     private String city;
@@ -35,7 +35,7 @@ public class User {
     public User(){}
 
     public User( String email, String password, String firstname, String lastname, String image, String city, String cellphone) {
-        this.setPassword(password);
+        this.setUser_password(password);
         this.setFirstname(firstname);
         this.setEmail(email);
         this.setLastname(lastname);
@@ -104,13 +104,13 @@ public class User {
         this.email = email;
     }
 
-    @Column(name="password", nullable = false)
-    public String getPassword() {
-        return password;
+    @Column(name="user_password", nullable = false)
+    public String getUser_password() {
+        return user_password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUser_password(String password) {
+        this.user_password = password;
     }
 
     @Column(name="firstname", nullable = false)
@@ -170,7 +170,7 @@ public class User {
     @Override
     public String toString()
     {
-        return "User{" + "id=" + getUser_id() + ", email='" + getEmail() + '\'' + ", password='" + getPassword() + '\'' + ", firstname='"
+        return "User{" + "id=" + getUser_id() + ", email='" + getEmail() + '\'' + ", password='" + getUser_password() + '\'' + ", firstname='"
                 + getFirstname() + '\'' + '}';
     }
 

@@ -36,13 +36,13 @@ public class UserController
 
         String jwtToken = "";
 
-        if ( login.getEmail() == null || login.getPassword() == null )
+        if ( login.getEmail() == null || login.getUser_password() == null )
         {
             throw new ServletException( "Please fill in username and password" );
         }
 
         String email = login.getEmail();
-        String password = login.getPassword();
+        String password = login.getUser_password();
 
         User user = userService.findUserByEmail(email);
 
@@ -51,7 +51,7 @@ public class UserController
             throw new ServletException( "User email not found." );
         }
 
-        String pwd = user.getPassword();
+        String pwd = user.getUser_password();
 
         if ( !password.equals( pwd ) )
         {
