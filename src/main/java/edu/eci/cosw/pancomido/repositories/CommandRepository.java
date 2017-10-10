@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface CommandRepository extends JpaRepository<Command, Integer> {
 
-    @Query("SELECT c.id_command FROM Command as c WHERE c.id_order = ?1")
+    @Query("SELECT c FROM Command as c WHERE c.id_order = ?1")
     public List<Command> getCommandsByOrder(Integer orderId);
 
-    //No sé si este bien supongo que no....
-    @Query("select c from Command as c inner join c.dishes d where d.restaurant_id = ?1")
+    //No sé si este bien supongo que no...
+    @Query("select c from Command as c inner join Dish as d inner join d.restaurant as r where r.id_restaurant = ?1")
     public List<Command> getCommandByRestaurant(Integer restaurantId);
 
     //Falta probar

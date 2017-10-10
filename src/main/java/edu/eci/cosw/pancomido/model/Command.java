@@ -20,9 +20,9 @@ public class Command {
     private Integer state;
     private Date creation_date;
 
-    private List<Dish> dishes;
+    //private List<Dish> dishes;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_order", nullable = false)
     @Fetch(FetchMode.JOIN)
     private Order id_order;
@@ -41,7 +41,7 @@ public class Command {
     public void setId_command(int idPedido) {
         this.id_command = idPedido;
     }
-
+    /*
     public List<Dish> getDishes() {
         return dishes;
     }
@@ -49,7 +49,7 @@ public class Command {
     public void setDishes(List<Dish> platos) {
         this.dishes = dishes;
     }
-
+    */
     public Dish getPlato(int id){
         Dish d = null; boolean found = false;
         /*for(int i =0; i< platos.size() && !found; i++){
