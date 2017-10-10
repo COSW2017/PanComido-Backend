@@ -42,12 +42,12 @@ CREATE TABLE Rest_Order (
 CREATE TABLE Restaurant (
  id_restaurant INT AUTO_INCREMENT PRIMARY KEY,
  NAME VARCHAR(100) NOT NULL,
- longitude DECIMAL(10, 10) NOT NULL,
- latitude DECIMAL(10, 10) NOT NULL,
- likes NUMERIC,
- dislike NUMERIC,
- love NUMERIC,
- angry NUMERIC,
+ longitude DOUBLE(20, 20) NOT NULL,
+ latitude DOUBLE(20, 20) NOT NULL,
+ likes INT,
+ dislike INT,
+ love INT,
+ angry INT,
  user_id INT
 );
 
