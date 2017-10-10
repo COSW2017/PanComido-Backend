@@ -23,6 +23,7 @@ public class PancomidoApplication {
 	}
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(PancomidoApplication.class, args);
 	}
 }
