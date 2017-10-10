@@ -12,7 +12,7 @@ public interface CommandRepository extends JpaRepository<Command, Integer> {
     public List<Command> getCommandsByOrder(Integer orderId);
 
     //No sé si este bien supongo que no...
-    @Query("select c from Command as c inner join Dish as d inner join d.restaurant as r where r.id_restaurant = ?1")
+    @Query("select cd.id_command from Command_Dish as cd inner join cd.id_dish as d where d.restaurant.id_restaurant = ?1")
     public List<Command> getCommandByRestaurant(Integer restaurantId);
 
     //Falta probar

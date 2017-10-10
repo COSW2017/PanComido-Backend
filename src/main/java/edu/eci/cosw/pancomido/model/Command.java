@@ -37,15 +37,7 @@ public class Command {
     public void setId_command(int idPedido) {
         this.id_command = idPedido;
     }
-    /*
-    public List<Dish> getDishes() {
-        return dishes;
-    }
 
-    public void setDishes(List<Dish> platos) {
-        this.dishes = dishes;
-    }
-    */
     public Dish getPlato(int id){
         Dish d = null; boolean found = false;
         /*for(int i =0; i< platos.size() && !found; i++){
@@ -55,14 +47,6 @@ public class Command {
             }
         }*/
         return d;
-    }
-
-    public Double getMonto(){
-        double sum = 0;
-        /*for(Dish d : getPlatos()){
-            sum+=d.getPrice();
-        }*/
-        return sum;
     }
 
     @Column(name="state", nullable = false)

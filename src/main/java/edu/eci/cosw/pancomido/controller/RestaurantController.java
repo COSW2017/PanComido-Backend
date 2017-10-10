@@ -1,5 +1,6 @@
 package edu.eci.cosw.pancomido.controller;
 
+import edu.eci.cosw.pancomido.Exceptions.PanComidoServicesException;
 import edu.eci.cosw.pancomido.model.*;
 import edu.eci.cosw.pancomido.service.RestaurantService;
 import edu.eci.cosw.pancomido.service.UserService;
@@ -70,7 +71,7 @@ public class RestaurantController {
     }
 
     @RequestMapping( value = "/near/{latitude}/{longitude}", method = RequestMethod.GET )
-    public List<Restaurant> getNearRestaurants(@PathVariable Double latitude, @PathVariable Double longitude)
+    public List<Restaurant> getNearRestaurants(@PathVariable Float latitude, @PathVariable Float longitude)
             throws ServletException{
         return restaurantService.getLocationRestaurants(latitude, longitude);
     }
@@ -84,7 +85,11 @@ public class RestaurantController {
     @RequestMapping( value = "/owner/{user_id}", method = RequestMethod.GET )
     public Restaurant getRestaurantOwner(@PathVariable Integer user_id)
             throws ServletException{
-        return restaurantService.getOwner(user_id);
+        Restaurant restaurant =restaurantService.getOwner(user_id);
+        if( restaurant == null){
+            throw new ServletException("Restaurante no encontrado");
+        }
+        return restaurant;
     }
 
 

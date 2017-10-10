@@ -115,7 +115,7 @@ public class RestaurantServiceImpl implements RestaurantService{
         this.restaurants = restaurants;
     }
 
-    public List<Restaurant> getLocationRestaurants(Double latitude, Double longitude){
+    public List<Restaurant> getLocationRestaurants(Float latitude, Float longitude){
         List<Restaurant> restaurants = restaurantRepository.findAll();
         ArrayList<Restaurant> locationRestaurants = new ArrayList<>();
         for(Restaurant restaurant : restaurants){
@@ -134,8 +134,7 @@ public class RestaurantServiceImpl implements RestaurantService{
 
     @Override
     public Restaurant addRestaurant(Restaurant restaurant) {
-        restaurantRepository.saveAndFlush(restaurant);
-        return restaurant;
+        return restaurantRepository.saveAndFlush(restaurant);
     }
 
     @Override
@@ -171,13 +170,13 @@ public class RestaurantServiceImpl implements RestaurantService{
         return restaurant;
     }
 
-    private Double calculateDistance(Double latitude1, Double latitude2, Double longitude1, Double longitude2) {
+    private Float calculateDistance(Float latitude1, Float latitude2, Float longitude1, Float longitude2) {
         Double rad =Math.PI/180;
-        Double dlat=latitude2-latitude1;
-        Double dlon=longitude2-longitude1;
+        Float dlat=latitude2-latitude1;
+        Float dlon=longitude2-longitude1;
         Double a = Math.pow(Math.sin(rad*dlat/2), 2)+Math.cos(rad*latitude1)*
                 Math.cos(rad*latitude2)*Math.pow(Math.sin(rad*dlon/2), 2);
-        Double distance = 2*RADIUS*Math.asin(Math.sqrt(a));
+        Float distance = Float.parseFloat(2*RADIUS*Math.asin(Math.sqrt(a))+"");
         return distance;
     }
 

@@ -14,7 +14,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long user_id;
+    private Integer user_id;
 
     private String email;
     private String user_password;
@@ -32,6 +32,10 @@ public class User {
     private List<PaymentMethod> metodosPaymentMethods;
     private List<Payment> pagos;*/
     public User(){}
+
+    public User(Integer user_id){
+        this.user_id = user_id;
+    }
 
     public User( String email, String password, String firstname, String lastname, String image, String city, String cellphone) {
         this.setUser_password(password);
@@ -84,11 +88,11 @@ public class User {
     }
 
     @Column(name="user_id", unique = true, nullable = false)
-    public long getUser_id() {
+    public Integer getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(long user_id) {
+    public void setUser_id(Integer user_id) {
         this.user_id = user_id;
     }
 
