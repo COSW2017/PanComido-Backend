@@ -19,7 +19,7 @@ public class Command {
     private Integer state;
     private Date creation_date;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_order", nullable = false)
     @Fetch(FetchMode.JOIN)
     private Order id_order;
