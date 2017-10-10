@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 CREATE TABLE CreditCard (
  card_number VARCHAR(20) NOT NULL,
  securityCode NUMERIC(3) NOT NULL,

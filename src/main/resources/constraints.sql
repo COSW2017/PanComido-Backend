@@ -11,5 +11,3 @@ ALTER TABLE Payment ADD CONSTRAINT FK_Payment_0 FOREIGN KEY (id_command) REFEREN
 ALTER TABLE Payment ADD CONSTRAINT FK_Payment_1 FOREIGN KEY (user_id ) REFERENCES Users (user_id );
 ALTER TABLE Command_Dish ADD CONSTRAINT FK_Command_Dish_0 FOREIGN KEY (id_command) REFERENCES Command (id_command);
 ALTER TABLE Command_Dish ADD CONSTRAINT FK_Command_Dish_1 FOREIGN KEY (id_dish) REFERENCES Dish (id_dish);
-
-
