@@ -170,6 +170,11 @@ public class RestaurantServiceImpl implements RestaurantService{
         return restaurant;
     }
 
+    @Override
+    public List<Dish> getDishesByCommand(Integer id_command) {
+        return commandRepository.getDishesByCommand(id_command);
+    }
+
     private Float calculateDistance(Float latitude1, Float latitude2, Float longitude1, Float longitude2) {
         Double rad =Math.PI/180;
         Float dlat=latitude2-latitude1;
