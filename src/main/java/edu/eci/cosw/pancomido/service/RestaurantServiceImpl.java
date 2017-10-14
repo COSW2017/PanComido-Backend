@@ -169,9 +169,12 @@ public class RestaurantServiceImpl implements RestaurantService{
         }
         return restaurant;
     }
-
+    /*
+    Lista los platos por pedido
+     */
     @Override
     public List<Dish> getDishesByCommand(Integer id_command) {
+
         return commandRepository.getDishesByCommand(id_command);
     }
 
@@ -184,6 +187,7 @@ public class RestaurantServiceImpl implements RestaurantService{
         Float distance = Float.parseFloat(2*RADIUS*Math.asin(Math.sqrt(a))+"");
         return distance;
     }
+
 
 
 
