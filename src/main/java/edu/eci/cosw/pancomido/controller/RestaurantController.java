@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletException;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Created by NGS on 9/12/17.
@@ -108,5 +109,17 @@ public class RestaurantController {
             throws ServletException{
         return restaurantService.changeCommandState(command);
     }
+
+    @RequestMapping( value = "{idRestaurant}/command/{id_command}", method = RequestMethod.GET )
+    public List<Dish> getDishesByCommand(@PathVariable Integer idRestaurant, @PathVariable Integer id_command)
+            throws ServletException{
+        List<Dish> dishes = restaurantService.getDishesByCommand(id_command);
+        if( dishes == null){
+            throw new ServletException("No hay platos registrados para el pedido"+id_command);
+        }
+        return dishes;
+    }
+
+
 
 }
