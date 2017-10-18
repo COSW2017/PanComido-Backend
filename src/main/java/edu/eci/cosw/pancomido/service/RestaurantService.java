@@ -35,4 +35,5 @@ public interface RestaurantService {
     Restaurant getOwner(Integer user_id);
 
     List<Dish> getDishByCommandId(Integer id_command);
+
 }

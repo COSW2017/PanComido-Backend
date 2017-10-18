@@ -169,12 +169,22 @@ public class RestaurantServiceImpl implements RestaurantService{
         }
         return restaurant;
     }
-
+    /*
+    Lista los platos por pedido
+     */
     @Override
     public List<Dish> getDishByCommandId(Integer id_command) {
         return commandRepository.getDishes(id_command);
     }
 
+    /**
+     * Calcula la distancia entre dos restaurantes
+     * @param latitude1
+     * @param latitude2
+     * @param longitude1
+     * @param longitude2
+     * @return
+     */
     private Float calculateDistance(Float latitude1, Float latitude2, Float longitude1, Float longitude2) {
         Double rad =Math.PI/180;
         Float dlat=latitude2-latitude1;
@@ -184,6 +194,7 @@ public class RestaurantServiceImpl implements RestaurantService{
         Float distance = Float.parseFloat(2*RADIUS*Math.asin(Math.sqrt(a))+"");
         return distance;
     }
+
 
 
 
