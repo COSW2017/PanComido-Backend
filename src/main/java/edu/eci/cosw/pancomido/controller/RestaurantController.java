@@ -38,11 +38,18 @@ public class RestaurantController {
 
     }
 
+    @RequestMapping( value = "/commands/{id_command}/dish", method = RequestMethod.GET )
+    public List<Dish> getDishByCommandId(@PathVariable Integer id_command)
+            throws ServletException {
+        return restaurantService.getDishByCommandId(id_command);
+
+    }
+
     @RequestMapping( value = "/{id_restaurant}/dish", method = RequestMethod.POST )
     public Dish addDish(@PathVariable Integer id_restaurant, @RequestBody Dish d)
             throws ServletException
     {
-        return restaurantService.addDish(id_restaurant, d);
+        return restaurantService.addDish(d);
     }
 
     @RequestMapping( value = "/{id_restaurant}/dish", method = RequestMethod.PUT )
@@ -56,7 +63,7 @@ public class RestaurantController {
     public boolean deleteDish(@PathVariable Integer id_restaurant, @PathVariable Integer id_dish)
             throws ServletException
     {
-        boolean deleted = restaurantService.deleteDish(id_restaurant, id_dish);
+        boolean deleted = restaurantService.deleteDish(id_dish);
         if(!deleted){
             throw new ServletException("This dish is associated with an active order.");
         }
