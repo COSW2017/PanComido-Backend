@@ -12,9 +12,9 @@ import java.util.List;
  */
 public interface RestaurantService {
 
-    Dish addDish(Integer id_restaurant, Dish d);
+    Dish addDish(Dish d);
 
-    Boolean deleteDish(Integer id_restaurant, Integer id_dish);
+    Boolean deleteDish(Integer id_dish);
 
     Dish modifyDish(Integer id_restaurant, Dish d);
 
@@ -34,5 +34,6 @@ public interface RestaurantService {
 
     Restaurant getOwner(Integer user_id);
 
-    List<Dish> getDishesByCommand(Integer id_command);
+    List<Dish> getDishByCommandId(Integer id_command);
+
 }

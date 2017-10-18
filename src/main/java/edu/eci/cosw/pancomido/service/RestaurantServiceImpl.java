@@ -3,6 +3,7 @@ package edu.eci.cosw.pancomido.service;
 import com.sun.org.apache.xpath.internal.operations.Or;
 import edu.eci.cosw.pancomido.model.*;
 import edu.eci.cosw.pancomido.repositories.CommandRepository;
+import edu.eci.cosw.pancomido.repositories.DishRepository;
 import edu.eci.cosw.pancomido.repositories.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,26 +28,25 @@ public class RestaurantServiceImpl implements RestaurantService{
     public RestaurantRepository restaurantRepository;
 
     @Autowired
+    public DishRepository dishRepository;
+
+    @Autowired
     public RestaurantServiceImpl() { }
 
 
     @Override
-    public Dish addDish(Integer id_restaurant, Dish d) {
-        /*Restaurant r = restaurants.get(id_restaurant);
-        List<Dish> dishes = r.getDishes();
-        dishes.add(d);*/
-        //restaurants.get(id_restaurant).addDish(d);
-        return d;
+    public Dish addDish(Dish d) {
+        return dishRepository.saveAndFlush(d);
     }
 
     @Override
-    public Boolean deleteDish(Integer id_restaurant, Integer id_dish) {
-        Restaurant restaurant = restaurants.get(id_restaurant);
-        Boolean found = false;
-        /*if(restaurant.getDishById(id_dish)!=null){
-            restaurant.delDishById(id_dish);
-            found = true;
-        }*/
+    public Boolean deleteDish(Integer id_dish) {
+        Dish dish = dishRepository.getOne(id_dish);
+        Integer activeCommands = commandRepository.checkActiveCommandsByDishId(dish.getId_dish()).size();
+        boolean found = activeCommands == 0;
+        if (found) {
+            dishRepository.delete(dish);
+        }
         return found;
     }
 
@@ -173,9 +173,8 @@ public class RestaurantServiceImpl implements RestaurantService{
     Lista los platos por pedido
      */
     @Override
-    public List<Dish> getDishesByCommand(Integer id_command) {
-
-        return commandRepository.getDishesByCommand(id_command);
+    public List<Dish> getDishByCommandId(Integer id_command) {
+        return commandRepository.getDishes(id_command);
     }
 
     /**
