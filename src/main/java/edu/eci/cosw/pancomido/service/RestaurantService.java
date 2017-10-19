@@ -36,4 +36,5 @@ public interface RestaurantService {
 
     List<Dish> getDishByCommandId(Integer id_command);
 
+    Dish getDishByDishId(Integer idRestaurant, Integer dish_id);
 }

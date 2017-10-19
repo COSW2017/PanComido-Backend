@@ -90,6 +90,12 @@ public class RestaurantController {
         return restaurantService.getDishes(idRestaurant);
     }
 
+    @RequestMapping( value = "{idRestaurant}/dish/{dish_id}", method = RequestMethod.GET )
+    public Dish getDishByDishId(@PathVariable Integer idRestaurant, @PathVariable Integer dish_id)
+            throws ServletException{
+        return restaurantService.getDishByDishId(idRestaurant, dish_id);
+    }
+
     @RequestMapping( value = "/owner/{user_id}", method = RequestMethod.GET )
     public Restaurant getRestaurantOwner(@PathVariable Integer user_id)
             throws ServletException{
@@ -126,7 +132,5 @@ public class RestaurantController {
         }
         return dishes;
     }
-
-
 
 }

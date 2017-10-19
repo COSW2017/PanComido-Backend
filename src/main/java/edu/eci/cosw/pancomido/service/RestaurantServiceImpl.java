@@ -5,6 +5,13 @@ import edu.eci.cosw.pancomido.model.*;
 import edu.eci.cosw.pancomido.repositories.CommandRepository;
 import edu.eci.cosw.pancomido.repositories.DishRepository;
 import edu.eci.cosw.pancomido.repositories.RestaurantRepository;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -78,8 +85,8 @@ public class RestaurantServiceImpl implements RestaurantService{
 
 
 
-    @Override
-    public Dish modifyDish(Integer id_restaurant, Dish d) {
+
+    /*public Dish modifyDish(Integer id_restaurant, Dish d) {
         boolean found = false;
         Restaurant r = restaurants.get(id_restaurant);
         List<Dish> dishes = null;
@@ -90,8 +97,22 @@ public class RestaurantServiceImpl implements RestaurantService{
             }
         }
         return d;
-    }
+    }*/
 
+
+
+
+    @Override
+    public Dish modifyDish(Integer id_restaurant, Dish d) {
+
+        Dish dish = dishRepository.getOne(d.getId_dish());
+        dish.setName(d.getName());
+        dish.setPrice(d.getPrice());
+        dish.setPrep_time(d.getPrep_time());
+        dish.setDescription(d.getDescription());
+
+        return dishRepository.save(dish);
+    }
     //Tal vez se debería crear un orderController
     /*@Override
     public Boolean changeStateOrder(Integer id_restaurant, Integer id_order, Integer state) {
@@ -175,6 +196,22 @@ public class RestaurantServiceImpl implements RestaurantService{
     @Override
     public List<Dish> getDishByCommandId(Integer id_command) {
         return commandRepository.getDishes(id_command);
+    }
+
+    @Override
+    public Dish getDishByDishId(Integer idRestaurant, Integer dish_id) {
+        //Esta cosa no sirvió y ni idea por qué
+        //System.out.println(dishRepository.getOne(dish_id));
+        //return dishRepository.getOne(dish_id);
+        List<Dish> dishes = this.getDishes(idRestaurant);
+        Dish dish = null;
+        for (Dish d: dishes) {
+            if (d.getId_dish()==dish_id){
+                dish = d;
+                break;
+            }
+        }
+        return dish;
     }
 
     /**
