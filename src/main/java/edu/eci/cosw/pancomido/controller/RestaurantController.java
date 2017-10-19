@@ -122,4 +122,21 @@ public class RestaurantController {
             throws ServletException{
         return restaurantService.changeCommandState(command);
     }
+
+    @RequestMapping( value = "/update", method = RequestMethod.PUT )
+    public Restaurant updateRestaurant(@RequestBody Restaurant restaurant)
+            throws ServletException{
+        return restaurantService.updateRestaurant(restaurant);
+    }
+
+    @RequestMapping( value = "{idRestaurant}/command/{id_command}", method = RequestMethod.GET )
+    public List<Dish> getDishesByCommand(@PathVariable Integer idRestaurant, @PathVariable Integer id_command)
+            throws ServletException{
+        List<Dish> dishes = restaurantService.getDishByCommandId(id_command);
+        if( dishes == null){
+            throw new ServletException("No hay platos registrados para el pedido"+id_command);
+        }
+        return dishes;
+    }
+
 }

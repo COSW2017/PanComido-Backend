@@ -19,7 +19,7 @@ public interface CommandRepository extends JpaRepository<Command, Integer> {
     //Falta probar
     @Query("select c from Command as c where c.id_command = ?1")
     public Command getCommand(Integer CommandId);
-    
+
     @Query("select cd.id_dish from Command_Dish as cd inner join cd.id_command as c where c.id_command = ?1")
     List<Dish> getDishes(Integer id_command);
 
