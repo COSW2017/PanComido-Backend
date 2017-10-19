@@ -120,7 +120,7 @@ public class RestaurantController {
     @RequestMapping( value = "{idRestaurant}/command/{id_command}", method = RequestMethod.GET )
     public List<Dish> getDishesByCommand(@PathVariable Integer idRestaurant, @PathVariable Integer id_command)
             throws ServletException{
-        List<Dish> dishes = restaurantService.getDishesByCommand(id_command);
+        List<Dish> dishes = restaurantService.getDishByCommandId(id_command);
         if( dishes == null){
             throw new ServletException("No hay platos registrados para el pedido"+id_command);
         }
