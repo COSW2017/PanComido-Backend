@@ -1,10 +1,8 @@
 package edu.eci.cosw.pancomido.service;
 
-import edu.eci.cosw.pancomido.Exceptions.PanComidoServicesException;
 import edu.eci.cosw.pancomido.model.*;
 
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * @author Santiago Carrillo

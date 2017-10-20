@@ -1,6 +1,5 @@
 package edu.eci.cosw.pancomido.service;
 
-import edu.eci.cosw.pancomido.Exceptions.PanComidoServicesException;
 import edu.eci.cosw.pancomido.model.*;
 import edu.eci.cosw.pancomido.repositories.CommandRepository;
 import edu.eci.cosw.pancomido.repositories.OrderRepository;
@@ -8,7 +7,6 @@ import edu.eci.cosw.pancomido.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

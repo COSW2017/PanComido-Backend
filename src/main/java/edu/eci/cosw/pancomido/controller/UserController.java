@@ -1,14 +1,11 @@
 package edu.eci.cosw.pancomido.controller;
 
-import edu.eci.cosw.pancomido.Exceptions.PanComidoServicesException;
 import edu.eci.cosw.pancomido.model.PaymentMethod;
 import edu.eci.cosw.pancomido.model.Order;
-import edu.eci.cosw.pancomido.model.Restaurant;
 import edu.eci.cosw.pancomido.model.User;
 import edu.eci.cosw.pancomido.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
