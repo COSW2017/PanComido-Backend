@@ -1,6 +1,8 @@
 package edu.eci.cosw.pancomido;
 
 import edu.eci.cosw.pancomido.config.JwtFilter;
+import org.hibernate.SessionFactory;
+import org.hibernate.jpa.HibernateEntityManagerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;

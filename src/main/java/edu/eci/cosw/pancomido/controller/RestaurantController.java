@@ -39,11 +39,18 @@ public class RestaurantController {
 
     }
 
+    @RequestMapping( value = "/commands/{id_command}/dish", method = RequestMethod.GET )
+    public List<Dish> getDishByCommandId(@PathVariable Integer id_command)
+            throws ServletException {
+        return restaurantService.getDishByCommandId(id_command);
+
+    }
+
     @RequestMapping( value = "/{id_restaurant}/dish", method = RequestMethod.POST )
     public Dish addDish(@PathVariable Integer id_restaurant, @RequestBody Dish d)
             throws ServletException
     {
-        return restaurantService.addDish(id_restaurant, d);
+        return restaurantService.addDish(d);
     }
 
     @RequestMapping( value = "/{id_restaurant}/dish", method = RequestMethod.PUT )
@@ -57,7 +64,7 @@ public class RestaurantController {
     public boolean deleteDish(@PathVariable Integer id_restaurant, @PathVariable Integer id_dish)
             throws ServletException
     {
-        boolean deleted = restaurantService.deleteDish(id_restaurant, id_dish);
+        boolean deleted = restaurantService.deleteDish(id_dish);
         if(!deleted){
             throw new ServletException("This dish is associated with an active order.");
         }
@@ -81,6 +88,12 @@ public class RestaurantController {
     public List<Dish> getDishesByRestaurant(@PathVariable Integer idRestaurant)
             throws ServletException{
         return restaurantService.getDishes(idRestaurant);
+    }
+
+    @RequestMapping( value = "{idRestaurant}/dish/{dish_id}", method = RequestMethod.GET )
+    public Dish getDishByDishId(@PathVariable Integer idRestaurant, @PathVariable Integer dish_id)
+            throws ServletException{
+        return restaurantService.getDishByDishId(idRestaurant, dish_id);
     }
 
     @RequestMapping( value = "/owner/{user_id}", method = RequestMethod.GET )
@@ -110,18 +123,20 @@ public class RestaurantController {
         return restaurantService.changeCommandState(command);
     }
 
+    @RequestMapping( value = "/update", method = RequestMethod.PUT )
+    public Restaurant updateRestaurant(@RequestBody Restaurant restaurant)
+            throws ServletException{
+        return restaurantService.updateRestaurant(restaurant);
+    }
+
     @RequestMapping( value = "{idRestaurant}/command/{id_command}", method = RequestMethod.GET )
     public List<Dish> getDishesByCommand(@PathVariable Integer idRestaurant, @PathVariable Integer id_command)
             throws ServletException{
-        List<Dish> dishes = restaurantService.getDishesByCommand(id_command);
+        List<Dish> dishes = restaurantService.getDishByCommandId(id_command);
         if( dishes == null){
             throw new ServletException("No hay platos registrados para el pedido"+id_command);
         }
         return dishes;
     }
-
-
-
-
 
 }

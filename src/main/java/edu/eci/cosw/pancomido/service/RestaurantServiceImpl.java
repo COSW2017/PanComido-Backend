@@ -3,7 +3,15 @@ package edu.eci.cosw.pancomido.service;
 import com.sun.org.apache.xpath.internal.operations.Or;
 import edu.eci.cosw.pancomido.model.*;
 import edu.eci.cosw.pancomido.repositories.CommandRepository;
+import edu.eci.cosw.pancomido.repositories.DishRepository;
 import edu.eci.cosw.pancomido.repositories.RestaurantRepository;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -27,41 +35,38 @@ public class RestaurantServiceImpl implements RestaurantService{
     public RestaurantRepository restaurantRepository;
 
     @Autowired
+    public DishRepository dishRepository;
+
+    @Autowired
     public RestaurantServiceImpl() { }
 
 
     @Override
-    public Dish addDish(Integer id_restaurant, Dish d) {
-        /*Restaurant r = restaurants.get(id_restaurant);
-        List<Dish> dishes = r.getDishes();
-        dishes.add(d);*/
-        //restaurants.get(id_restaurant).addDish(d);
-        return d;
+    public Dish addDish(Dish d) {
+        return dishRepository.saveAndFlush(d);
     }
 
     @Override
-    public Boolean deleteDish(Integer id_restaurant, Integer id_dish) {
-        Restaurant restaurant = restaurants.get(id_restaurant);
-        Boolean found = false;
-        /*if(restaurant.getDishById(id_dish)!=null){
-            restaurant.delDishById(id_dish);
-            found = true;
-        }*/
+    public Boolean deleteDish(Integer id_dish) {
+        Dish dish = dishRepository.getOne(id_dish);
+        Integer activeCommands = commandRepository.checkActiveCommandsByDishId(dish.getId_dish()).size();
+        boolean found = activeCommands == 0;
+        if (found) {
+            dishRepository.delete(dish);
+        }
         return found;
     }
 
     @Override
     public Dish modifyDish(Integer id_restaurant, Dish d) {
-        boolean found = false;
-        Restaurant r = restaurants.get(id_restaurant);
-        List<Dish> dishes = null;
-        for (int i = 0 ; i < dishes.size() && !found; i++){
-            if(dishes.get(i).equals(d)){
-                dishes.set(i, d);
-                found = true;
-            }
-        }
-        return d;
+
+        Dish dish = dishRepository.getOne(d.getId_dish());
+        dish.setName(d.getName());
+        dish.setPrice(d.getPrice());
+        dish.setPrep_time(d.getPrep_time());
+        dish.setDescription(d.getDescription());
+
+        return dishRepository.save(dish);
     }
 
     public HashMap<Integer, Restaurant> getRestaurants() {
@@ -103,6 +108,16 @@ public class RestaurantServiceImpl implements RestaurantService{
     }
 
     @Override
+    public Restaurant updateRestaurant(Restaurant restaurant) {
+        Restaurant updateRestaurant = restaurantRepository.getOne(restaurant.getId_restaurant());
+        updateRestaurant.setName(restaurant.getName());
+        updateRestaurant.setLatitude(restaurant.getLatitude());
+        updateRestaurant.setLongitude(restaurant.getLongitude());
+        restaurantRepository.saveAndFlush(updateRestaurant);
+        return restaurant;
+    }
+
+    @Override
     public Command getCommand(Integer id_Command) {
         return commandRepository.getCommand(id_Command);
     }
@@ -130,9 +145,24 @@ public class RestaurantServiceImpl implements RestaurantService{
     Lista los platos por pedido
      */
     @Override
-    public List<Dish> getDishesByCommand(Integer id_command) {
+    public List<Dish> getDishByCommandId(Integer id_command) {
+        return commandRepository.getDishes(id_command);
+    }
 
-        return commandRepository.getDishesByCommand(id_command);
+    @Override
+    public Dish getDishByDishId(Integer idRestaurant, Integer dish_id) {
+        //Esta cosa no sirvió y ni idea por qué
+        //System.out.println(dishRepository.getOne(dish_id));
+        //return dishRepository.getOne(dish_id);
+        List<Dish> dishes = this.getDishes(idRestaurant);
+        Dish dish = null;
+        for (Dish d: dishes) {
+            if (d.getId_dish()==dish_id){
+                dish = d;
+                break;
+            }
+        }
+        return dish;
     }
 
     /**
