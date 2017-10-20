@@ -4,6 +4,7 @@ import com.sun.org.apache.xpath.internal.operations.Or;
 import edu.eci.cosw.pancomido.model.*;
 import edu.eci.cosw.pancomido.repositories.CommandRepository;
 import edu.eci.cosw.pancomido.repositories.DishRepository;
+import edu.eci.cosw.pancomido.repositories.OrderRepository;
 import edu.eci.cosw.pancomido.repositories.RestaurantRepository;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -36,6 +37,9 @@ public class RestaurantServiceImpl implements RestaurantService{
 
     @Autowired
     public DishRepository dishRepository;
+
+    @Autowired
+    public OrderRepository orderRepository;
 
     @Autowired
     public RestaurantServiceImpl() { }
@@ -101,6 +105,7 @@ public class RestaurantServiceImpl implements RestaurantService{
 
     @Override
     public Command changeCommandState(Command command) {
+        System.out.print("Entra aquí");
         Command updateCommand = commandRepository.getOne(command.getId_command());
         updateCommand.setState(command.getState());
         commandRepository.saveAndFlush(updateCommand);
@@ -115,6 +120,11 @@ public class RestaurantServiceImpl implements RestaurantService{
         updateRestaurant.setLongitude(restaurant.getLongitude());
         restaurantRepository.saveAndFlush(updateRestaurant);
         return restaurant;
+    }
+
+    @Override
+    public List<Order> getRestaurantOrders(int id_restaurant) {
+        return orderRepository.getRestaurantOrders(id_restaurant);
     }
 
     @Override
