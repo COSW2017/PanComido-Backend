@@ -57,51 +57,6 @@ public class RestaurantServiceImpl implements RestaurantService{
         return found;
     }
 
-    /*@Override
-    public Boolean deleteDish(Integer id_restaurant, Integer id_dish) {
-        boolean found = false;
-        Restaurant r = restaurants.get(id_restaurant);
-
-        List<Dish> dishes = r.getDishes();
-        List<Order> orders = r.getOrders();
-        boolean found2 = false;
-        for (int i = 0 ; i < dishes.size() && !found; i++){
-
-            if(dishes.get(i).getId_dish() == id_dish){
-                found2 = false;
-                for (int j = 0 ; j < orders.size() && !found2; j++){
-                    if(orders.get(j).getId() == dishes.get(i).getId_dish()){
-                        found2 = true;
-                    }
-                }
-                if(!found2){
-                    dishes.remove(i);
-                }
-                found = true;
-            }
-        }
-        return found && !found2;
-    }*/
-
-
-
-
-    /*public Dish modifyDish(Integer id_restaurant, Dish d) {
-        boolean found = false;
-        Restaurant r = restaurants.get(id_restaurant);
-        List<Dish> dishes = null;
-        for (int i = 0 ; i < dishes.size() && !found; i++){
-            if(dishes.get(i).equals(d)){
-                dishes.set(i, d);
-                found = true;
-            }
-        }
-        return d;
-    }*/
-
-
-
-
     @Override
     public Dish modifyDish(Integer id_restaurant, Dish d) {
 
@@ -113,20 +68,6 @@ public class RestaurantServiceImpl implements RestaurantService{
 
         return dishRepository.save(dish);
     }
-    //Tal vez se debería crear un orderController
-    /*@Override
-    public Boolean changeStateOrder(Integer id_restaurant, Integer id_order, Integer state) {
-        List<Order> orders = restaurants.get(id_restaurant).getOrders();
-        Boolean found = false;
-        for (int i = 0; i < orders.size() & !found; i++){
-            if(orders.get(i).getId() == id_order){
-                orders.get(i).setState(state);
-                found = true;
-            }
-        }
-        return found;
-    }*/
-
 
     public HashMap<Integer, Restaurant> getRestaurants() {
         return restaurants;
