@@ -1,5 +1,6 @@
 package edu.eci.cosw.pancomido.service;
 
+import edu.eci.cosw.pancomido.exceptions.PanComidoServicesException;
 import edu.eci.cosw.pancomido.model.*;
 import org.springframework.stereotype.Service;
 

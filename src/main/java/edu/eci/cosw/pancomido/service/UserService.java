@@ -4,17 +4,23 @@ import edu.eci.cosw.pancomido.model.*;
 
 import java.util.HashMap;
 
+import edu.eci.cosw.pancomido.exceptions.PanComidoServicesException;
+import edu.eci.cosw.pancomido.model.*;
+
+import java.util.List;
+
+
 /**
  * @author Santiago Carrillo
  * 8/21/17.
  */
 public interface UserService
 {
-    HashMap<Long, User> getUsers();
+    List<User> getUsers();
 
-    User getUser( Long id );
+    User getUser(Integer id);
 
-    User createUser( User user );
+    User createUser(User user );
 
     User findUserByEmail( String email );
 
@@ -22,7 +28,7 @@ public interface UserService
 
     User updateUser(User user);
 
-    Boolean addFriend(Long user, Long friend);
+    Boolean addFriend(Integer user, Integer friend);
 
     Order getOrder(Integer id_order);
 
@@ -34,5 +40,7 @@ public interface UserService
     Order cancelOrder(Order order) throws PanComidoServicesException;
 
     Order getOrderById(Integer id_order);
+
+    List<Order> getOrders(Integer id_user);
 
 }

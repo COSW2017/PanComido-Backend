@@ -54,6 +54,8 @@ public class Order {
         this.user_id = user;
     }
 
+    /*
+
     public void addPedido(Command p){
         this.getCommands().add(p);
     }
@@ -73,6 +75,8 @@ public class Order {
         }
     }
 
+    */
+
     @Override
     public String toString() {
         return "Order{" +
@@ -81,14 +85,6 @@ public class Order {
                 '}';
     }
 
-
-    public List<Command> getCommands() {
-        return null;//this.commands;
-    }
-
-    public void setCommands(List<Command> commands) {
-        //this.commands = commands;
-    }
     /*
     En cola: 0, En progreso: 1, Listo=2
      */

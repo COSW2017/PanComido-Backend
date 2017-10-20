@@ -69,7 +69,7 @@ public class RestaurantServiceImpl implements RestaurantService{
         dish.setPrice(d.getPrice());
         dish.setPrep_time(d.getPrep_time());
         dish.setDescription(d.getDescription());
-
+        dish.setImage(d.getImage());
         return dishRepository.save(dish);
     }
 

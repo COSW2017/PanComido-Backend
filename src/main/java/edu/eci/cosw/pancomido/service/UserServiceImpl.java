@@ -1,16 +1,16 @@
 package edu.eci.cosw.pancomido.service;
 
+import edu.eci.cosw.pancomido.exceptions.PanComidoServicesException;
 import edu.eci.cosw.pancomido.model.*;
 import edu.eci.cosw.pancomido.repositories.CommandRepository;
+import edu.eci.cosw.pancomido.repositories.FriendRepository;
 import edu.eci.cosw.pancomido.repositories.OrderRepository;
 import edu.eci.cosw.pancomido.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Santiago Carrillo
@@ -20,7 +20,7 @@ import java.util.Map;
 public class UserServiceImpl implements UserService
 {
 
-    private HashMap<Long, User> users = new HashMap<>();
+    //private HashMap<Long, User> users = new HashMap<>();
 
     @Autowired
     public OrderRepository orderRepository;
@@ -33,6 +33,9 @@ public class UserServiceImpl implements UserService
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private FriendRepository friendRepository;
 
     @Autowired
     public UserServiceImpl() { }
@@ -59,15 +62,15 @@ public class UserServiceImpl implements UserService
     }*/
     
     @Override
-    public HashMap<Long, User> getUsers()
+    public List<User> getUsers()
     {
-        return users;
+        return userRepository.findAll();
     }
 
     @Override
-    public User getUser( Long id )
+    public User getUser(Integer id)
     {
-        return users.get(id);
+        return userRepository.getOne(id);
     }
 
     @Override
@@ -96,17 +99,7 @@ public class UserServiceImpl implements UserService
     @Override
     public User findUserByEmailAndPassword( String email, String password )
     {
-        User found = null;
-        for (Map.Entry<Long, User> entry : users.entrySet())
-        {
-            Long key = entry.getKey();
-            User value = entry.getValue();
-            if(value.getEmail().equals(email) && value.getUser_password().equals(password)){
-                found = value;
-                break;
-            }
-        }
-
+        User found = userRepository.findUsersByEmailAndPassword(email, password).get(0);
         return found;
     }
 
@@ -121,17 +114,17 @@ public class UserServiceImpl implements UserService
     }
 
     @Override
-    public Boolean addFriend(Long user, Long friend) {
-        User user1 = this.getUser(user);
-        User user2 = this.getUser(friend);
-        //List<User> pending1 = user1.getPendingFriends();
-        /*boolean retval = false;
-        if(!pending1.contains(user2)) {
-            pending1.add(user2);
-            retval = true;
-        }*/
-        return null;
-
+    public Boolean addFriend(Integer user, Integer friend) {
+        Friend friendship = friendRepository.checkIfAFriendshipExist(user, friend);
+        Friend f = null;
+        if(friendship==null){
+            friendship = friendRepository.checkIfAPendingFriendshipExist(user, friend);
+            if(friendship==null) {
+                f = new Friend(getUser(user), getUser(friend), 0);
+                friendRepository.saveAndFlush(f);
+            }
+        }
+        return f!=null;
     }
 
     //Pensar si es mejor pasar las ordenes del usuario a un HashMap
@@ -175,24 +168,12 @@ public class UserServiceImpl implements UserService
 
     @Override
     public Order getOrderById(Integer id_order) {
-        HashMap<Integer, Order> ordenes = getAllOrders();
-        return ordenes.get(id_order);
+        return orderRepository.getOne(id_order);
     }
 
-
-
-    private HashMap<Integer, Order> getAllOrders(){
-        List<Order> orders = new ArrayList<>();
-        HashMap<Integer, Order> allOrders = new HashMap<>();
-        for(Long u : users.keySet()){
-            orders =  new ArrayList<>();
-            for(Order o : orders){
-                if(!allOrders.containsKey(o.getId_order())){
-                    allOrders.put(o.getId_order(), o);
-                }
-            }
-        }
-        return allOrders;
+    @Override
+    public List<Order> getOrders(Integer id_user) {
+        return orderRepository.getOrdersByUser(id_user);
     }
 
 
