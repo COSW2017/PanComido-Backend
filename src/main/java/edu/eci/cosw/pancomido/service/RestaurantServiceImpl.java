@@ -173,7 +173,7 @@ public class RestaurantServiceImpl implements RestaurantService{
         updateRestaurant.setLatitude(restaurant.getLatitude());
         updateRestaurant.setLongitude(restaurant.getLongitude());
         restaurantRepository.saveAndFlush(updateRestaurant);
-        return updateRestaurant;
+        return restaurant;
     }
 
     @Override
