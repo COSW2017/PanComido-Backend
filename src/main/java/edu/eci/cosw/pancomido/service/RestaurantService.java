@@ -39,4 +39,6 @@ public interface RestaurantService {
     Dish getDishByDishId(Integer idRestaurant, Integer dish_id);
 
     Restaurant updateRestaurant(Restaurant restaurant);
+
+    List<Order> getRestaurantOrders(int id_restaurant);
 }

@@ -116,7 +116,7 @@ public class RestaurantController {
     }
 
     @RequestMapping( value = "{idRestaurant}/command", method = RequestMethod.PUT )
-    public Command updateCommmandState(@PathVariable Integer id_restaurant, @RequestBody Command command)
+    public Command updateCommmandState(@PathVariable Integer idRestaurant, @RequestBody Command command)
             throws ServletException{
         return restaurantService.changeCommandState(command);
     }
@@ -135,6 +135,16 @@ public class RestaurantController {
             throw new ServletException("No hay platos registrados para el pedido"+id_command);
         }
         return dishes;
+    }
+
+    @RequestMapping( value = "{idRestaurant}/order", method = RequestMethod.GET )
+    public List<Order> getRestaurantOrders(@PathVariable Integer idRestaurant)
+            throws ServletException{
+        List<Order> orders = restaurantService.getRestaurantOrders(idRestaurant);
+        if( orders == null){
+            throw new ServletException("No hay ordenes registradas"+idRestaurant);
+        }
+        return orders;
     }
 
 }
