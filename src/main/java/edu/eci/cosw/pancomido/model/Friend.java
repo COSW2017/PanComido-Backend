@@ -66,4 +66,14 @@ public class Friend {
     public void setState(int state) {
         this.state = state;
     }
+
+    @Override
+    public String toString() {
+        return "Friend{" +
+                "id_friend=" + id_friend +
+                ", user_id=" + user_id +
+                ", friend_id=" + friend_id +
+                ", state=" + state +
+                '}';
+    }
 }

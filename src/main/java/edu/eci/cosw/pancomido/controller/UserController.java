@@ -1,21 +1,20 @@
 package edu.eci.cosw.pancomido.controller;
 
-import edu.eci.cosw.pancomido.Exceptions.PanComidoServicesException;
+import edu.eci.cosw.pancomido.exceptions.PanComidoServicesException;
+import edu.eci.cosw.pancomido.model.Friend;
 import edu.eci.cosw.pancomido.model.PaymentMethod;
 import edu.eci.cosw.pancomido.model.Order;
-import edu.eci.cosw.pancomido.model.Restaurant;
 import edu.eci.cosw.pancomido.model.User;
 import edu.eci.cosw.pancomido.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Santiago Carrillo
@@ -66,7 +65,7 @@ public class UserController
 
     @RequestMapping( value = "/items", method = RequestMethod.GET )
     public List<User> getUsers(){
-        return new ArrayList<>(userService.getUsers().values());
+        return userService.getUsers();
     }
 
         @RequestMapping( value = "/search", method = RequestMethod.POST )
@@ -131,5 +130,17 @@ public class UserController
         } catch (PanComidoServicesException e) {
             throw new ServletException(e.getMessage());
         }
+    }
+
+    @RequestMapping( value = "/{idUser}/order", method = RequestMethod.GET )
+    public List<Order> getOrdersByUser(@PathVariable Integer idUser)
+            throws ServletException {
+        return userService.getOrders(idUser);
+    }
+
+    @RequestMapping( value = "/friendship", method = RequestMethod.POST )
+    public boolean insertPendingFriendship(@RequestBody Map<String, Integer> json)
+            throws ServletException {
+        return userService.addFriend(json.get("id_user"), json.get("id_friend"));
     }
 }

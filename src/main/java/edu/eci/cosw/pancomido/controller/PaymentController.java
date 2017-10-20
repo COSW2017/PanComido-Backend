@@ -1,10 +1,8 @@
 package edu.eci.cosw.pancomido.controller;
 
 
-import edu.eci.cosw.pancomido.Exceptions.PanComidoServicesException;
+import edu.eci.cosw.pancomido.exceptions.PanComidoServicesException;
 import edu.eci.cosw.pancomido.model.Command;
-import edu.eci.cosw.pancomido.model.PaymentMethod;
-import edu.eci.cosw.pancomido.model.Order;
 import edu.eci.cosw.pancomido.model.User;
 import edu.eci.cosw.pancomido.service.PagoService;
 import org.springframework.beans.factory.annotation.Autowired;

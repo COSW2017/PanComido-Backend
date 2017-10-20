@@ -1,4 +1,4 @@
-package edu.eci.cosw.pancomido.Exceptions;
+package edu.eci.cosw.pancomido.exceptions;
 
 public class PanComidoServicesException extends Exception{
 

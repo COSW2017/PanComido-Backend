@@ -1,8 +1,7 @@
 package edu.eci.cosw.pancomido.service;
 
-import edu.eci.cosw.pancomido.Exceptions.PanComidoServicesException;
+import edu.eci.cosw.pancomido.exceptions.PanComidoServicesException;
 import edu.eci.cosw.pancomido.model.Command;
-import edu.eci.cosw.pancomido.model.Order;
 import edu.eci.cosw.pancomido.model.User;
 
 public interface PagoService {

@@ -1,6 +1,5 @@
 package edu.eci.cosw.pancomido.controller;
 
-import edu.eci.cosw.pancomido.Exceptions.PanComidoServicesException;
 import edu.eci.cosw.pancomido.model.*;
 import edu.eci.cosw.pancomido.service.RestaurantService;
 import edu.eci.cosw.pancomido.service.UserService;
@@ -9,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletException;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * Created by NGS on 9/12/17.
