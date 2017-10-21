@@ -20,9 +20,6 @@ public class RestaurantController {
     @Autowired
     RestaurantService restaurantService;
 
-    @Autowired
-    UserService userService;
-
     @RequestMapping( value = "/{id_restaurant}/commands", method = RequestMethod.GET )
     public List<Command> get(@PathVariable Integer id_restaurant)
             throws ServletException {
@@ -150,6 +147,10 @@ public class RestaurantController {
     @RequestMapping( value = "{name}", method = RequestMethod.GET )
     public Restaurant getRestaurantByName(@PathVariable String name)
             throws ServletException{
-        return restaurantService.getRestByName(name);
+        if( restaurantService.getRestByName(name) == null){
+            throw new ServletException("Error: Restaurant not found");
+        }else{
+            return restaurantService.getRestByName(name);
+        }
     }
 }
