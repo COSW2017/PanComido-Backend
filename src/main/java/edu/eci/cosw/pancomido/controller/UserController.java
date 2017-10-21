@@ -143,4 +143,11 @@ public class UserController
             throws ServletException {
         return userService.addFriend(json.get("id_user"), json.get("id_friend"));
     }
+
+    @RequestMapping( value = "/modify", method = RequestMethod.PUT)
+    public User modifyDataU(@RequestBody String email, @RequestBody String user_pas, @RequestBody String city, @RequestBody String cellphone)
+            throws ServletException
+    {
+        return userService.modifyUserData(email, user_pas, city, cellphone);
+    }
 }

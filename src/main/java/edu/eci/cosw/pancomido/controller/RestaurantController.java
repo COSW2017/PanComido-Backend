@@ -147,4 +147,9 @@ public class RestaurantController {
         return orders;
     }
 
+    @RequestMapping( value = "{name}", method = RequestMethod.GET )
+    public Restaurant getRestaurantByName(@PathVariable String name)
+            throws ServletException{
+        return restaurantService.getRestByName(name);
+    }
 }
