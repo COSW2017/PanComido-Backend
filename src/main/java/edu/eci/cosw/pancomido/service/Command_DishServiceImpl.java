@@ -5,7 +5,9 @@ import edu.eci.cosw.pancomido.repositories.CommandRepository;
 import edu.eci.cosw.pancomido.repositories.Command_DishRepository;
 import edu.eci.cosw.pancomido.repositories.DishRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class Command_DishServiceImpl implements Command_DishService {
 
     @Autowired

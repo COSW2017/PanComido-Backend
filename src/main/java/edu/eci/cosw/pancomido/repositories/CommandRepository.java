@@ -4,13 +4,14 @@ import edu.eci.cosw.pancomido.model.Command;
 import edu.eci.cosw.pancomido.model.Dish;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
 public interface CommandRepository extends JpaRepository<Command, Integer> {
 
-    @Query("SELECT c FROM Command as c WHERE c.id_order = ?1")
-    public List<Command> getCommandsByOrder(Integer orderId);
+    @Query("SELECT c FROM Command as c WHERE c.id_order = :id_order")
+    public List<Command> getCommandsByOrder(@Param("id_order") Integer orderId);
 
     //No sé si este bien supongo que no...
     @Query("select cd.id_command from Command_Dish as cd inner join cd.id_dish as d where d.restaurant.id_restaurant = ?1")
