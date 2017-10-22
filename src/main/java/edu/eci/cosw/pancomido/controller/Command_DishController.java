@@ -25,10 +25,15 @@ public class Command_DishController {
 
 
     @RequestMapping( value = "/{id_command}/{id_dish}", method = RequestMethod.POST)
-    public Command_Dish addDishC(@PathVariable Integer id_command, @PathVariable Integer id_dish)
+    public Boolean addDishC(@PathVariable Integer id_command, @PathVariable Integer id_dish)
             throws ServletException
     {
-        return commandD.addDishCommand(id_command, id_dish);
+        Command_Dish add = commandD.addDishCommand(id_command, id_dish);
+        if (add == null){
+            throw new ServletException("Error adding dish");
+        }else {
+            return true;
+        }
     }
 
     @RequestMapping( value = "/{id_command}/{id_dish}", method = RequestMethod.DELETE)

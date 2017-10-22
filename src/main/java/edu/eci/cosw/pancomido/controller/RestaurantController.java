@@ -144,7 +144,7 @@ public class RestaurantController {
         return orders;
     }
 
-    @RequestMapping( value = "{name}", method = RequestMethod.GET )
+    @RequestMapping( value = "/{name}", method = RequestMethod.GET )
     public Restaurant getRestaurantByName(@PathVariable String name)
             throws ServletException{
         if( restaurantService.getRestByName(name) == null){
