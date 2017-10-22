@@ -23,16 +23,6 @@ public class Command_DishController {
         return "this is a test";
     }
 
-    @RequestMapping( value = "/{id_command}/{id_dish}", method = RequestMethod.GET)
-    public Command_Dish getDishC(@PathVariable Integer id_command, @PathVariable Integer id_dish)
-            throws ServletException
-    {
-            Command_Dish dsh = commandD.getDishCommand(id_command, id_dish);
-            if (dsh == null){
-                throw new ServletException("This dish does not belong to any command");
-            }
-            return dsh;
-    }
 
     @RequestMapping( value = "/{id_command}/{id_dish}", method = RequestMethod.POST)
     public Command_Dish addDishC(@PathVariable Integer id_command, @PathVariable Integer id_dish)

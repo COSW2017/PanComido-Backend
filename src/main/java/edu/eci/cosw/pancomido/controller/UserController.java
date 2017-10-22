@@ -145,7 +145,7 @@ public class UserController
     }
 
     @RequestMapping( value = "/modify", method = RequestMethod.PUT)
-    public User modifyDataU(@RequestBody String email, @RequestBody String user_pas, @RequestBody String city, @RequestBody String cellphone)
+    public User modifyDataU(@RequestParam("email") String email, @RequestParam("user_pas") String user_pas, @RequestParam("city") String city, @RequestParam("cellphone") String cellphone)
             throws ServletException
     {
         return userService.modifyUserData(email, user_pas, city, cellphone);

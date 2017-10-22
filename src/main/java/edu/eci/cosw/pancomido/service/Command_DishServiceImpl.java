@@ -22,19 +22,6 @@ public class Command_DishServiceImpl implements Command_DishService {
     @Autowired
     public Command_DishServiceImpl(){ }
 
-    @Override
-    public Command_Dish getDishCommand(Integer id_command, Integer id_dish) {
-        Boolean ext = commandRepository.existsById(id_command);
-        Boolean est = dishRepository.existsById(id_dish);
-        if (est && ext){
-           Command c = commandRepository.getOne(id_command);
-           Dish d = dishRepository.getOne(id_dish);
-           Command_Dish cd = command_dishRepository.getCommandDish(c, d);
-           return cd;
-        } else {
-            return null;
-        }
-    }
 
     @Override
     public Command_Dish addDishCommand(Integer id_command, Integer id_dish) {
@@ -48,11 +35,12 @@ public class Command_DishServiceImpl implements Command_DishService {
     public Boolean deleteDishCommand(Integer id_command, Integer id_dish) {
         Boolean ext = commandRepository.existsById(id_command);
         Boolean est = dishRepository.existsById(id_dish);
+        Command c = commandRepository.getOne(id_command);
+        Dish d = dishRepository.getOne(id_dish);
+
+        Command_Dish commandD = command_dishRepository.getCommandDish(c, d);
         Boolean fl = false;
-        if (ext && est) {
-            Command c = commandRepository.getOne(id_command);
-            Dish d = dishRepository.getOne(id_dish);
-            Command_Dish commandD = command_dishRepository.getCommandDish(c, d);
+        if (ext && est && commandD != null) {
             command_dishRepository.delete(commandD);
             fl = true;
         }
