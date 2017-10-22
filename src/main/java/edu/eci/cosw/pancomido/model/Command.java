@@ -38,17 +38,6 @@ public class Command {
         this.id_command = idPedido;
     }
 
-    public Dish getPlato(int id){
-        Dish d = null; boolean found = false;
-        /*for(int i =0; i< platos.size() && !found; i++){
-            if(id == platos.get(i).getId_dish()){
-                d = platos.get(i);
-                found = true;
-            }
-        }*/
-        return d;
-    }
-
     @Column(name="state", nullable = false)
     public Integer getState() {
         return state;

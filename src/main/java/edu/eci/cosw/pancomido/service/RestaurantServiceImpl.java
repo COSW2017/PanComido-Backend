@@ -104,6 +104,20 @@ public class RestaurantServiceImpl implements RestaurantService{
     }
 
     @Override
+    public Restaurant getRestByName(String name) {
+        List<Restaurant> rests = restaurantRepository.findAll();
+        boolean fd = false;
+        Restaurant rt = new Restaurant();
+        for (int i = 0; i < rests.size() && !fd; i++) {
+            if (name.equalsIgnoreCase(rests.get(i).getName())){
+                rt = rests.get(i);
+                fd = true;
+            }
+        }
+        return rt;
+    }
+
+    @Override
     public Command changeCommandState(Command command) {
         System.out.print("Entra aquí");
         Command updateCommand = commandRepository.getOne(command.getId_command());
@@ -126,6 +140,7 @@ public class RestaurantServiceImpl implements RestaurantService{
     public List<Order> getRestaurantOrders(int id_restaurant) {
         return orderRepository.getRestaurantOrders(id_restaurant);
     }
+
 
     @Override
     public Command getCommand(Integer id_Command) {

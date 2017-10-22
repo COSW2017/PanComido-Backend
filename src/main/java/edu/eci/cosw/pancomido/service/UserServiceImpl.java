@@ -176,5 +176,15 @@ public class UserServiceImpl implements UserService
         return orderRepository.getOrdersByUser(id_user);
     }
 
+    @Override
+    public User modifyUserData(String email, String user_pas, String city, String cellphone){
+        User prev = this.findUserByEmail(email);
+        prev.setEmail(email);
+        prev.setUser_password(user_pas);
+        prev.setCity(city);
+        prev.setCellphone(cellphone);
+
+        return prev;
+    }
 
 }
