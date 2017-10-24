@@ -85,7 +85,7 @@ public class RestaurantServiceImpl implements RestaurantService{
         List<Restaurant> restaurants = restaurantRepository.findAll();
         ArrayList<Restaurant> locationRestaurants = new ArrayList<>();
         for(Restaurant restaurant : restaurants){
-            if(calculateDistance(latitude, restaurant.getLatitude(), longitude, restaurant.getLongitude()) < 0.2){
+            if(calculateDistance(latitude, restaurant.getLatitude(), longitude, restaurant.getLongitude()) < 20){
                 locationRestaurants.add(restaurant);
             }
         }
@@ -205,6 +205,7 @@ public class RestaurantServiceImpl implements RestaurantService{
         Double a = Math.pow(Math.sin(rad*dlat/2), 2)+Math.cos(rad*latitude1)*
                 Math.cos(rad*latitude2)*Math.pow(Math.sin(rad*dlon/2), 2);
         Float distance = Float.parseFloat(2*RADIUS*Math.asin(Math.sqrt(a))+"");
+        System.out.println("Distancia"+distance+" "+latitude1+" "+longitude1);
         return distance;
     }
 
