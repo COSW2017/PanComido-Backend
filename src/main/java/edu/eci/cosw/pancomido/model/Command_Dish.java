@@ -23,6 +23,14 @@ public class Command_Dish {
     @Fetch(FetchMode.JOIN)
     private Dish id_dish;
 
+    public Command_Dish() {
+    }
+
+    public Command_Dish(Command command, Dish dish){
+        this.id_command = command;
+        this.id_dish = dish;
+
+    }
     @Column(name="id_command_dish", unique = true, nullable = false)
     public int getId_command_dish() {
         return id_command_dish;

@@ -40,26 +40,6 @@ public class UserServiceImpl implements UserService
     @Autowired
     public UserServiceImpl() { }
 
-    /*@PostConstruct
-    private void populateSampleData()
-    {
-        User user = new User( "test@mail.com", "password", "Andres", "Perez", "https://cdn-images-1.medium.com/max/796/1*juPyda3wq9uz_SNFRLuANg@2x.png", "test", "123456" );
-        Restaurant restaurant = new Restaurant(0, "Perter pan", 1.12, 2.36, 5, 2, 3, 1);
-        ArrayList<Dish> dishes = new ArrayList<>();
-        Dish dish = new Dish(0, "Arroz con pollo", 25000, "Arroz con pollo y papas a la francesa", restaurant);
-        //restaurant.addDish(dish);
-        Command command = new Command(0, dishes);
-        ArrayList<Command> commands = new ArrayList<>(); commands.add(command);
-        Order order = new Order(0, user);
-        order.setCommands(commands);
-        ArrayList<Order> orders = new ArrayList<>();
-        //user.setOrders(orders);
-        //user.setRestaurant(restaurant);
-        //restaurant.setDishes(dishes);
-        users.put(1l, user);
-
-        restaurantService.addRestaurant(restaurant);
-    }*/
     
     @Override
     public List<User> getUsers()
@@ -82,17 +62,6 @@ public class UserServiceImpl implements UserService
     @Override
     public User findUserByEmail( String email )
     {
-        /*User found = null;
-        for (Map.Entry<Long, User> entry : users.entrySet())
-        {
-            Long key = entry.getKey();
-            User value = entry.getValue();
-            if(value.getEmail().equals(email)) {
-                found = value;
-                break;
-            }
-        }
-        return found;*/
         return userRepository.findUsersByEmail(email);
     }
 
@@ -110,6 +79,8 @@ public class UserServiceImpl implements UserService
         oldUser.setCity(user.getCity());
         oldUser.setUser_password(user.getUser_password());
         oldUser.setImage(user.getImage());
+        oldUser.setEmail(user.getEmail());
+        userRepository.saveAndFlush(oldUser);
         return oldUser;
     }
 
@@ -127,7 +98,6 @@ public class UserServiceImpl implements UserService
         return f!=null;
     }
 
-    //Pensar si es mejor pasar las ordenes del usuario a un HashMap
     @Override
     public Order getOrder(Integer id_order) {
         List<Order> orders = new ArrayList<>();
@@ -175,6 +145,5 @@ public class UserServiceImpl implements UserService
     public List<Order> getOrders(Integer id_user) {
         return orderRepository.getOrdersByUser(id_user);
     }
-
 
 }
