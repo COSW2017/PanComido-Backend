@@ -123,7 +123,7 @@ public class UserController
     }
 
     @RequestMapping( value = "/{id_user}/order/", method = RequestMethod.PUT )
-    public Order cancelOrder(@PathVariable Long idUser, @RequestBody Order order)
+    public Order cancelOrder(@PathVariable Long id_user, @RequestBody Order order)
             throws ServletException {
         try {
             return userService.cancelOrder(order);
