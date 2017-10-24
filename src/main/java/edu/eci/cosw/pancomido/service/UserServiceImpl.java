@@ -80,6 +80,7 @@ public class UserServiceImpl implements UserService
         oldUser.setUser_password(user.getUser_password());
         oldUser.setImage(user.getImage());
         oldUser.setEmail(user.getEmail());
+        userRepository.saveAndFlush(oldUser);
         return oldUser;
     }
 
