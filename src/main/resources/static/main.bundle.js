@@ -282,7 +282,7 @@ AppModule = __decorate([
             {
                 provide: __WEBPACK_IMPORTED_MODULE_6__common_initial_config__["a" /* INITIAL_CONFIG */],
                 useValue: {
-                    apiURL: 'https://pancomido-cosw.herokuapp.com'
+                    apiURL: 'https://pancomido-cosw.herokuapp.com/'
                 }
             },
             __WEBPACK_IMPORTED_MODULE_18__services_todo_service__["a" /* TodoService */],
@@ -708,7 +708,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/pages/command-delivery-page/command-delivery.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<ngx-loading [show]=\"load\" [config]=\"{ backdropBorderRadius: '14px' }\"></ngx-loading>\r\n<div class=\"page_container\">    \r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n          <div class=\"col-lg-12 text-center\">\r\n            <h2 class=\"section-heading\">Command Delivery</h2>\r\n            <hr class=\"primary\">\r\n          </div>\r\n        </div>\r\n      </div>\r\n  <div class=\"container\">\r\n    <table class=\"table table-bordered\">\r\n    <thead>\r\n      <tr>\r\n        <th>Command Id</th>\r\n        <th>User Name</th>\r\n        <th>State</th>\r\n        <th>Action</th>\r\n      </tr>\r\n    </thead>\r\n    <tr *ngFor=\"let command of commands; let i = index\">\r\n        <td *ngIf=\"command.state==2\">{{command.id_command}}</td>\r\n        <td  *ngIf=\"command.state==2\">\r\n          <p *ngIf=\"!(orders[i]==null)\">{{orders[i].user_id.firstname}} {{orders[i].user_id.lastname}}</p>\r\n        </td>\r\n        <td *ngIf=\"command.state==2\">\r\n          <p *ngIf=\"command.state == 2\">Ready</p><p *ngIf=\"command.state == 3\">Delivered</p>\r\n        </td>\r\n        <td *ngIf=\"command.state==2\">\r\n          <Button class=\"btn btn-success\" (click)=\"changeCommandState(command, 3)\">Deliver</Button>\r\n        </td>\r\n    </tr>\r\n    <tr *ngIf=\"commands.length == 0\">\r\n      <td>No hay pedidos aún</td>\r\n    </tr>\r\n    </table>\r\n  </div>\r\n</div>"
+module.exports = "<ngx-loading [show]=\"load\" [config]=\"{ backdropBorderRadius: '14px' }\"></ngx-loading>\r\n<div class=\"page_container\">    \r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n          <div class=\"col-lg-12 text-center\">\r\n            <h2 class=\"section-heading\">Command Delivery</h2>\r\n            <hr class=\"primary\">\r\n          </div>\r\n        </div>\r\n      </div>\r\n  <div class=\"container\">\r\n    <table class=\"table table-bordered\">\r\n    <thead>\r\n      <tr>\r\n        <th>Command Id</th>\r\n        <th>User Name</th>\r\n        <th>State</th>\r\n        <th>Action</th>\r\n      </tr>\r\n    </thead>\r\n    <tr *ngFor=\"let command of commands; let i = index\">\r\n        <td *ngIf=\"command.state==2\">{{command.id_command}}</td>\r\n        <td  *ngIf=\"command.state==2\">\r\n          <p *ngIf=\"!(orders[i]==null)\">{{orders[i].user_id.firstname}} {{orders[i].user_id.lastname}}</p>\r\n        </td>\r\n        <td *ngIf=\"command.state==2\">\r\n          <p *ngIf=\"command.state == 2\">Ready</p><p *ngIf=\"command.state == 3\">Delivered</p>\r\n        </td>\r\n        <td *ngIf=\"command.state==2\">\r\n          <Button class=\"btn btn-success\" (click)=\"changeCommandState(command, 3)\">Deliver</Button>\r\n        </td>\r\n    </tr>\r\n    <tr *ngIf=\"orders.length == 0\">\r\n      <td>No hay pedidos aún</td>\r\n    </tr>\r\n    </table>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
