@@ -24,13 +24,6 @@ public class User {
     private String image;
     private String cellphone;
 
-
-
-    /*public List<Order> orders;
-    public List<User> friends;
-    public List<User> pendingFriends;
-    private List<PaymentMethod> metodosPaymentMethods;
-    private List<Payment> pagos;*/
     public User(){}
 
     public User(Integer user_id){
@@ -45,43 +38,8 @@ public class User {
         this.setImage(image);
         this.setCity(city);
         this.setCellphone(cellphone);
-        /*orders = new ArrayList<>();
-        friends = new ArrayList<>();
-        pendingFriends = new ArrayList<>();
-        metodosPaymentMethods = new ArrayList<>();*/
-    }
-    /*public List<Payment> getPagos() {return pagos;}
-    public void setPagos(List<Payment> pagos) {
-        this.pagos = pagos;
     }
 
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
-
-    public List<User> getFriends() {
-        return friends;
-    }
-
-    public void setFriends(List<User> friends) {
-        this.friends = friends;
-    }
-
-    public List<User> getPendingFriends() {
-        return pendingFriends;
-    }
-
-    public void setPendingFriends(List<User> pendingFriends) {
-        this.pendingFriends = pendingFriends;
-    }
-
-    public void addMetodoPago(PaymentMethod paymentMethod){
-        metodosPaymentMethods.add(paymentMethod);
-    }*/
 
     public PaymentMethod getPaymentMethod(){
         return null;

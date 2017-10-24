@@ -62,17 +62,6 @@ public class UserServiceImpl implements UserService
     @Override
     public User findUserByEmail( String email )
     {
-        /*User found = null;
-        for (Map.Entry<Long, User> entry : users.entrySet())
-        {
-            Long key = entry.getKey();
-            User value = entry.getValue();
-            if(value.getEmail().equals(email)) {
-                found = value;
-                break;
-            }
-        }
-        return found;*/
         return userRepository.findUsersByEmail(email);
     }
 
@@ -90,6 +79,7 @@ public class UserServiceImpl implements UserService
         oldUser.setCity(user.getCity());
         oldUser.setUser_password(user.getUser_password());
         oldUser.setImage(user.getImage());
+        oldUser.setEmail(user.getEmail());
         return oldUser;
     }
 
@@ -153,17 +143,6 @@ public class UserServiceImpl implements UserService
     @Override
     public List<Order> getOrders(Integer id_user) {
         return orderRepository.getOrdersByUser(id_user);
-    }
-
-    @Override
-    public User modifyUserData(String email, String user_pas, String city, String cellphone){
-        User prev = this.findUserByEmail(email);
-        prev.setEmail(email);
-        prev.setUser_password(user_pas);
-        prev.setCity(city);
-        prev.setCellphone(cellphone);
-
-        return prev;
     }
 
 }

@@ -102,7 +102,7 @@ public class UserController
         }
     }
 
-    @RequestMapping( value = "/update", method = RequestMethod.POST )
+    @RequestMapping( value = "/update", method = RequestMethod.PUT )
     public User update( @RequestBody User user )
             throws ServletException
     {
@@ -144,10 +144,4 @@ public class UserController
         return userService.addFriend(json.get("id_user"), json.get("id_friend"));
     }
 
-    @RequestMapping( value = "/modify", method = RequestMethod.PUT)
-    public User modifyDataU(@RequestParam("email") String email, @RequestParam("user_pas") String user_pas, @RequestParam("city") String city, @RequestParam("cellphone") String cellphone)
-            throws ServletException
-    {
-        return userService.modifyUserData(email, user_pas, city, cellphone);
-    }
 }

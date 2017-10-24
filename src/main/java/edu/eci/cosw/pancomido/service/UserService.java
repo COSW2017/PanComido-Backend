@@ -43,6 +43,5 @@ public interface UserService
 
     List<Order> getOrders(Integer id_user);
 
-    User modifyUserData(String email, String user_pas, String city, String cellphone);
 
 }

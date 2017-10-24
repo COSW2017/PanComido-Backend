@@ -30,7 +30,7 @@ public class Command_DishController {
     {
         Command_Dish add = commandD.addDishCommand(id_command, id_dish);
         if (add == null){
-            throw new ServletException("Error adding dish");
+            throw new ServletException("Dish already added");
         }else {
             return true;
         }
