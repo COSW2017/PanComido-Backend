@@ -40,26 +40,6 @@ public class UserServiceImpl implements UserService
     @Autowired
     public UserServiceImpl() { }
 
-    /*@PostConstruct
-    private void populateSampleData()
-    {
-        User user = new User( "test@mail.com", "password", "Andres", "Perez", "https://cdn-images-1.medium.com/max/796/1*juPyda3wq9uz_SNFRLuANg@2x.png", "test", "123456" );
-        Restaurant restaurant = new Restaurant(0, "Perter pan", 1.12, 2.36, 5, 2, 3, 1);
-        ArrayList<Dish> dishes = new ArrayList<>();
-        Dish dish = new Dish(0, "Arroz con pollo", 25000, "Arroz con pollo y papas a la francesa", restaurant);
-        //restaurant.addDish(dish);
-        Command command = new Command(0, dishes);
-        ArrayList<Command> commands = new ArrayList<>(); commands.add(command);
-        Order order = new Order(0, user);
-        order.setCommands(commands);
-        ArrayList<Order> orders = new ArrayList<>();
-        //user.setOrders(orders);
-        //user.setRestaurant(restaurant);
-        //restaurant.setDishes(dishes);
-        users.put(1l, user);
-
-        restaurantService.addRestaurant(restaurant);
-    }*/
     
     @Override
     public List<User> getUsers()
@@ -127,7 +107,6 @@ public class UserServiceImpl implements UserService
         return f!=null;
     }
 
-    //Pensar si es mejor pasar las ordenes del usuario a un HashMap
     @Override
     public Order getOrder(Integer id_order) {
         List<Order> orders = new ArrayList<>();
@@ -176,5 +155,15 @@ public class UserServiceImpl implements UserService
         return orderRepository.getOrdersByUser(id_user);
     }
 
+    @Override
+    public User modifyUserData(String email, String user_pas, String city, String cellphone){
+        User prev = this.findUserByEmail(email);
+        prev.setEmail(email);
+        prev.setUser_password(user_pas);
+        prev.setCity(city);
+        prev.setCellphone(cellphone);
+
+        return prev;
+    }
 
 }

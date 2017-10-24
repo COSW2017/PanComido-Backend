@@ -26,6 +26,8 @@ public interface RestaurantService {
 
     Restaurant addRestaurant(Restaurant restaurant);
 
+    Restaurant getRestByName(String name);
+
     Command changeCommandState(Command command);
 
     Command getCommand(Integer id_Command);
@@ -41,4 +43,5 @@ public interface RestaurantService {
     Restaurant updateRestaurant(Restaurant restaurant);
 
     List<Order> getRestaurantOrders(int id_restaurant);
+
 }
