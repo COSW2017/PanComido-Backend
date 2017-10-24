@@ -13,22 +13,19 @@ general:
       - master # only build/deploy from master
   artifacts:
     - "build/reports/tests" # preserve the generated HTML test reports
-
+    
+deployment:
+  staging:
+    branch: master
+    heroku: 
+      appname: pancomido
+      
 test:
   override:
     - ./gradlew test -is
   post:
+    - mkdir $CIRCLE_ARTIFACTS/reports
+    - exec cp -R target/site/* $CIRCLE_ARTIFACTS/reports
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
     - find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
     
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build
-      - test:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
