@@ -85,7 +85,7 @@ public class RestaurantServiceImpl implements RestaurantService{
         List<Restaurant> restaurants = restaurantRepository.findAll();
         ArrayList<Restaurant> locationRestaurants = new ArrayList<>();
         for(Restaurant restaurant : restaurants){
-            if(calculateDistance(latitude, restaurant.getLatitude(), longitude, restaurant.getLongitude()) < 0.2){
+            if(calculateDistance(latitude, restaurant.getLatitude(), longitude, restaurant.getLongitude()) < 20){
                 locationRestaurants.add(restaurant);
             }
         }
