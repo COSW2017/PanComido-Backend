@@ -27,12 +27,13 @@ public class Command_DishServiceImpl implements Command_DishService {
     public Command_Dish addDishCommand(Integer id_command, Integer id_dish) {
         Dish dish = dishRepository.getOne(id_dish);
         Command command = commandRepository.getOne(id_command);
-        Command_Dish cd = command_dishRepository.getCommandDish(command, dish);
-        if (cd == null){
-            Command_Dish commandD = new Command_Dish(command, dish);
-            return command_dishRepository.saveAndFlush(commandD);
-        }
-        return  null;
+        //Command_Dish cd = command_dishRepository.getCommandDish(command, dish);
+        System.out.println(id_command+" "+id_dish);
+        //if (cd == null){
+        Command_Dish commandD = new Command_Dish(command, dish);
+        return command_dishRepository.saveAndFlush(commandD);
+        //}
+        //return  null;
     }
 
     @Override
