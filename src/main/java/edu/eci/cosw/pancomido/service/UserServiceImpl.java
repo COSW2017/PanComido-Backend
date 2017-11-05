@@ -146,4 +146,10 @@ public class UserServiceImpl implements UserService
         return orderRepository.getOrdersByUser(id_user);
     }
 
+    @Override
+    public List<User> getFreinds(String email) {
+        User u = userRepository.findUsersByEmail(email);
+        return userRepository.findFriends(u.getUser_id());
+    }
+
 }

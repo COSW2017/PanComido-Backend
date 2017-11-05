@@ -144,4 +144,10 @@ public class UserController
         return userService.addFriend(json.get("id_user"), json.get("id_friend"));
     }
 
+    @RequestMapping( value = "/{email}/friends", method = RequestMethod.GET )
+    public List<User> getFriends(@PathVariable String email)
+            throws ServletException {
+        return userService.getFreinds(email);
+    }
+
 }
