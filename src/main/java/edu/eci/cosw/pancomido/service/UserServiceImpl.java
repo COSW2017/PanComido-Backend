@@ -53,9 +53,11 @@ public class UserServiceImpl implements UserService
         return userRepository.getOne(id);
     }
 
-    @Override
+    @Override 
     public User createUser( User user ){
-        userRepository.saveAndFlush(user);
+        if(findUserByEmail(user.getEmail())==null){
+            userRepository.saveAndFlush(user);
+        }
         return user;
     }
 
