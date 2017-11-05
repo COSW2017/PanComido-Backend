@@ -68,10 +68,10 @@ public class UserController
         return userService.getUsers();
     }
 
-        @RequestMapping( value = "/search", method = RequestMethod.POST )
+    @RequestMapping( value = "/search", method = RequestMethod.POST )
     public User searchUsersByEmail(@RequestBody String email)
             throws ServletException{
-
+        email=email.replaceAll("\"", "");
         User u = userService.findUserByEmail(email);
         if(u == null){
             throw new ServletException( "No user found with the email address." );
