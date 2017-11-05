@@ -45,5 +45,7 @@ public interface UserService
 
     List<User> getFreinds(String email);
 
+    Order addOrder(Order order);
+
 
 }

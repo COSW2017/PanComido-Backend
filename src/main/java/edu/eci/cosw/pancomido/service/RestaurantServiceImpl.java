@@ -141,6 +141,11 @@ public class RestaurantServiceImpl implements RestaurantService{
         return orderRepository.getRestaurantOrders(id_restaurant);
     }
 
+    @Override
+    public Command addCommand(Command command) {
+        return commandRepository.saveAndFlush(command);
+    }
+
 
     @Override
     public Command getCommand(Integer id_Command) {

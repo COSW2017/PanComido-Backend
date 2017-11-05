@@ -8,6 +8,7 @@ import edu.eci.cosw.pancomido.model.User;
 import edu.eci.cosw.pancomido.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -148,6 +149,12 @@ public class UserController
     public List<User> getFriends(@PathVariable String email)
             throws ServletException {
         return userService.getFreinds(email);
+    }
+
+    @RequestMapping( value = "/order", method = RequestMethod.POST )
+    public Order addOrder(@RequestBody Order order)
+            throws ServletException {
+        return userService.addOrder(order);
     }
 
 }

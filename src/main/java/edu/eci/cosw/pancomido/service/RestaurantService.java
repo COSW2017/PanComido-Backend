@@ -44,4 +44,6 @@ public interface RestaurantService {
 
     List<Order> getRestaurantOrders(int id_restaurant);
 
+    Command addCommand(Command command);
+
 }

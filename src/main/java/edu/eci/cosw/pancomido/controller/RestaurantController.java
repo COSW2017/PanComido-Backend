@@ -101,7 +101,6 @@ public class RestaurantController {
         return restaurant;
     }
 
-
     @RequestMapping( value = "/register", method = RequestMethod.POST )
     public Restaurant restaurantRegister(@RequestBody Restaurant toRegister)
             throws ServletException{
@@ -152,5 +151,11 @@ public class RestaurantController {
         }else{
             return restaurantService.getRestByName(name);
         }
+    }
+
+    @RequestMapping( value = "/command", method = RequestMethod.POST )
+    public Command addCommand(@RequestBody Command toRegister)
+            throws ServletException{
+        return restaurantService.addCommand(toRegister);
     }
 }

@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService
         return userRepository.getOne(id);
     }
 
-    @Override 
+    @Override
     public User createUser( User user ){
         if(findUserByEmail(user.getEmail())==null){
             userRepository.saveAndFlush(user);
@@ -152,6 +152,11 @@ public class UserServiceImpl implements UserService
     public List<User> getFreinds(String email) {
         User u = userRepository.findUsersByEmail(email);
         return userRepository.findFriends(u.getUser_id());
+    }
+
+    @Override
+    public Order addOrder(Order order) {
+        return  orderRepository.saveAndFlush(order);
     }
 
 }
