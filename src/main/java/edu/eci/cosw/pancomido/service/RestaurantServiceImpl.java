@@ -132,6 +132,7 @@ public class RestaurantServiceImpl implements RestaurantService{
         updateRestaurant.setName(restaurant.getName());
         updateRestaurant.setLatitude(restaurant.getLatitude());
         updateRestaurant.setLongitude(restaurant.getLongitude());
+        updateRestaurant.setImage(restaurant.getImage());
         restaurantRepository.saveAndFlush(updateRestaurant);
         return restaurant;
     }
