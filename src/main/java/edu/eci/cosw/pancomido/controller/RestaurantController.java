@@ -73,10 +73,11 @@ public class RestaurantController {
 
     }
 
-    @RequestMapping( value = "/near/{latitude}/{longitude}", method = RequestMethod.GET )
-    public List<Restaurant> getNearRestaurants(@PathVariable Float latitude, @PathVariable Float longitude)
+    @RequestMapping( value = "/near/{latitudelongitude}/", method = RequestMethod.GET )
+    public List<Restaurant> getNearRestaurants(@PathVariable String latitudelongitude)
             throws ServletException{
-        return restaurantService.getLocationRestaurants(latitude, longitude);
+        String[] latlong = latitudelongitude.split(",");
+        return restaurantService.getLocationRestaurants(Float.parseFloat(latlong[0]), Float.parseFloat(latlong[1]));
     }
 
     @RequestMapping( value = "{idRestaurant}/dish", method = RequestMethod.GET )

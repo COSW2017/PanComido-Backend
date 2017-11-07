@@ -85,7 +85,7 @@ public class RestaurantServiceImpl implements RestaurantService{
         List<Restaurant> restaurants = restaurantRepository.findAll();
         ArrayList<Restaurant> locationRestaurants = new ArrayList<>();
         for(Restaurant restaurant : restaurants){
-            if(calculateDistance(latitude, restaurant.getLatitude(), longitude, restaurant.getLongitude()) < 20){
+            if(calculateDistance(latitude, restaurant.getLatitude(), longitude, restaurant.getLongitude()) < 0.5){
                 locationRestaurants.add(restaurant);
             }
         }
@@ -203,14 +203,23 @@ public class RestaurantServiceImpl implements RestaurantService{
      * @param longitude2
      * @return
      */
-    private Float calculateDistance(Float latitude1, Float latitude2, Float longitude1, Float longitude2) {
-        Double rad =Math.PI/180;
-        Float dlat=latitude2-latitude1;
-        Float dlon=longitude2-longitude1;
-        Double a = Math.pow(Math.sin(rad*dlat/2), 2)+Math.cos(rad*latitude1)*
-                Math.cos(rad*latitude2)*Math.pow(Math.sin(rad*dlon/2), 2);
-        Float distance = Float.parseFloat(2*RADIUS*Math.asin(Math.sqrt(a))+"");
-        return distance;
+    private Double calculateDistance(Float latitude1, Float latitude2, Float longitude1, Float longitude2) {
+        double theta = longitude1 - longitude2;
+        System.out.println("long "+longitude1+" long "+longitude2);
+        double dist = Math.sin(deg2rad(latitude1)) * Math.sin(deg2rad(latitude2)) + Math.cos(deg2rad(latitude1)) * Math.cos(deg2rad(latitude2)) * Math.cos(deg2rad(theta));
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60 * 1.1515;
+        System.out.println(dist+" "+latitude1+" "+longitude1);
+        return (dist);
+    }
+
+    private double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+
+    private double rad2deg(double rad) {
+        return (rad * 180.0 / Math.PI);
     }
 
 
