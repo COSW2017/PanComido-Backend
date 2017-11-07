@@ -28,8 +28,8 @@ public class Command_DishController {
     public Boolean addDishC(@PathVariable Integer id_command, @PathVariable Integer id_dish)
             throws ServletException
     {
-        Command_Dish add = commandD.addDishCommand(id_command, id_dish);
-        if (add == null){
+        Boolean add = commandD.addDishCommand(id_command, id_dish);
+        if (!add){
             throw new ServletException("Dish already added");
         }else {
             return true;
