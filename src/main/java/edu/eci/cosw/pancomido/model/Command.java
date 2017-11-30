@@ -16,7 +16,7 @@ public class Command {
     private int id_command;
 
     private Integer state;
-    private Date creation_date;
+    public Date creation_date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_order", nullable = false)
