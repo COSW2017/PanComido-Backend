@@ -13,8 +13,16 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -119,12 +127,15 @@ public class RestaurantServiceImpl implements RestaurantService{
 
     @Override
     public Command changeCommandState(Command command) {
-        System.out.print("Entra aquí");
         Command updateCommand = commandRepository.getOne(command.getId_command());
+        String u = updateCommand.getId_order().getUser_id().getEmail();
         updateCommand.setState(command.getState());
         commandRepository.saveAndFlush(updateCommand);
+        UtilService.sendNotifications(u, "Your command is ready", "PanComido");
         return command;
     }
+
+
 
     @Override
     public Restaurant updateRestaurant(Restaurant restaurant) {
