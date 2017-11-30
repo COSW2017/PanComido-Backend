@@ -9,6 +9,9 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 
+import javax.annotation.PostConstruct;
+import java.util.TimeZone;
+
 @SpringBootApplication
 //@EnableJpaRepositories("edu.eci.cosw.examples.productorders.repositories")
 @EntityScan("edu.eci.cosw.pancomido.model")
@@ -27,5 +30,10 @@ public class PancomidoApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(PancomidoApplication.class, args);
+	}
+
+	@PostConstruct
+	void started(){
+		TimeZone.setDefault(TimeZone.getTimeZone("America/Bogota"));
 	}
 }
