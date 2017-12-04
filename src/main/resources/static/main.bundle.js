@@ -282,7 +282,7 @@ AppModule = __decorate([
             {
                 provide: __WEBPACK_IMPORTED_MODULE_6__common_initial_config__["a" /* INITIAL_CONFIG */],
                 useValue: {
-                    apiURL: 'http://localhost:8080'
+                    apiURL: 'http://pancomido-cosw.herokuapp.com'
                 }
             },
             __WEBPACK_IMPORTED_MODULE_18__services_todo_service__["a" /* TodoService */],
