@@ -2,10 +2,7 @@ package edu.eci.cosw.pancomido.service;
 
 import com.sun.org.apache.xpath.internal.operations.Or;
 import edu.eci.cosw.pancomido.model.*;
-import edu.eci.cosw.pancomido.repositories.CommandRepository;
-import edu.eci.cosw.pancomido.repositories.DishRepository;
-import edu.eci.cosw.pancomido.repositories.OrderRepository;
-import edu.eci.cosw.pancomido.repositories.RestaurantRepository;
+import edu.eci.cosw.pancomido.repositories.*;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -48,6 +45,9 @@ public class RestaurantServiceImpl implements RestaurantService{
 
     @Autowired
     public OrderRepository orderRepository;
+
+    @Autowired
+    public CommentsRepository commentsRepository;
 
     @Autowired
     public RestaurantServiceImpl() { }
@@ -156,6 +156,11 @@ public class RestaurantServiceImpl implements RestaurantService{
     @Override
     public Command addCommand(Command command) {
         return commandRepository.saveAndFlush(command);
+    }
+
+    @Override
+    public List<Comment> getRestaurantComments(int id_restaurant) {
+        return commentsRepository.getCommentsByRestaurant(id_restaurant);
     }
 
 

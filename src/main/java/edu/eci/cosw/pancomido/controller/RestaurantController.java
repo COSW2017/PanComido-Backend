@@ -92,6 +92,12 @@ public class RestaurantController {
         return restaurantService.getDishByDishId(idRestaurant, dish_id);
     }
 
+    @RequestMapping( value = "/{idRestaurant}/comment", method = RequestMethod.GET )
+    public List<Comment> getCommentsByRestaurant(@PathVariable Integer idRestaurant)
+            throws ServletException{
+        return restaurantService.getRestaurantComments(idRestaurant);
+    }
+
     @RequestMapping( value = "/owner/{user_id}", method = RequestMethod.GET )
     public Restaurant getRestaurantOwner(@PathVariable Integer user_id)
             throws ServletException{

@@ -282,7 +282,7 @@ AppModule = __decorate([
             {
                 provide: __WEBPACK_IMPORTED_MODULE_6__common_initial_config__["a" /* INITIAL_CONFIG */],
                 useValue: {
-                    apiURL: 'http://pancomido-cosw.herokuapp.com/'
+                    apiURL: 'http://localhost:8080'
                 }
             },
             __WEBPACK_IMPORTED_MODULE_18__services_todo_service__["a" /* TodoService */],
@@ -1686,7 +1686,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "img{\r\n    height: 150px; \r\n    width: 150px;\r\n}\r\n\r\nbutton{\r\n    width: 100%;\r\n}\r\n\r\nhr {\r\n    max-width: 50px;\r\n    border-width: 3px;\r\n    border-color: #F05F40; }\r\n\r\n#login-box{\r\n    background: white;\r\n    padding: 20px 20px 20px 20px;\r\n    border-radius: 15px;\r\n    text-align: center !important; \r\n    max-width: 600px; \r\n    margin: 0 auto;\r\n}\r\n\r\n.page_container_login{\r\n    background: #CBDEEC;\r\n    width: 100%;\r\n    height: 100%; \r\n    text-align: center !important;\r\n    font-family: 'Montserrat', sans-serif;\r\n    position: relative; \r\n    padding-top: 50px; \r\n\r\n\r\n}", ""]);
+exports.push([module.i, "img{\r\n    height: 150px; \r\n    width: 150px;\r\n}\r\n\r\nbutton{\r\n    width: 100%;\r\n}\r\n\r\nhr {\r\n    max-width: 50px;\r\n    border-width: 3px;\r\n    border-color: #F05F40; }\r\n\r\n#login-box{\r\n    background: white;\r\n    padding: 20px 20px 20px 20px;\r\n    border-radius: 15px;\r\n    text-align: center !important;\r\n    max-width: 600px;\r\n    border-style: solid;\r\n    margin: 0 auto;\r\n    border-color: #F05F40;\r\n}\r\n\r\n.page_container_login{\r\n    width: 100%;\r\n    height: 100%; \r\n    text-align: center !important;\r\n    font-family: 'Montserrat', sans-serif;\r\n    position: relative; \r\n    padding-top: 50px; \r\n\r\n\r\n}", ""]);
 
 // exports
 

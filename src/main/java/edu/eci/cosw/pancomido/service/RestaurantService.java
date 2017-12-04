@@ -46,4 +46,6 @@ public interface RestaurantService {
 
     Command addCommand(Command command);
 
+    List<Comment> getRestaurantComments(int id_restaurant);
+
 }
