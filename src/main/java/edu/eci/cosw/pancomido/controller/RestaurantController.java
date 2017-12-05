@@ -160,6 +160,11 @@ public class RestaurantController {
         }
     }
 
+    @RequestMapping( value = "/command/{id_order}", method = RequestMethod.GET )
+    public List<Command> getCommandsByOrder(@PathVariable Integer id_order) throws ServletException{
+        return restaurantService.getCommandsByOrder(id_order);
+    }
+
     @RequestMapping( value = "/command", method = RequestMethod.POST )
     public Command addCommand(@RequestBody Command toRegister)
             throws ServletException{

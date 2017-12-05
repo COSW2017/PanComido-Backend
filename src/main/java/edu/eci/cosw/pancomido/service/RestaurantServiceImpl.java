@@ -159,6 +159,11 @@ public class RestaurantServiceImpl implements RestaurantService{
     }
 
     @Override
+    public List<Command> getCommandsByOrder(Integer id_order) {
+        return commandRepository.getCommandsByOrder(id_order);
+    }
+
+    @Override
     public List<Comment> getRestaurantComments(int id_restaurant) {
         return commentsRepository.getCommentsByRestaurant(id_restaurant);
     }
