@@ -102,16 +102,7 @@ public class UserServiceImpl implements UserService
 
     @Override
     public Order getOrder(Integer id_order) {
-        List<Order> orders = new ArrayList<>();
-        Boolean found = false;
-        Order order = null;
-        for(int i = 0; i < orders.size() & !found;i++){
-            if(orders.get(i).getId_order() == id_order){
-                order=orders.get(i);
-                found = true;
-            }
-        }
-        return order;
+        return orderRepository.getOrdersById(id_order);
     }
 
     @Override
