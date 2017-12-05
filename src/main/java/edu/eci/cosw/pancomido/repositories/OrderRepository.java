@@ -16,4 +16,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     @Query("SELECT o FROM Order as o WHERE o.user_id.user_id = ?1")
     public List<Order> getOrdersByUser(Integer userId);
 
+    @Query("SELECT o FROM Order as o WHERE o.id_order = ?1")
+    public Order getOrdersById(Integer orderId);
+
 }
