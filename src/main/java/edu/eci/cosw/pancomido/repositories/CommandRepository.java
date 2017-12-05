@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface CommandRepository extends JpaRepository<Command, Integer> {
 
-    @Query("SELECT c FROM Command as c WHERE c.id_order = ?1")
+    @Query("SELECT c FROM Command as c WHERE c.id_order.id_order = ?1")
     List<Command> getCommandsByOrder(Integer orderId);
 
     //No sé si este bien supongo que no...
