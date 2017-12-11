@@ -43,6 +43,8 @@ public class UtilService {
 
             generalRequest.put("message", data);
 
+            System.out.println(generalRequest.toString());
+
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(generalRequest.toString());
             wr.flush();
