@@ -131,7 +131,11 @@ public class RestaurantServiceImpl implements RestaurantService{
         String u = updateCommand.getId_order().getUser_id().getEmail();
         updateCommand.setState(command.getState());
         commandRepository.saveAndFlush(updateCommand);
-        UtilService.sendNotifications(u, "Your command is ready", "Command ready!");
+        try {
+            UtilService.sendNotifications(u, "Your command is ready", "Command ready!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return command;
     }
 
